@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\ConfigureServiceProvider\\ConfigureServiceProvider.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\ConfigureServiceProvider\\ConfigureServiceProvider.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\ConfigureServiceProvider\\ConfigureServiceProvider.csproj",
+        "projectName": "ConfigureServiceProvider",
+        "projectPath": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\ConfigureServiceProvider\\ConfigureServiceProvider.csproj",
+        "packagesPath": "C:\\Users\\Ilia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\ConfigureServiceProvider\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Ilia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\Mountain-Rescue-Services\\Mountain-Rescue-Services.csproj": {
+                "projectPath": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\Mountain-Rescue-Services\\Mountain-Rescue-Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\Mountain-Rescue-Services\\Mountain-Rescue-Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\Mountain-Rescue-Services\\Mountain-Rescue-Services.csproj",
+        "projectName": "Mountain-Rescue-Services",
+        "projectPath": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSDesktopApp\\Mountain-Rescue-Services\\Mountain-Rescue-Services.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}
