@@ -1,0 +1,9 @@
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Models\bin\Debug\netcoreapp2.2\MRS.Models.deps.json
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Models\bin\Debug\netcoreapp2.2\MRS.Models.dll
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Models\bin\Debug\netcoreapp2.2\MRS.Models.pdb
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Models\obj\Debug\netcoreapp2.2\MRS.Models.csprojAssemblyReference.cache
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Models\obj\Debug\netcoreapp2.2\MRS.Models.csproj.CoreCompileInputs.cache
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Models\obj\Debug\netcoreapp2.2\MRS.Models.AssemblyInfoInputs.cache
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Models\obj\Debug\netcoreapp2.2\MRS.Models.AssemblyInfo.cs
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Models\obj\Debug\netcoreapp2.2\MRS.Models.dll
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Models\obj\Debug\netcoreapp2.2\MRS.Models.pdb
