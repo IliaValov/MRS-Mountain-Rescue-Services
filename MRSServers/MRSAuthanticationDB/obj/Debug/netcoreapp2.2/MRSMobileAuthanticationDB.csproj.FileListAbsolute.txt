@@ -1,0 +1,11 @@
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\bin\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.deps.json
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\bin\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.dll
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\obj\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.csprojAssemblyReference.cache
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\obj\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.csproj.CoreCompileInputs.cache
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\obj\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.AssemblyInfoInputs.cache
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\obj\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.AssemblyInfo.cs
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\bin\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.runtimeconfig.json
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\bin\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.runtimeconfig.dev.json
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\bin\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.pdb
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\obj\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.dll
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRSAuthanticationDB\obj\Debug\netcoreapp2.2\MRSMobileAuthanticationDB.pdb

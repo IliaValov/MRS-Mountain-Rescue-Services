@@ -1,0 +1,6 @@
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Data.deps.json
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Data.dll
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.csproj.CoreCompileInputs.cache
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.AssemblyInfoInputs.cache
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.AssemblyInfo.cs
+D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.csprojAssemblyReference.cache

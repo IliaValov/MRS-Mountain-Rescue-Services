@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.645
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRSMobileServer", "MRSMobileServer\MRSMobileServer.csproj", "{D8B57B61-A163-4F91-97FC-3C231DD8E0FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobileServer", "MRSMobileServer\MRSMobileServer.csproj", "{D8B57B61-A163-4F91-97FC-3C231DD8E0FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRS.Data", "MRS.Data\MRS.Data.csproj", "{C906D724-CED2-4873-AA46-B07DD77B8347}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRS.Models", "MRS.Models\MRS.Models.csproj", "{D9004DA0-C7AD-4888-ABB6-97871C29E6CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D8B57B61-A163-4F91-97FC-3C231DD8E0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8B57B61-A163-4F91-97FC-3C231DD8E0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8B57B61-A163-4F91-97FC-3C231DD8E0FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C906D724-CED2-4873-AA46-B07DD77B8347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C906D724-CED2-4873-AA46-B07DD77B8347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C906D724-CED2-4873-AA46-B07DD77B8347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C906D724-CED2-4873-AA46-B07DD77B8347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9004DA0-C7AD-4888-ABB6-97871C29E6CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9004DA0-C7AD-4888-ABB6-97871C29E6CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9004DA0-C7AD-4888-ABB6-97871C29E6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9004DA0-C7AD-4888-ABB6-97871C29E6CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
