@@ -6,6 +6,14 @@ namespace MRS.Models
 {
     public class MrsUser
     {
+        public MrsUser()
+        {
+
+            UserRoles = new List<MrsUserRole>();
+            Locations = new List<MrsLocation>();
+            UserVerifications = new List<MrsUserVerification>();
+        }
+
         [Key]
         [Required]
         public int Id { get; set; }
@@ -17,9 +25,12 @@ namespace MRS.Models
         public DateTime LockoutEnd { get; set; }
 
         [Required]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         public bool PhoneNumberConfirmed { get; set; } = false;
 
-       
+
         [Required]
         public int DeviceId { get; set; }
         public MrsUserDevice Device { get; set; }
@@ -28,8 +39,8 @@ namespace MRS.Models
         public int AuthanticationTokenId { get; set; }
         public MrsUserAuthanticationToken AuthanticationToken { get; set; }
 
-        public ICollection<MrsUserVerification> UserVerifications { get; set; }
         public ICollection<MrsUserRole> UserRoles { get; set; }
         public ICollection<MrsLocation> Locations { get; set; }
+        public ICollection<MrsUserVerification> UserVerifications { get; set; }
     }
 }

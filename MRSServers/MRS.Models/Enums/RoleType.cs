@@ -6,7 +6,7 @@ namespace MRS.Models.Enums
 {
     public enum RoleType
     {
-        Common = 0,
-        Savior = 1
+        common = 0,
+        savior = 1
     }
 }
