@@ -36,5 +36,15 @@ namespace Mountain_Rescue_Services
         {
 
         }
+
+        private void Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void UserButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -30,8 +30,8 @@
         {
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             this.UserBox = new System.Windows.Forms.ListBox();
+            this.UserButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,29 +71,34 @@
             this.UserBox.ItemHeight = 16;
             this.UserBox.Items.AddRange(new object[] {
             "Всички клиенти"});
-            this.UserBox.Location = new System.Drawing.Point(25, 0);
+            this.UserBox.Location = new System.Drawing.Point(244, 27);
             this.UserBox.Name = "UserBox";
             this.UserBox.Size = new System.Drawing.Size(129, 452);
             this.UserBox.TabIndex = 1;
+            this.UserBox.Visible = false;
             this.UserBox.SelectedIndexChanged += new System.EventHandler(this.UserBox_SelectedIndexChanged);
+            // 
+            // UserButton
+            // 
+            this.UserButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UserButton.Location = new System.Drawing.Point(8, 0);
+            this.UserButton.Name = "UserButton";
+            this.UserButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.UserButton.Size = new System.Drawing.Size(106, 26);
+            this.UserButton.TabIndex = 3;
+            this.UserButton.Text = "Потребители";
+            this.UserButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.UserButton.UseVisualStyleBackColor = false;
+            this.UserButton.Click += new System.EventHandler(this.UserButton_Click);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Controls.Add(this.UserButton);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(25, 450);
-            this.panel1.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(16, 93);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.panel1.Size = new System.Drawing.Size(800, 29);
+            this.panel1.TabIndex = 4;
             // 
             // Form1
             // 
@@ -106,6 +111,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mountain-Rescue-Services 1.0.0";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -115,8 +121,8 @@
 
         private GMap.NET.WindowsForms.GMapControl gMapControl1;
         private System.Windows.Forms.ListBox UserBox;
+        private System.Windows.Forms.Button UserButton;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
     }
 }
 

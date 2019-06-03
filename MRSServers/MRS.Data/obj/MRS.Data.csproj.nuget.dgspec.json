@@ -1,97 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\MRS.Data.csproj": {}
+    "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\MRS.Data.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\MRS.Data.csproj": {
+    "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data.Models\\MRS.Data.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\MRS.Data.csproj",
-        "projectName": "MRS.Data",
-        "projectPath": "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\MRS.Data.csproj",
-        "packagesPath": "C:\\Users\\iliaf\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\obj\\",
+        "projectUniqueName": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data.Models\\MRS.Data.Models.csproj",
+        "projectName": "MRS.Data.Models",
+        "projectPath": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data.Models\\MRS.Data.Models.csproj",
+        "packagesPath": "C:\\Users\\Ilia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\iliaf\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp2.2"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netcoreapp2.2": {
-            "projectReferences": {
-              "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Models\\MRS.Models.csproj": {
-                "projectPath": "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Models\\MRS.Models.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netcoreapp2.2": {
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[2.2.4, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[2.2.4, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
-              "target": "Package",
-              "version": "[1.1.6, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.2.4, )"
-            },
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.2.0, )",
-              "autoReferenced": true
-            }
-          },
-          "imports": [
-            "net461"
-          ],
-          "assetTargetFallback": true,
-          "warn": true
-        }
-      }
-    },
-    "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Models\\MRS.Models.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Models\\MRS.Models.csproj",
-        "projectName": "MRS.Models",
-        "projectPath": "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Models\\MRS.Models.csproj",
-        "packagesPath": "C:\\Users\\iliaf\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Models\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\iliaf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ilia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -115,6 +41,84 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\MRS.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\MRS.Data.csproj",
+        "projectName": "MRS.Data",
+        "projectPath": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\MRS.Data.csproj",
+        "packagesPath": "C:\\Users\\Ilia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Ilia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data.Models\\MRS.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Ilia\\Desktop\\C#\\MRS-Mountain-Rescue-Services\\MRSServers\\MRS.Data.Models\\MRS.Data.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",

@@ -1,0 +1,14 @@
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\bin\Debug\netcoreapp2.2\MRSMobileServer.deps.json
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\bin\Debug\netcoreapp2.2\MRSMobileServer.runtimeconfig.json
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\bin\Debug\netcoreapp2.2\MRSMobileServer.runtimeconfig.dev.json
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\bin\Debug\netcoreapp2.2\MRSMobileServer.dll
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\bin\Debug\netcoreapp2.2\MRSMobileServer.pdb
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.csprojAssemblyReference.cache
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.csproj.CoreCompileInputs.cache
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.RazorAssemblyInfo.cache
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.RazorAssemblyInfo.cs
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.AssemblyInfoInputs.cache
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.AssemblyInfo.cs
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.RazorTargetAssemblyInfo.cache
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.dll
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.pdb
