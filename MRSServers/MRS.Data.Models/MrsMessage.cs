@@ -18,7 +18,7 @@ namespace MRS.Data.Models
         public string Message { get; set; }
 
         [Required]
-        public int LocatioId { get; set; }
+        public string LocatioId { get; set; }
         public MrsLocation Location { get; set; }
     }
 }

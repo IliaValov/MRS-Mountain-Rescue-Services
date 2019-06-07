@@ -1,0 +1,9 @@
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Common\bin\Debug\netcoreapp2.2\MRS.Common.deps.json
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Common\bin\Debug\netcoreapp2.2\MRS.Common.dll
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Common\bin\Debug\netcoreapp2.2\MRS.Common.pdb
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Common\obj\Debug\netcoreapp2.2\MRS.Common.csprojAssemblyReference.cache
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Common\obj\Debug\netcoreapp2.2\MRS.Common.csproj.CoreCompileInputs.cache
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Common\obj\Debug\netcoreapp2.2\MRS.Common.AssemblyInfoInputs.cache
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Common\obj\Debug\netcoreapp2.2\MRS.Common.AssemblyInfo.cs
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Common\obj\Debug\netcoreapp2.2\MRS.Common.dll
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Common\obj\Debug\netcoreapp2.2\MRS.Common.pdb

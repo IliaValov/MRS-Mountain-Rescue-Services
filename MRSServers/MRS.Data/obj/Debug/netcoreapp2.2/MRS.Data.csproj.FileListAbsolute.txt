@@ -13,8 +13,6 @@ D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreap
 D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.dll
 D:\Projects\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.pdb
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Data.Models.dll
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Models.dll
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Models.pdb
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.csprojAssemblyReference.cache
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.csproj.CoreCompileInputs.cache
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.AssemblyInfoInputs.cache
@@ -25,7 +23,6 @@ C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\De
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Data.runtimeconfig.json
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Data.runtimeconfig.dev.json
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Data.dll
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Data.Models.pdb
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.xml
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\obj\Debug\netcoreapp2.2\MRS.Data.csproj.CopyComplete
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Data\bin\Debug\netcoreapp2.2\MRS.Data.pdb

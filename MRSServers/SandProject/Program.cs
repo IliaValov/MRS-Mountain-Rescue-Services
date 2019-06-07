@@ -7,7 +7,7 @@ namespace SandProject
     {
         static void Main(string[] args)
         {
-            using (MRSContext context = new MRSContext())
+            using (ApplicationDbContext context = new ApplicationDbContext())
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();

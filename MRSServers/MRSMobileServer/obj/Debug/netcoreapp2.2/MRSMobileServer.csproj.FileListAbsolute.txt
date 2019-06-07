@@ -12,3 +12,8 @@ C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.RazorTargetAssemblyInfo.cache
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.dll
 C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.pdb
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\bin\Debug\netcoreapp2.2\MRS.Data.Models.dll
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\bin\Debug\netcoreapp2.2\MRS.Data.Models.pdb
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\obj\Debug\netcoreapp2.2\MRSMobileServer.csproj.CopyComplete
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\bin\Debug\netcoreapp2.2\MRS.Data.dll
+C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRSMobileServer\bin\Debug\netcoreapp2.2\MRS.Data.pdb

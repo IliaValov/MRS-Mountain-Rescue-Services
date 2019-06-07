@@ -23,11 +23,11 @@ namespace MRS.Data.Models
         public double Altitude { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        public virtual string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
 
-        public int? MessageId { get; set; }
+        public string MessageId { get; set; }
         public MrsMessage Message { get; set; }
     }
 }

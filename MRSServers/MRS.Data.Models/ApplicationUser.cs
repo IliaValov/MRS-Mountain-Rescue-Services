@@ -21,8 +21,8 @@ namespace MRS.Data.Models
         public override string PhoneNumber { get; set; }
 
         [Required]
-        public virtual int DeviceId { get; set; }
-        public virtual MrsDevice Device { get; set; }
+        public string DeviceId { get; set; }
+        public MrsDevice Device { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

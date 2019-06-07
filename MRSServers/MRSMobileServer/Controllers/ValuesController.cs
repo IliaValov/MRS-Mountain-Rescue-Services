@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using MRS.Data.Models;
 
 namespace MRSMobileServer.Controllers
 {
@@ -10,6 +14,15 @@ namespace MRSMobileServer.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public ValuesController()
+        {
+                
+        }
+
+
+        private readonly UserManager<ApplicationUser> userManager;
+
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -26,8 +39,10 @@ namespace MRSMobileServer.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async void Post([FromBody] string value)
         {
+            var user = new ApplicationUser { PhoneNumber = "0888014990", PhoneNumberConfirmed = true};
+            var result = await this.userManager.CreateAsync(user);
         }
 
         // PUT api/values/5
