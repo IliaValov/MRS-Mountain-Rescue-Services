@@ -1,4 +1,0 @@
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Initilizer\obj\Debug\netcoreapp2.2\MRS.Initilizer.csprojAssemblyReference.cache
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Initilizer\obj\Debug\netcoreapp2.2\MRS.Initilizer.csproj.CoreCompileInputs.cache
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Initilizer\obj\Debug\netcoreapp2.2\MRS.Initilizer.AssemblyInfoInputs.cache
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSServers\MRS.Initilizer\obj\Debug\netcoreapp2.2\MRS.Initilizer.AssemblyInfo.cs

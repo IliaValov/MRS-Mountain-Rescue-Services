@@ -1,5 +1,0 @@
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSDesktopApp\ConfigureServiceProvider\bin\Debug\netstandard2.0\Mountain-Rescue-Services.exe
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSDesktopApp\ConfigureServiceProvider\obj\Debug\netstandard2.0\ConfigureServiceProvider.csprojAssemblyReference.cache
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSDesktopApp\ConfigureServiceProvider\obj\Debug\netstandard2.0\ConfigureServiceProvider.csproj.CoreCompileInputs.cache
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSDesktopApp\ConfigureServiceProvider\obj\Debug\netstandard2.0\ConfigureServiceProvider.AssemblyInfoInputs.cache
-C:\Users\Ilia\Desktop\C#\MRS-Mountain-Rescue-Services\MRSDesktopApp\ConfigureServiceProvider\obj\Debug\netstandard2.0\ConfigureServiceProvider.AssemblyInfo.cs
