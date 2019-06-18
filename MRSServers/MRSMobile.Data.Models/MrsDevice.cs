@@ -7,7 +7,7 @@ namespace MRSMobile.Data.Models
     {
         public MrsDevice()
         {
-                
+            Users = new List<MrsUser>();
         }
 
         [Key]

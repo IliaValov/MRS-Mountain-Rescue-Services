@@ -5,8 +5,16 @@ using MRSMobile.Data.Models;
 
 namespace MRSMobile.Data
 {
-    public class MrsMobileContex : IdentityDbContext<MrsUser, IdentityRole<string>, string>
+    public class MrsMobileContext : IdentityDbContext<MrsUser, IdentityRole<string>, string>
     {
+        public MrsMobileContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        protected MrsMobileContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(GetConnectionString());
@@ -18,6 +26,12 @@ namespace MRSMobile.Data
                 .Entity<MrsLocation>()
                 .HasOne(x => x.Message)
                 .WithOne(x => x.Location);
+
+            builder
+                .Entity<MrsMessage>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Messages)
+                .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }
