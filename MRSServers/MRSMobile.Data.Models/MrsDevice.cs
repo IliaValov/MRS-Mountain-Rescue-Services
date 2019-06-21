@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MRSMobile.Data.Models
@@ -7,7 +8,8 @@ namespace MRSMobile.Data.Models
     {
         public MrsDevice()
         {
-            Users = new List<MrsUser>();
+            this.Id = Guid.NewGuid().ToString();
+            this.Users = new List<MrsUser>();
         }
 
         [Key]

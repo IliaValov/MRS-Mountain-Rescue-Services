@@ -62,6 +62,9 @@ namespace MRSAuthServer
                     };
                 });
 
+            services.AddTransient<IUserStore<MrsUser>, MrsUserStore>();
+            services.AddTransient<IRoleStore<MrsRole>, MrsRoleStore>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -78,14 +81,13 @@ namespace MRSAuthServer
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseAuthentication();
 
             app.UseHttpsRedirection();
 
             app.UseMvc();
 
-
-            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
         }
     }

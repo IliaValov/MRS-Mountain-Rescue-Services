@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSAuthServer", "MRSAuthSer
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBases", "DataBases", "{E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRSMobile.Data", "MRSMobile.Data\MRSMobile.Data.csproj", "{A876FE60-D08F-47E2-8BA3-089524F38171}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobile.Data", "MRSMobile.Data\MRSMobile.Data.csproj", "{A876FE60-D08F-47E2-8BA3-089524F38171}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRSMobile.Data.Models", "MRSMobile.Data.Models\MRSMobile.Data.Models.csproj", "{C0B22F7B-3672-4EBE-A299-068808D65EE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobile.Data.Models", "MRSMobile.Data.Models\MRSMobile.Data.Models.csproj", "{C0B22F7B-3672-4EBE-A299-068808D65EE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

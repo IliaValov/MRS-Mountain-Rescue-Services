@@ -6,6 +6,11 @@ namespace MRSMobile.Data.Models
 {
     public class MrsMessage
     {
+        public MrsMessage()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         [Key]
         public string Id { get; set; }
 
