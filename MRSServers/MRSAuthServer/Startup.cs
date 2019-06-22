@@ -34,7 +34,15 @@ namespace MRSAuthServer
               GetConnectionString("DefaultConnection")));
 
             // ===== Add Identity ========
-            services.AddIdentity<MrsUser, IdentityRole>()
+            services
+                .AddIdentity<MrsUser, MrsRole>(options =>
+                {
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                })
                 .AddEntityFrameworkStores<MrsMobileContext>()
                 .AddDefaultTokenProviders();
 
@@ -88,6 +96,7 @@ namespace MRSAuthServer
 
             app.UseMvc();
 
+            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
         }
     }

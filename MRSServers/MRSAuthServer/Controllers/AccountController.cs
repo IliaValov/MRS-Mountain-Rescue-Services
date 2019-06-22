@@ -18,13 +18,13 @@ namespace MRSAuthServer.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<MrsUser> _signInManager;
+        private readonly UserManager<MrsUser> _userManager;
         private readonly IConfiguration _configuration;
 
         public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<MrsUser> userManager,
+            SignInManager<MrsUser> signInManager,
             IConfiguration configuration
             )
         {
@@ -40,6 +40,8 @@ namespace MRSAuthServer.Controllers
 
             if (result.Succeeded)
             {
+
+
                 var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
                 return await GenerateJwtToken(model.Email, appUser);
             }
@@ -50,7 +52,7 @@ namespace MRSAuthServer.Controllers
         [HttpPost()]
         public async Task<object> Register([FromBody] RegisterDto model)
         {
-            var user = new IdentityUser
+            var user = new MrsUser
             {
                 UserName = model.Email,
                 Email = model.Email

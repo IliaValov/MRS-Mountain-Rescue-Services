@@ -6,7 +6,7 @@ namespace MRSMobile.Data.Models.Enums
 {
     public enum TypeUser
     {
-        Мountaineer = 1,
+        Regular = 1,
         Savior = 2
     }
 }

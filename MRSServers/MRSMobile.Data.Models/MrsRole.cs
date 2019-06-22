@@ -3,7 +3,7 @@ using System;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsRole : IdentityRole<string>
+    public class MrsRole : IdentityRole
     {
         public MrsRole()
             : this(null)

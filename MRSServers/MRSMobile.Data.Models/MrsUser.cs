@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsUser : IdentityUser<string>
+    public class MrsUser : IdentityUser
     {
         public MrsUser()
         {
@@ -17,9 +17,9 @@ namespace MRSMobile.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
-        public TypeUser User { get; set; }
-
         public bool IsInDanger { get; set; }
+
+        public TypeUser User { get; set; }
 
         public string DeviceId { get; set; }
         public MrsDevice Device { get; set; }
