@@ -3,15 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSAuthServer", "MRSAuthServer\MRSAuthServer.csproj", "{33297B88-DF5E-4E5A-898A-D46C70C21F8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSAuthServer.Web", "MRSAuthServer\MRSAuthServer.Web.csproj", "{33297B88-DF5E-4E5A-898A-D46C70C21F8C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBases", "DataBases", "{E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobile.Data", "MRSMobile.Data\MRSMobile.Data.csproj", "{A876FE60-D08F-47E2-8BA3-089524F38171}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobile.Data.Models", "MRSMobile.Data.Models\MRSMobile.Data.Models.csproj", "{C0B22F7B-3672-4EBE-A299-068808D65EE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRSMobile.Data.Common", "MRSMobile.Data.Common\MRSMobile.Data.Common.csproj", "{F76C3C74-25EE-4A64-A6C7-949F384CD909}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobile.Data.Common", "MRSMobile.Data.Common\MRSMobile.Data.Common.csproj", "{F76C3C74-25EE-4A64-A6C7-949F384CD909}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D7235977-13BC-49F4-8BD6-5758364AE6C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRS.Web.Infrastructure", "MRS.Web.Infrastructure\MRS.Web.Infrastructure.csproj", "{7EFF3D53-12CE-481B-B7C0-5FB8F6A2ABB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRS.Common", "MRS.Common\MRS.Common.csproj", "{EE099845-3D47-40A9-8B06-9E2250C717DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,14 +41,24 @@ Global
 		{F76C3C74-25EE-4A64-A6C7-949F384CD909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F76C3C74-25EE-4A64-A6C7-949F384CD909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F76C3C74-25EE-4A64-A6C7-949F384CD909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EFF3D53-12CE-481B-B7C0-5FB8F6A2ABB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EFF3D53-12CE-481B-B7C0-5FB8F6A2ABB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EFF3D53-12CE-481B-B7C0-5FB8F6A2ABB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EFF3D53-12CE-481B-B7C0-5FB8F6A2ABB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE099845-3D47-40A9-8B06-9E2250C717DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE099845-3D47-40A9-8B06-9E2250C717DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE099845-3D47-40A9-8B06-9E2250C717DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE099845-3D47-40A9-8B06-9E2250C717DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{33297B88-DF5E-4E5A-898A-D46C70C21F8C} = {D7235977-13BC-49F4-8BD6-5758364AE6C2}
 		{A876FE60-D08F-47E2-8BA3-089524F38171} = {E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}
 		{C0B22F7B-3672-4EBE-A299-068808D65EE2} = {E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}
 		{F76C3C74-25EE-4A64-A6C7-949F384CD909} = {E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}
+		{7EFF3D53-12CE-481B-B7C0-5FB8F6A2ABB7} = {D7235977-13BC-49F4-8BD6-5758364AE6C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6265760A-7113-4314-970D-CD3BE9D9C751}

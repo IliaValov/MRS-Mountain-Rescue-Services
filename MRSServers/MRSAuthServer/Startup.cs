@@ -1,18 +1,31 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+
+
+using MRSMobile.Data;
+using MRSMobile.Data.Models;
+using MRS.Web.Infrastructure.Middlewares.Auth;
+
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using MRSMobile.Data;
-using MRSMobile.Data.Models;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
+using Newtonsoft.Json;
 namespace MRSAuthServer
 {
     public class Startup
@@ -34,6 +47,33 @@ namespace MRSAuthServer
               GetConnectionString("DefaultConnection")));
 
             // ===== Add Identity ========
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JwtTokenValidation:Secret"]));
+
+            services.Configure<TokenProviderOptions>(opts =>
+            {
+                opts.Audience = this.Configuration["JwtTokenValidation:Audience"];
+                opts.Issuer = this.Configuration["JwtTokenValidation:Issuer"];
+                opts.Path = "/api/account/login";
+                opts.Expiration = TimeSpan.FromDays(15);
+                opts.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            });
+
+            services
+                .AddAuthentication()
+                .AddJwtBearer(opts =>
+                {
+                    opts.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = signingKey,
+                        ValidateIssuer = true,
+                        ValidIssuer = this.Configuration["JwtTokenValidation:Issuer"],
+                        ValidateAudience = true,
+                        ValidAudience = this.Configuration["JwtTokenValidation:Audience"],
+                        ValidateLifetime = true,
+                    };
+                });
+
             services
                 .AddIdentity<MrsUser, MrsRole>(options =>
                 {
@@ -44,37 +84,18 @@ namespace MRSAuthServer
                     options.Password.RequireUppercase = false;
                 })
                 .AddEntityFrameworkStores<MrsMobileContext>()
+                .AddUserStore<MrsUserStore>()
+                .AddRoleStore<MrsRoleStore>()
                 .AddDefaultTokenProviders();
 
-            // ===== Add Jwt Authentication ========
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
-            services
-                .AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-                })
-                .AddJwtBearer(cfg =>
-                {
-                    cfg.RequireHttpsMetadata = false;
-                    cfg.SaveToken = true;
-                    cfg.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidIssuer = Configuration["JwtIssuer"],
-                        ValidAudience = Configuration["JwtIssuer"],
-                        IssuerSigningKey =
-                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"])),
-                        ClockSkew = TimeSpan.Zero // remove delay of token when expire
-                    };
-                });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddTransient<IUserStore<MrsUser>, MrsUserStore>();
             services.AddTransient<IRoleStore<MrsRole>, MrsRoleStore>();
 
+            services.AddSingleton(this.Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,14 +111,43 @@ namespace MRSAuthServer
                 app.UseHsts();
             }
 
-            app.UseAuthentication();
+            app.UseJwtBearerTokens(
+              app.ApplicationServices.GetRequiredService<IOptions<TokenProviderOptions>>(),
+              PrincipalResolver);
 
             app.UseHttpsRedirection();
 
             app.UseMvc();
 
-            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
+        }
+
+
+        private static async Task<GenericPrincipal> PrincipalResolver(HttpContext context)
+        {
+            var email = context.Request.Form["email"];
+
+            var userManager = context.RequestServices.GetRequiredService<UserManager<MrsUser>>();
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null || user.IsDeleted)
+            {
+                return null;
+            }
+
+            var password = context.Request.Form["password"];
+
+            var isValidPassword = await userManager.CheckPasswordAsync(user, password);
+            if (!isValidPassword)
+            {
+                return null;
+            }
+
+            var roles = await userManager.GetRolesAsync(user);
+
+            var identity = new GenericIdentity(email, "Token");
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+
+            return new GenericPrincipal(identity, roles.ToArray());
         }
     }
 }
