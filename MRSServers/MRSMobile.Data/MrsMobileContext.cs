@@ -33,26 +33,26 @@ namespace MRSMobile.Data
                 .WithMany(x => x.Messages)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<MrsUser>()
-                .HasMany(e => e.Claims)
-                .WithOne()
-                .HasForeignKey(e => e.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<MrsUser>()
+            //    .HasMany(e => e.Claims)
+            //    .WithOne()
+            //    .HasForeignKey(e => e.UserId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<MrsUser>()
-                .HasMany(e => e.Logins)
-                .WithOne()
-                .HasForeignKey(e => e.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<MrsUser>()
+            //    .HasMany(e => e.Logins)
+            //    .WithOne()
+            //    .HasForeignKey(e => e.UserId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<MrsUser>()
-                .HasMany(e => e.Roles)
-                .WithOne()
-                .HasForeignKey(e => e.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<MrsUser>()
+            //    .HasMany(e => e.Roles)
+            //    .WithOne()
+            //    .HasForeignKey(e => e.UserId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }

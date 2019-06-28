@@ -1,18 +1,19 @@
-﻿using System;
+﻿using MRSMobile.Data.Common.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsLocation
+    public class MrsLocation : BaseDeletableModel<string>
     {
         public MrsLocation()
         {
             this.Id = Guid.NewGuid().ToString();
+
+            this.CreatedOn = DateTime.UtcNow;
         }
 
-        [Key]
-        public string Id { get; set; }
 
         [Required]
         public double Latitude { get; set; }
@@ -22,9 +23,6 @@ namespace MRSMobile.Data.Models
 
         [Required]
         public double Altitude { get; set; }
-
-        [Required]
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         public string UserId { get; set; }
         public MrsUser User { get; set; }

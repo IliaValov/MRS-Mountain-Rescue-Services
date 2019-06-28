@@ -1,27 +1,24 @@
-﻿using System;
+﻿using MRSMobile.Data.Common.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsMessage
+    public class MrsMessage : BaseDeletableModel<string>
     {
         public MrsMessage()
         {
             this.Id = Guid.NewGuid().ToString();
-        }
 
-        [Key]
-        public string Id { get; set; }
+            this.CreatedOn = DateTime.UtcNow;
+        }
 
         [Required]
         public string Message { get; set; }
 
         [Required]
         public string Condition { get; set; }
-
-        [Required]
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         [ForeignKey("User")]
         public string UserId { get; set; }

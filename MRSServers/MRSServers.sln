@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobile.Data", "MRSMobile
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobile.Data.Models", "MRSMobile.Data.Models\MRSMobile.Data.Models.csproj", "{C0B22F7B-3672-4EBE-A299-068808D65EE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRSMobile.Data.Common", "MRSMobile.Data.Common\MRSMobile.Data.Common.csproj", "{F76C3C74-25EE-4A64-A6C7-949F384CD909}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{C0B22F7B-3672-4EBE-A299-068808D65EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0B22F7B-3672-4EBE-A299-068808D65EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0B22F7B-3672-4EBE-A299-068808D65EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F76C3C74-25EE-4A64-A6C7-949F384CD909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F76C3C74-25EE-4A64-A6C7-949F384CD909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F76C3C74-25EE-4A64-A6C7-949F384CD909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F76C3C74-25EE-4A64-A6C7-949F384CD909}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A876FE60-D08F-47E2-8BA3-089524F38171} = {E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}
 		{C0B22F7B-3672-4EBE-A299-068808D65EE2} = {E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}
+		{F76C3C74-25EE-4A64-A6C7-949F384CD909} = {E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6265760A-7113-4314-970D-CD3BE9D9C751}
