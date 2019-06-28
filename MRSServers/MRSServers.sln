@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSAuthServer.Web", "MRSAuthServer\MRSAuthServer.Web.csproj", "{33297B88-DF5E-4E5A-898A-D46C70C21F8C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobile.Data", "MRSMobile.Data\MRSMobile.Data.csproj", "{A876FE60-D08F-47E2-8BA3-089524F38171}"
@@ -17,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D7235977-13B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRS.Web.Infrastructure", "MRS.Web.Infrastructure\MRS.Web.Infrastructure.csproj", "{7EFF3D53-12CE-481B-B7C0-5FB8F6A2ABB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRS.Common", "MRS.Common\MRS.Common.csproj", "{EE099845-3D47-40A9-8B06-9E2250C717DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRS.Common", "MRS.Common\MRS.Common.csproj", "{EE099845-3D47-40A9-8B06-9E2250C717DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRSMobileServer", "MRSMobileServer\MRSMobileServer.csproj", "{ED99DC53-F59C-4B81-BA62-A2B6BCA3A9EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{33297B88-DF5E-4E5A-898A-D46C70C21F8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33297B88-DF5E-4E5A-898A-D46C70C21F8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33297B88-DF5E-4E5A-898A-D46C70C21F8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33297B88-DF5E-4E5A-898A-D46C70C21F8C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A876FE60-D08F-47E2-8BA3-089524F38171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A876FE60-D08F-47E2-8BA3-089524F38171}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A876FE60-D08F-47E2-8BA3-089524F38171}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,12 +45,15 @@ Global
 		{EE099845-3D47-40A9-8B06-9E2250C717DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE099845-3D47-40A9-8B06-9E2250C717DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE099845-3D47-40A9-8B06-9E2250C717DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED99DC53-F59C-4B81-BA62-A2B6BCA3A9EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED99DC53-F59C-4B81-BA62-A2B6BCA3A9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED99DC53-F59C-4B81-BA62-A2B6BCA3A9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED99DC53-F59C-4B81-BA62-A2B6BCA3A9EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{33297B88-DF5E-4E5A-898A-D46C70C21F8C} = {D7235977-13BC-49F4-8BD6-5758364AE6C2}
 		{A876FE60-D08F-47E2-8BA3-089524F38171} = {E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}
 		{C0B22F7B-3672-4EBE-A299-068808D65EE2} = {E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}
 		{F76C3C74-25EE-4A64-A6C7-949F384CD909} = {E7DD73CE-2C02-4D5E-9135-6E1AB22611A8}

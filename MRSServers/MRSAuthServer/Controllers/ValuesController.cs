@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MRSAuthServer.Controllers;
 
-namespace MRSAuthServer.Controllers
+namespace MRSAuthServer.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    [Authorize]
+    public class ValuesController : BaseController
     {
         // GET api/values
         [HttpGet]
