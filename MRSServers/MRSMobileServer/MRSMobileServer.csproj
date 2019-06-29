@@ -20,7 +20,6 @@
   <ItemGroup>
     <Folder Include="Areas\Mobile\Data\" />
     <Folder Include="Areas\Mobile\Models\" />
-    <Folder Include="Areas\Mobile\Views\" />
   </ItemGroup>
 
 </Project>

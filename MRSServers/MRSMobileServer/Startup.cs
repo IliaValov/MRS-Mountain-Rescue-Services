@@ -22,7 +22,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MRS.Common.Mapping;
 using MRSMobileServer.ViewModels.Account;
-using MRSMobileServer.ViewModels.Location;
+using MRSMobileServer.Areas.Mobile.Views.Location;
+using System.Reflection;
 
 namespace MRSMobileServer
 {
@@ -99,8 +100,7 @@ namespace MRSMobileServer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, MrsMobileContext dbContext)
         {
-            AutoMapperConfig.RegisterMappings(typeof(CreateLocationBindingModel).GetType().Assembly);
-           
+            AutoMapperConfig.RegisterMappings(typeof(CreateLocationBindingModel).GetTypeInfo().Assembly);
 
             dbContext.Database.EnsureCreated();
 

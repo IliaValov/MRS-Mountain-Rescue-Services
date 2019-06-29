@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClassLibrary1
+namespace MRS.Services
 {
     public class Class1
     {
