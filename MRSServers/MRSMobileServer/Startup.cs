@@ -24,6 +24,8 @@ using MRS.Common.Mapping;
 using MRSMobileServer.ViewModels.Account;
 using MRSMobileServer.Areas.Mobile.Views.Location;
 using System.Reflection;
+using MRS.Services.Contracts;
+using MRS.Services;
 
 namespace MRSMobileServer
 {
@@ -39,7 +41,7 @@ namespace MRSMobileServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MrsMobileContext>
+            services.AddDbContext<MrsMobileDbContext>
               (options => options.
               UseSqlServer(this.
               Configuration.
@@ -82,12 +84,16 @@ namespace MRSMobileServer
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
-                .AddEntityFrameworkStores<MrsMobileContext>()
+                .AddEntityFrameworkStores<MrsMobileDbContext>()
                 .AddUserStore<MrsUserStore>()
                 .AddRoleStore<MrsRoleStore>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddTransient<ILocationService, LocationService>();
+            services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<IUserStore<MrsUser>, MrsUserStore>();
             services.AddTransient<IRoleStore<MrsRole>, MrsRoleStore>();
@@ -98,7 +104,7 @@ namespace MRSMobileServer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, MrsMobileContext dbContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, MrsMobileDbContext dbContext)
         {
             AutoMapperConfig.RegisterMappings(typeof(CreateLocationBindingModel).GetTypeInfo().Assembly);
 
@@ -128,10 +134,10 @@ namespace MRSMobileServer
 
         private static async Task<GenericPrincipal> PrincipalResolver(HttpContext context)
         {
-            var email = context.Request.Form["email"];
+            var name = context.Request.Form["username"];
 
             var userManager = context.RequestServices.GetRequiredService<UserManager<MrsUser>>();
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindByNameAsync(name);
             if (user == null || user.IsDeleted)
             {
                 return null;
@@ -147,7 +153,7 @@ namespace MRSMobileServer
 
             var roles = await userManager.GetRolesAsync(user);
 
-            var identity = new GenericIdentity(email, "Token");
+            var identity = new GenericIdentity(name, "Token");
             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
             return new GenericPrincipal(identity, roles.ToArray());

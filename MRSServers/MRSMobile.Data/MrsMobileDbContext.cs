@@ -5,13 +5,13 @@ using MRSMobile.Data.Models;
 
 namespace MRSMobile.Data
 {
-    public class MrsMobileContext : IdentityDbContext<MrsUser, MrsRole, string>
+    public class MrsMobileDbContext : IdentityDbContext<MrsUser, MrsRole, string>
     {
-        public MrsMobileContext(DbContextOptions options) : base(options)
+        public MrsMobileDbContext(DbContextOptions options) : base(options)
         {
         }
 
-        protected MrsMobileContext()
+        protected MrsMobileDbContext()
         {
         }
 

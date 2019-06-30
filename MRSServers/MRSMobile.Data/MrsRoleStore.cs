@@ -7,12 +7,12 @@ namespace MRSMobile.Data
 {
     public class MrsRoleStore : RoleStore<
         MrsRole,
-        MrsMobileContext,
+        MrsMobileDbContext,
         string,
         IdentityUserRole<string>,
         IdentityRoleClaim<string>>
     {
-        public MrsRoleStore(MrsMobileContext context, IdentityErrorDescriber describer = null)
+        public MrsRoleStore(MrsMobileDbContext context, IdentityErrorDescriber describer = null)
             : base(context, describer)
         {
         }

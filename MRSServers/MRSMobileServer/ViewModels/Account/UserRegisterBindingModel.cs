@@ -8,6 +8,10 @@ namespace MRSMobileServer.ViewModels.Account
         [EmailAddress]
         public string Email { get; set; }
 
+        [Phone]
+        [Required]
+        public string PhoneNumber { get; set; }
+
         [Required]
         public string Password { get; set; }
 

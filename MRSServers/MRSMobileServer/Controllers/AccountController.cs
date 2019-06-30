@@ -27,7 +27,7 @@ namespace MRSMobileServer.Controllers
                 return this.BadRequest(this.ModelState.Values.FirstOrDefault());
             }
 
-            var user = new MrsUser { Email = model.Email, UserName = model.Email };
+            var user = new MrsUser { UserName = model.PhoneNumber };
             var result = await this.userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)

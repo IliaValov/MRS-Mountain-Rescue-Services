@@ -8,7 +8,7 @@ namespace MRSMobile.Data
     public class MrsUserStore : UserStore<
         MrsUser,
         MrsRole,
-        MrsMobileContext,
+        MrsMobileDbContext,
         string,
         IdentityUserClaim<string>,
         IdentityUserRole<string>,
@@ -16,7 +16,7 @@ namespace MRSMobile.Data
         IdentityUserToken<string>,
         IdentityRoleClaim<string>>
     {
-        public MrsUserStore(MrsMobileContext context, IdentityErrorDescriber describer = null)
+        public MrsUserStore(MrsMobileDbContext context, IdentityErrorDescriber describer = null)
             : base(context, describer)
         {
         }
