@@ -3,15 +3,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MRS.Services.Contracts;
-using MRSMobile.Data;
 using MRSMobile.Data.Models;
 using MRSMobileServer.Areas.Mobile.Views.Location;
 using MRSMobileServer.Controllers;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MRSMobileServer.Areas.Mobile.Controllers
 {
-    [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
     public class LocationController : BaseController
@@ -27,7 +26,7 @@ namespace MRSMobileServer.Areas.Mobile.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult AddLocation([FromBody]CreateLocationBindingModel locationInfo)
+        public async Task<ActionResult> AddLocation([FromBody]CreateLocationBindingModel locationInfo)
         {
             if (locationInfo == null && !ModelState.IsValid)
             {
@@ -40,12 +39,12 @@ namespace MRSMobileServer.Areas.Mobile.Controllers
 
             location.UserId = userId;
 
-            locationService.AddLocation(location);
+            await locationService.AddLocation(location);
 
             return StatusCode(201);
         }
 
-        public ActionResult AddLocationWithMessage([FromBody]CreateLocationBindingModel locationInfo)
+        public async Task<ActionResult> AddLocationWithMessage([FromBody]CreateLocationBindingModel locationInfo)
         {
             if (locationInfo == null && !ModelState.IsValid)
             {
@@ -59,7 +58,7 @@ namespace MRSMobileServer.Areas.Mobile.Controllers
             location.UserId = userId;
             location.Message.LocationId = location.Id;
 
-            locationService.AddLocation(location);
+            await locationService.AddLocation(location);
             userService.ChangeUserCondition(userId, true);
 
             return StatusCode(201);

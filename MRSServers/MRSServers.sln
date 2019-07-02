@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRS.Common", "MRS.Common\MR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSMobileServer", "MRSMobileServer\MRSMobileServer.csproj", "{ED99DC53-F59C-4B81-BA62-A2B6BCA3A9EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRS.Services", "MRS.Services\MRS.Services.csproj", "{C24AEC3E-D6F8-4210-8C5B-7947C2D7BCAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRS.Services", "MRS.Services\MRS.Services.csproj", "{C24AEC3E-D6F8-4210-8C5B-7947C2D7BCAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SandProject", "SandProject\SandProject.csproj", "{D58E22D6-CFCE-492E-A258-40E18A71C5EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRSWebServer", "MRSWebServer\MRSWebServer.csproj", "{FEF50F12-5F39-4358-B38C-C7B2A3C9A726}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,14 @@ Global
 		{C24AEC3E-D6F8-4210-8C5B-7947C2D7BCAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C24AEC3E-D6F8-4210-8C5B-7947C2D7BCAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C24AEC3E-D6F8-4210-8C5B-7947C2D7BCAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D58E22D6-CFCE-492E-A258-40E18A71C5EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D58E22D6-CFCE-492E-A258-40E18A71C5EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D58E22D6-CFCE-492E-A258-40E18A71C5EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D58E22D6-CFCE-492E-A258-40E18A71C5EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEF50F12-5F39-4358-B38C-C7B2A3C9A726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF50F12-5F39-4358-B38C-C7B2A3C9A726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF50F12-5F39-4358-B38C-C7B2A3C9A726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF50F12-5F39-4358-B38C-C7B2A3C9A726}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

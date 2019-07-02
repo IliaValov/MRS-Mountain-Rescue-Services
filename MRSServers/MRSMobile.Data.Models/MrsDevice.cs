@@ -5,11 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsDevice : BaseDeletableModel<string>
+    public class MrsDevice : BaseDeletableModel<int>
     {
         public MrsDevice()
         {
-            this.Id = Guid.NewGuid().ToString();
 
             this.CreatedOn = DateTime.UtcNow;
 

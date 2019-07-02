@@ -5,12 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsMessage : BaseDeletableModel<string>
+    public class MrsMessage : BaseDeletableModel<int>
     {
         public MrsMessage()
         {
-            this.Id = Guid.NewGuid().ToString();
-
             this.CreatedOn = DateTime.UtcNow;
         }
 
@@ -26,7 +24,7 @@ namespace MRSMobile.Data.Models
 
         [Required]
         [ForeignKey("Location")]
-        public string LocationId { get; set; }
+        public int LocationId { get; set; }
         public MrsLocation Location { get; set; }
     }
 }

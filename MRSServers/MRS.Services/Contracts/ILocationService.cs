@@ -1,15 +1,16 @@
 ﻿using MRSMobile.Data.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MRS.Services.Contracts
 {
     public interface ILocationService
     {
-        void AddLocation(MrsLocation location);
+        Task AddLocation(MrsLocation location);
 
-        IQueryable<TModel> GetByDay<TModel>(DateTime date);
+        Task<IQueryable<TModel>> GetByDay<TModel>(DateTime date);
 
-        IQueryable<TModel> All<TModel>();
+        Task<IQueryable<TModel>> All<TModel>();
     }
 }

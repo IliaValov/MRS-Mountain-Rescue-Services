@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +10,6 @@ using MRSMobileServer.ViewModels.Account;
 
 namespace MRSMobileServer.Controllers
 {
-    [Route("api/[controller]/[action]")]
     [AllowAnonymous]
     public class AccountController : BaseController
     {
@@ -20,6 +21,18 @@ namespace MRSMobileServer.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> Login([FromBody]UserLoginBindingModel model)
+        {
+            if (model == null || !this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState.Values.FirstOrDefault());
+            }
+
+
+            return BadRequest();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Register([FromBody]UserRegisterBindingModel model)
         {
             if (model == null || !this.ModelState.IsValid)
@@ -27,8 +40,8 @@ namespace MRSMobileServer.Controllers
                 return this.BadRequest(this.ModelState.Values.FirstOrDefault());
             }
 
-            var user = new MrsUser { UserName = model.PhoneNumber };
-            var result = await this.userManager.CreateAsync(user, model.Password);
+            var user = new MrsUser { Email = model.Email, UserName = model.PhoneNumber };
+            var result = await this.userManager.CreateAsync(user, model.PhoneNumber);
 
             if (result.Succeeded)
             {

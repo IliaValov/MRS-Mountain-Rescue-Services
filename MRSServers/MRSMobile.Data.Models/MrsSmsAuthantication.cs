@@ -1,32 +1,28 @@
 ﻿using MRSMobile.Data.Common.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsLocation : BaseDeletableModel<int>
+    public class MrsSmsAuthantication : BaseModel<int>
     {
-        public MrsLocation()
+        public MrsSmsAuthantication()
         {
             this.CreatedOn = DateTime.UtcNow;
         }
 
+        [Required]
+        public string Cookie { get; set; }
 
         [Required]
-        public double Latitude { get; set; }
+        public string AuthanticationCode { get; set; }
 
         [Required]
-        public double Longitude { get; set; }
-
-        [Required]
-        public double Altitude { get; set; }
-
+        [ForeignKey("User")]
         public string UserId { get; set; }
         public MrsUser User { get; set; }
 
-        [ForeignKey("Message")]
-        public string MessageId { get; set; }
-        public MrsMessage Message { get; set; }
     }
 }

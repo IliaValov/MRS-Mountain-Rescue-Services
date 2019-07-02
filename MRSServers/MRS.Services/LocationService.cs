@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper.QueryableExtensions;
 using MRS.Services.Contracts;
 using MRSMobile.Data;
@@ -16,17 +17,24 @@ namespace MRS.Services
             this.context = context;
         }
 
-        public void AddLocation(MrsLocation location)
+        public async Task AddLocation(MrsLocation location)
         {
-            this.context.MrsLocations.Add(location);
+            await this.context.MrsLocations.AddAsync(location);
 
-            this.context.SaveChanges();
+            await this.context.SaveChangesAsync();
 
-           
         }
 
-        public IQueryable<TModel> All<TModel>() => this.context.MrsLocations.AsQueryable().ProjectTo<TModel>();
+        public Task<IQueryable<TModel>> All<TModel>() =>
+            Task.Run(() => this.context.MrsLocations.AsQueryable().ProjectTo<TModel>());
 
-        public IQueryable<TModel> GetByDay<TModel>(DateTime date) => this.context.MrsLocations.Where(d => d.CreatedOn.Day == date.Day).AsQueryable().ProjectTo<TModel>();
+
+        public Task<IQueryable<TModel>> GetByDay<TModel>(DateTime date) =>
+            Task.Run(() =>
+            this.context
+            .MrsLocations
+            .Where(d => d.CreatedOn.Day == date.Day)
+            .AsQueryable()
+            .ProjectTo<TModel>());
     }
 }
