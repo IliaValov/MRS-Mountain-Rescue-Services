@@ -13,7 +13,7 @@ namespace MRSMobile.Data.Models
         }
 
         [Required]
-        public string Cookie { get; set; }
+        public string Token { get; set; }
 
         [Required]
         public string AuthanticationCode { get; set; }

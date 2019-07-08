@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MRS.Web.Infrastructure
+﻿namespace MRS.Web.Infrastructure
 {
-    class SmsOptions
+    public class SmsOptions
     {
+        public string AccountSid { get; set; }
+
+        public string AuthToken { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 }

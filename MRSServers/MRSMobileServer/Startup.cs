@@ -26,6 +26,7 @@ using MRSMobileServer.Areas.Mobile.Views.Location;
 using System.Reflection;
 using MRS.Services.MrsMobileServices;
 using MRS.Services.MrsMobileServices.Contracts;
+using MRS.Web.Infrastructure;
 
 namespace MRSMobileServer
 {
@@ -46,6 +47,9 @@ namespace MRSMobileServer
               UseSqlServer(this.
               Configuration.
               GetConnectionString("DefaultConnection")));
+
+            var smsSettingsSection = Configuration.GetSection("SmsValidation");
+            services.Configure<SmsOptions>(smsSettingsSection);
 
             // ===== Add Identity ========
 
@@ -96,6 +100,7 @@ namespace MRSMobileServer
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ISmsService, SmsService>();
 
             services.AddTransient<IUserStore<MrsMobileUser>, MrsMobileUserStore>();
             services.AddTransient<IRoleStore<MrsMobileRole>, MrsMobileRoleStore>();
