@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MRSMobileServer.Areas.Mobile.Views.Location
 {
-    public class CreateMessageBindingModel : IMapTo<MrsMessage>
+    public class CreateMessageBindingModel : IMapTo<MrsMobileMessage>
     {
         [Required]
         public string Message { get; set; }

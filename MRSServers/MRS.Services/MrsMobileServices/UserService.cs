@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using AutoMapper.QueryableExtensions;
-using MRS.Services.Contracts;
+using MRS.Services.MrsMobileServices.Contracts;
 using MRSMobile.Data;
 using MRSMobile.Data.Models;
 
-namespace MRS.Services
+namespace MRS.Services.MrsMobileServices
 {
     public class UserService : IUserService
     {
@@ -16,18 +16,18 @@ namespace MRS.Services
             this.context = context;
         }
 
-        public IQueryable<TModel> All<TModel>() => this.context.Users.AsQueryable().ProjectTo<TModel>();
+        public IQueryable<TModel> All<TModel>() => context.Users.AsQueryable().ProjectTo<TModel>();
 
         public void ChangeUserCondition(string id, bool isInDanger)
         {
-            var user = this.context.Users.SingleOrDefault(x => x.Id == id);
+            var user = context.Users.SingleOrDefault(x => x.Id == id);
 
             user.IsInDanger = isInDanger;
 
-            this.context.Update(user);
-            this.context.SaveChanges();
+            context.Update(user);
+            context.SaveChanges();
         }
 
-        public MrsUser GetUserById(string id) => this.context.Users.SingleOrDefault(x => x.Id == id);
+        public MrsMobileUser GetUserById(string id) => context.Users.SingleOrDefault(x => x.Id == id);
     }
 }

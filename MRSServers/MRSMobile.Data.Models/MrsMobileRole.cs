@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MRSMobile.Data.Common.Models;
+using MRS.Data.Common.Models;
 using System;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsRole : IdentityRole, IAuditInfo, IDeletableEntity
+    public class MrsMobileRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
-        public MrsRole()
+        public MrsMobileRole()
             : this(null)
         {
         }
 
-        public MrsRole(string name)
+        public MrsMobileRole(string name)
             : base(name)
         {
             this.Id = Guid.NewGuid().ToString();

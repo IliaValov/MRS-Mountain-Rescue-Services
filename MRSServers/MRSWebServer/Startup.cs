@@ -1,10 +1,24 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using MRS.Web.Infrastructure.Middlewares.Auth;
+using MRSWeb.Data;
+using MRSWeb.Data.Models;
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MRSWebServer
 {
@@ -20,8 +34,64 @@ namespace MRSWebServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<MrsWebDbContext>
+              (options => options.
+              UseSqlServer(this.
+              Configuration.
+              GetConnectionString("DefaultConnection")));
+
+            // ===== Add Identity ========
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JwtTokenValidation:Secret"]));
+
+            services.Configure<TokenProviderOptions>(opts =>
+            {
+                opts.Audience = this.Configuration["JwtTokenValidation:Audience"];
+                opts.Issuer = this.Configuration["JwtTokenValidation:Issuer"];
+                opts.Path = "/api/account/login";
+                opts.Expiration = TimeSpan.FromDays(15);
+                opts.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            });
+
+            services
+                .AddAuthentication()
+                .AddJwtBearer(opts =>
+                {
+                    opts.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = signingKey,
+                        ValidateIssuer = true,
+                        ValidIssuer = this.Configuration["JwtTokenValidation:Issuer"],
+                        ValidateAudience = true,
+                        ValidAudience = this.Configuration["JwtTokenValidation:Audience"],
+                        ValidateLifetime = true,
+                    };
+                });
+
+            services
+                .AddIdentity<MrsWebUser, MrsWebRole>(options =>
+                {
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                })
+                .AddEntityFrameworkStores<MrsWebDbContext>()
+                .AddUserStore<MrsWebUserStore>()
+                .AddRoleStore<MrsWebRoleStore>()
+                .AddDefaultTokenProviders();
+
+
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddTransient<IUserStore<MrsWebUser>, MrsWebUserStore>();
+            services.AddTransient<IRoleStore<MrsWebRole>, MrsWebRoleStore>();
+
+            services.AddSingleton(this.Configuration);
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -43,9 +113,15 @@ namespace MRSWebServer
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseJwtBearerTokens(
+         app.ApplicationServices.GetRequiredService<IOptions<TokenProviderOptions>>(),
+         PrincipalResolver);
 
             app.UseMvc(routes =>
             {
@@ -63,6 +139,33 @@ namespace MRSWebServer
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+        }
+
+        private static async Task<GenericPrincipal> PrincipalResolver(HttpContext context)
+        {
+            var name = context.Request.Form["username"];
+
+            var userManager = context.RequestServices.GetRequiredService<UserManager<MrsWebUser>>();
+            var user = await userManager.FindByNameAsync(name);
+            if (user == null || user.IsDeleted)
+            {
+                return null;
+            }
+
+            var password = context.Request.Form["password"];
+
+            var isValidPassword = await userManager.CheckPasswordAsync(user, password);
+            if (!isValidPassword)
+            {
+                return null;
+            }
+
+            var roles = await userManager.GetRolesAsync(user);
+
+            var identity = new GenericIdentity(name, "Token");
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+
+            return new GenericPrincipal(identity, roles.ToArray());
         }
     }
 }

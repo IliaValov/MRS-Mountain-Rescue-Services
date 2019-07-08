@@ -3,11 +3,11 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MRS.Services.Contracts
+namespace MRS.Services.MrsMobileServices.Contracts
 {
     public interface ILocationService
     {
-        Task AddLocation(MrsLocation location);
+        Task AddLocation(MrsMobileLocation location);
 
         Task<IQueryable<TModel>> GetByDay<TModel>(DateTime date);
 

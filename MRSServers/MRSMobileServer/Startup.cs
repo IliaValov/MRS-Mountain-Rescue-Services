@@ -24,8 +24,8 @@ using MRS.Common.Mapping;
 using MRSMobileServer.ViewModels.Account;
 using MRSMobileServer.Areas.Mobile.Views.Location;
 using System.Reflection;
-using MRS.Services.Contracts;
-using MRS.Services;
+using MRS.Services.MrsMobileServices;
+using MRS.Services.MrsMobileServices.Contracts;
 
 namespace MRSMobileServer
 {
@@ -48,6 +48,8 @@ namespace MRSMobileServer
               GetConnectionString("DefaultConnection")));
 
             // ===== Add Identity ========
+
+
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JwtTokenValidation:Secret"]));
 
             services.Configure<TokenProviderOptions>(opts =>
@@ -76,7 +78,7 @@ namespace MRSMobileServer
                 });
 
             services
-                .AddIdentity<MrsUser, MrsRole>(options =>
+                .AddIdentity<MrsMobileUser, MrsMobileRole>(options =>
                 {
                     options.Password.RequiredLength = 6;
                     options.Password.RequireDigit = false;
@@ -85,8 +87,8 @@ namespace MRSMobileServer
                     options.Password.RequireUppercase = false;
                 })
                 .AddEntityFrameworkStores<MrsMobileDbContext>()
-                .AddUserStore<MrsUserStore>()
-                .AddRoleStore<MrsRoleStore>()
+                .AddUserStore<MrsMobileUserStore>()
+                .AddRoleStore<MrsMobileRoleStore>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -95,8 +97,8 @@ namespace MRSMobileServer
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IUserService, UserService>();
 
-            services.AddTransient<IUserStore<MrsUser>, MrsUserStore>();
-            services.AddTransient<IRoleStore<MrsRole>, MrsRoleStore>();
+            services.AddTransient<IUserStore<MrsMobileUser>, MrsMobileUserStore>();
+            services.AddTransient<IRoleStore<MrsMobileRole>, MrsMobileRoleStore>();
 
             services.AddSingleton(this.Configuration);
 
@@ -108,6 +110,7 @@ namespace MRSMobileServer
         {
             AutoMapperConfig.RegisterMappings(typeof(CreateLocationBindingModel).GetTypeInfo().Assembly);
 
+            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
 
             if (env.IsDevelopment())
@@ -134,26 +137,27 @@ namespace MRSMobileServer
 
         private static async Task<GenericPrincipal> PrincipalResolver(HttpContext context)
         {
-            var name = context.Request.Form["username"];
+            var phone = context.Request.Form["phonenumber"];
+            var token = context.Request.Form["token"];
 
-            var userManager = context.RequestServices.GetRequiredService<UserManager<MrsUser>>();
-            var user = await userManager.FindByNameAsync(name);
-            if (user == null || user.IsDeleted)
+            using (var dbContext = new MrsMobileDbContext())
             {
-                return null;
+                if(dbContext.MobileSmsAuthantications.SingleOrDefault(x => x.Token == token) == null)
+                {
+                    return null;
+                }
             }
 
-            var password = context.Request.Form["password"];
-
-            var isValidPassword = await userManager.CheckPasswordAsync(user, password);
-            if (!isValidPassword)
+            var userManager = context.RequestServices.GetRequiredService<UserManager<MrsMobileUser>>();
+            var user = await userManager.FindByNameAsync(phone);
+            if (user == null || user.IsDeleted)
             {
                 return null;
             }
 
             var roles = await userManager.GetRolesAsync(user);
 
-            var identity = new GenericIdentity(name, "Token");
+            var identity = new GenericIdentity(phone, "Token");
             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
             return new GenericPrincipal(identity, roles.ToArray());

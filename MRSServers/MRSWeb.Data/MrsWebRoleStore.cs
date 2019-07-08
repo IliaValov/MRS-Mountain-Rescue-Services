@@ -1,23 +1,23 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using MRSMobile.Data.Models;
+using MRSWeb.Data.Models;
 using System.Security.Claims;
 
-namespace MRSMobile.Data
+namespace MRSWeb.Data
 {
-    public class MrsRoleStore : RoleStore<
-        MrsRole,
-        MrsMobileDbContext,
+    public class MrsWebRoleStore : RoleStore<
+        MrsWebRole,
+        MrsWebDbContext,
         string,
         IdentityUserRole<string>,
         IdentityRoleClaim<string>>
     {
-        public MrsRoleStore(MrsMobileDbContext context, IdentityErrorDescriber describer = null)
+        public MrsWebRoleStore(MrsWebDbContext context, IdentityErrorDescriber describer = null)
             : base(context, describer)
         {
         }
 
-        protected override IdentityRoleClaim<string> CreateRoleClaim(MrsRole role, Claim claim) =>
+        protected override IdentityRoleClaim<string> CreateRoleClaim(MrsWebRole role, Claim claim) =>
             new IdentityRoleClaim<string>
             {
                 RoleId = role.Id,

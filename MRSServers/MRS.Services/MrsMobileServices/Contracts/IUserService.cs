@@ -1,12 +1,12 @@
 ﻿using MRSMobile.Data.Models;
 using System.Linq;
 
-namespace MRS.Services.Contracts
+namespace MRS.Services.MrsMobileServices.Contracts
 {
     public interface IUserService
     {
 
-        MrsUser GetUserById(string id);
+        MrsMobileUser GetUserById(string id);
 
         void ChangeUserCondition(string Id, bool isInDanger);
 

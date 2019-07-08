@@ -2,13 +2,13 @@
 using System;
 using System.Linq;
 
-namespace MRS.Services.Contracts
+namespace MRS.Services.MrsMobileServices.Contracts
 {
     public interface IMessageService
     {
-        void AddMessage(MrsMessage message);
+        void AddMessage(MrsMobileMessage message);
 
-        MrsMessage GetLastMessage();
+        MrsMobileMessage GetLastMessage();
 
         IQueryable<TModel> GetByDay<TModel>(DateTime date);
 

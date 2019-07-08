@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MRS.Services.Contracts;
+using MRS.Services.MrsMobileServices.Contracts;
 using MRSMobile.Data.Models;
 using MRSMobileServer.Areas.Mobile.Views.Location;
 using MRSMobileServer.Controllers;
@@ -33,7 +33,7 @@ namespace MRSMobileServer.Areas.Mobile.Controllers
                 return BadRequest("Location is invalid");
             }
 
-            var location = Mapper.Map<MrsLocation>(locationInfo);
+            var location = Mapper.Map<MrsMobileLocation>(locationInfo);
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -51,7 +51,7 @@ namespace MRSMobileServer.Areas.Mobile.Controllers
                 return BadRequest("Location is invalid");
             }
 
-            var location = Mapper.Map<MrsLocation>(locationInfo);
+            var location = Mapper.Map<MrsMobileLocation>(locationInfo);
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 

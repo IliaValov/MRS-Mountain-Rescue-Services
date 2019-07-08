@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MRSMobile.Data.Common.Models
+namespace MRS.Data.Common.Models
 {
     public abstract class BaseModel<TKey> : IAuditInfo
     {

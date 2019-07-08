@@ -1,14 +1,13 @@
-﻿using MRSMobile.Data.Common.Models;
+﻿using MRS.Data.Common.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsSmsAuthantication : BaseModel<int>
+    public class MrsMobileSmsAuthantication : BaseModel<int>
     {
-        public MrsSmsAuthantication()
+        public MrsMobileSmsAuthantication()
         {
             this.CreatedOn = DateTime.UtcNow;
         }
@@ -22,7 +21,7 @@ namespace MRSMobile.Data.Models
         [Required]
         [ForeignKey("User")]
         public string UserId { get; set; }
-        public MrsUser User { get; set; }
+        public MrsMobileUser User { get; set; }
 
     }
 }

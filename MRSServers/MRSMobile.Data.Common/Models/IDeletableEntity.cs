@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MRSMobile.Data.Common.Models
+namespace MRS.Data.Common.Models
 {
     public interface IDeletableEntity
     {

@@ -1,17 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MRSMobile.Data.Models;
+using MRSWeb.Data.Models;
 
-namespace MRSMobile.Data
+namespace MRSWeb.Data
 {
-    public class MrsMobileDbContext : IdentityDbContext<MrsMobileUser, MrsMobileRole, string>
+    public class MrsWebDbContext : IdentityDbContext<MrsWebUser, MrsWebRole, string>
     {
-        public MrsMobileDbContext(DbContextOptions options) : base(options)
+        public MrsWebDbContext(DbContextOptions options) : base(options)
         {
         }
 
-        public MrsMobileDbContext()
+        protected MrsWebDbContext()
         {
         }
 
@@ -22,16 +21,7 @@ namespace MRSMobile.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder
-                .Entity<MrsMobileLocation>()
-                .HasOne(x => x.Message)
-                .WithOne(x => x.Location);
-
-            builder
-                .Entity<MrsMobileMessage>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.Messages)
-                .OnDelete(DeleteBehavior.Restrict);
+         
 
             //builder.Entity<MrsUser>()
             //    .HasMany(e => e.Claims)
@@ -57,24 +47,16 @@ namespace MRSMobile.Data
             base.OnModelCreating(builder);
         }
 
-        public DbSet<MrsMobileLocation> MrsLocations { get; set; }
-
-        public DbSet<MrsMobileMessage> MrsMessages { get; set; }
-
-        public DbSet<MrsMobileDevice> MrsDevices { get; set; }
-
-        public DbSet<MrsMobileSmsAuthantication> MobileSmsAuthantications { get; set; }
 
 
         private static string GetConnectionString()
         {
-            const string databaseName = "MrsMobileDb";
+            const string databaseName = "MrsWebDb";
 
 
             return $@"Server=.\SQLEXPRESS;Database={databaseName};
                     Trusted_Connection=True;
                     Integrated Security=True;";
         }
-
     }
 }

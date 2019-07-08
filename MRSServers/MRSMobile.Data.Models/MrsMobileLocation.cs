@@ -1,13 +1,13 @@
-﻿using MRSMobile.Data.Common.Models;
+﻿using MRS.Data.Common.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsLocation : BaseDeletableModel<int>
+    public class MrsMobileLocation : BaseDeletableModel<int>
     {
-        public MrsLocation()
+        public MrsMobileLocation()
         {
             this.CreatedOn = DateTime.UtcNow;
         }
@@ -23,10 +23,10 @@ namespace MRSMobile.Data.Models
         public double Altitude { get; set; }
 
         public string UserId { get; set; }
-        public MrsUser User { get; set; }
+        public MrsMobileUser User { get; set; }
 
         [ForeignKey("Message")]
         public string MessageId { get; set; }
-        public MrsMessage Message { get; set; }
+        public MrsMobileMessage Message { get; set; }
     }
 }

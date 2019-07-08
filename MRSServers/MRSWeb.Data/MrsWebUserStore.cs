@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using MRSMobile.Data.Models;
+using MRSWeb.Data.Models;
+using System;
+using System.Collections.Generic;
 using System.Security.Claims;
+using System.Text;
 
-namespace MRSMobile.Data
+namespace MRSWeb.Data
 {
-    public class MrsUserStore : UserStore<
-        MrsUser,
-        MrsRole,
-        MrsMobileDbContext,
+    public class MrsWebUserStore : UserStore<
+        MrsWebUser,
+        MrsWebRole,
+        MrsWebDbContext,
         string,
         IdentityUserClaim<string>,
         IdentityUserRole<string>,
@@ -16,24 +19,24 @@ namespace MRSMobile.Data
         IdentityUserToken<string>,
         IdentityRoleClaim<string>>
     {
-        public MrsUserStore(MrsMobileDbContext context, IdentityErrorDescriber describer = null)
+        public MrsWebUserStore(MrsWebDbContext context, IdentityErrorDescriber describer = null)
             : base(context, describer)
         {
         }
 
-        protected override IdentityUserRole<string> CreateUserRole(MrsUser user, MrsRole role)
+        protected override IdentityUserRole<string> CreateUserRole(MrsWebUser user, MrsWebRole role)
         {
             return new IdentityUserRole<string> { RoleId = role.Id, UserId = user.Id };
         }
 
-        protected override IdentityUserClaim<string> CreateUserClaim(MrsUser user, Claim claim)
+        protected override IdentityUserClaim<string> CreateUserClaim(MrsWebUser user, Claim claim)
         {
             var identityUserClaim = new IdentityUserClaim<string> { UserId = user.Id };
             identityUserClaim.InitializeFromClaim(claim);
             return identityUserClaim;
         }
 
-        protected override IdentityUserLogin<string> CreateUserLogin(MrsUser user, UserLoginInfo login) =>
+        protected override IdentityUserLogin<string> CreateUserLogin(MrsWebUser user, UserLoginInfo login) =>
             new IdentityUserLogin<string>
             {
                 UserId = user.Id,
@@ -43,7 +46,7 @@ namespace MRSMobile.Data
             };
 
         protected override IdentityUserToken<string> CreateUserToken(
-            MrsUser user,
+            MrsWebUser user,
             string loginProvider,
             string name,
             string value)
@@ -58,4 +61,6 @@ namespace MRSMobile.Data
             return token;
         }
     }
+
 }
+

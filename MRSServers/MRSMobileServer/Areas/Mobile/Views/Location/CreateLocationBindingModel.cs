@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MRSMobileServer.Areas.Mobile.Views.Location
 {
-    public class CreateLocationBindingModel : IMapTo<MrsLocation>
+    public class CreateLocationBindingModel : IMapTo<MrsMobileLocation>
     {
         [Required]
         public double Latitude { get; set; }
