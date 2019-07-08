@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsMobileDevice : BaseDeletableModel<int>
+    public class MrsMobileDevice : BaseDeletableModel<long>
     {
         public MrsMobileDevice()
         {

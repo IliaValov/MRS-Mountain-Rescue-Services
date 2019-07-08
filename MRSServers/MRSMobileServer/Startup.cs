@@ -21,7 +21,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MRS.Common.Mapping;
-using MRSMobileServer.ViewModels.Account;
 using MRSMobileServer.Areas.Mobile.Views.Location;
 using System.Reflection;
 using MRS.Services.MrsMobileServices;
@@ -50,6 +49,9 @@ namespace MRSMobileServer
 
             var smsSettingsSection = Configuration.GetSection("SmsValidation");
             services.Configure<SmsOptions>(smsSettingsSection);
+
+            var settings = smsSettingsSection.Get<SmsOptions>();
+            var key = Encoding.UTF8.GetBytes(settings.AccountSid);
 
             // ===== Add Identity ========
 
@@ -84,11 +86,12 @@ namespace MRSMobileServer
             services
                 .AddIdentity<MrsMobileUser, MrsMobileRole>(options =>
                 {
-                    options.Password.RequiredLength = 6;
+                    options.Password.RequiredLength = 3;
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
+                    options.Password.RequireDigit = false;
                 })
                 .AddEntityFrameworkStores<MrsMobileDbContext>()
                 .AddUserStore<MrsMobileUserStore>()
@@ -99,6 +102,7 @@ namespace MRSMobileServer
 
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IDeviceService, DeviceService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISmsService, SmsService>();
 
@@ -142,19 +146,27 @@ namespace MRSMobileServer
 
         private static async Task<GenericPrincipal> PrincipalResolver(HttpContext context)
         {
-            var phone = context.Request.Form["phonenumber"];
-            var token = context.Request.Form["token"];
+            string phoneNumber = context.Request.Form["phonenumber"];
+            string smsVerificationCode = context.Request.Form["verificationcode"];
+            string token = context.Request.Form["token"];
 
             using (var dbContext = new MrsMobileDbContext())
             {
-                if(dbContext.MobileSmsAuthantications.SingleOrDefault(x => x.Token == token) == null)
+
+                var mobileAuth = dbContext.MobileSmsAuthantications
+                    .Include(x => x.User)
+                    .SingleOrDefault(x => x.Token == token &&
+                    x.User.UserName == phoneNumber &&
+                    x.AuthanticationCode == smsVerificationCode);
+
+                if (mobileAuth == null)
                 {
                     return null;
                 }
             }
 
             var userManager = context.RequestServices.GetRequiredService<UserManager<MrsMobileUser>>();
-            var user = await userManager.FindByNameAsync(phone);
+            var user = await userManager.FindByNameAsync(phoneNumber);
             if (user == null || user.IsDeleted)
             {
                 return null;
@@ -162,7 +174,7 @@ namespace MRSMobileServer
 
             var roles = await userManager.GetRolesAsync(user);
 
-            var identity = new GenericIdentity(phone, "Token");
+            var identity = new GenericIdentity(phoneNumber, "Token");
             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
             return new GenericPrincipal(identity, roles.ToArray());

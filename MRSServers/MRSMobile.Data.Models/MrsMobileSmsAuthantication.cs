@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsMobileSmsAuthantication : BaseModel<int>
+    public class MrsMobileSmsAuthantication : BaseModel<long>
     {
         public MrsMobileSmsAuthantication()
         {

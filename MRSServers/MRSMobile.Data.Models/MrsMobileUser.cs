@@ -2,6 +2,7 @@
 using MRS.Data.Common.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MRSMobile.Data.Models
 {
@@ -21,7 +22,8 @@ namespace MRSMobile.Data.Models
 
         public bool IsInDanger { get; set; }
 
-        public string DeviceId { get; set; }
+        [Required]
+        public long DeviceId { get; set; }
         public MrsMobileDevice Device { get; set; }
 
         // Audit info

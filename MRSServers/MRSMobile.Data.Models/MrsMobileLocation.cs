@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MRSMobile.Data.Models
 {
-    public class MrsMobileLocation : BaseDeletableModel<int>
+    public class MrsMobileLocation : BaseDeletableModel<long>
     {
         public MrsMobileLocation()
         {
@@ -26,7 +26,7 @@ namespace MRSMobile.Data.Models
         public MrsMobileUser User { get; set; }
 
         [ForeignKey("Message")]
-        public string MessageId { get; set; }
+        public long? MessageId { get; set; }
         public MrsMobileMessage Message { get; set; }
     }
 }
