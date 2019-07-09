@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper.QueryableExtensions;
+using MRS.Models.MRSMobileModels.ViewModels.Account;
 using MRS.Services.MrsMobileServices.Contracts;
 using MRSMobile.Data;
 using MRSMobile.Data.Models;
@@ -16,7 +17,7 @@ namespace MRS.Services.MrsMobileServices
             this.context = context;
         }
 
-        public IQueryable<TModel> All<TModel>() => context.Users.AsQueryable().ProjectTo<TModel>();
+        public IQueryable<UserViewModel> All<TModel>() => context.Users.AsQueryable().ProjectTo<UserViewModel>();
 
         public void ChangeUserCondition(string id, bool isInDanger)
         {

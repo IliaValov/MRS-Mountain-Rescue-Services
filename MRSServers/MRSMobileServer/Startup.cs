@@ -21,11 +21,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MRS.Common.Mapping;
-using MRSMobileServer.Areas.Mobile.Views.Location;
 using System.Reflection;
 using MRS.Services.MrsMobileServices;
 using MRS.Services.MrsMobileServices.Contracts;
 using MRS.Web.Infrastructure;
+using MRS.Models.MRSMobileModels.BindingModels.Location;
 
 namespace MRSMobileServer
 {
@@ -50,11 +50,7 @@ namespace MRSMobileServer
             var smsSettingsSection = Configuration.GetSection("SmsValidation");
             services.Configure<SmsOptions>(smsSettingsSection);
 
-            var settings = smsSettingsSection.Get<SmsOptions>();
-            var key = Encoding.UTF8.GetBytes(settings.AccountSid);
-
             // ===== Add Identity ========
-
 
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JwtTokenValidation:Secret"]));
 
@@ -100,6 +96,7 @@ namespace MRSMobileServer
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            //Add Services
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IDeviceService, DeviceService>();
@@ -117,7 +114,8 @@ namespace MRSMobileServer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, MrsMobileDbContext dbContext)
         {
-            AutoMapperConfig.RegisterMappings(typeof(CreateLocationBindingModel).GetTypeInfo().Assembly);
+            //Configure Automapper
+            AutoMapperConfig.RegisterMappings(typeof(LocationCreateBindingModel).GetTypeInfo().Assembly);
 
             dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
@@ -132,6 +130,7 @@ namespace MRSMobileServer
                 app.UseHsts();
             }
 
+            //Add JwtBearer Token
             app.UseJwtBearerTokens(
               app.ApplicationServices.GetRequiredService<IOptions<TokenProviderOptions>>(),
               PrincipalResolver);

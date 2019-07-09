@@ -2,9 +2,9 @@
 using MRSMobile.Data.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace MRSMobileServer.Areas.Mobile.Views.Location
+namespace MRS.Models.MRSMobileModels.BindingModels.Message
 {
-    public class CreateMessageBindingModel : IMapTo<MrsMobileMessage>
+    public class MessageCreateBindingModel : IMapTo<MrsMobileMessage>
     {
         [Required]
         public string Message { get; set; }

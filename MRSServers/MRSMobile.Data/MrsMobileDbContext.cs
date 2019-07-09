@@ -15,10 +15,10 @@ namespace MRSMobile.Data
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(GetConnectionString());
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(GetConnectionString());
+        //}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

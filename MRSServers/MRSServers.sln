@@ -27,9 +27,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MRSMobileDb", "MRSMobileDb"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MRSWebDb", "MRSWebDb", "{06F34228-32CD-4D2E-ADBD-9486C3CB338A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRSWeb.Data", "MRSWeb.Data\MRSWeb.Data.csproj", "{CA0DE2CA-4880-4AB3-B6EC-ECC5B8E8BE03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSWeb.Data", "MRSWeb.Data\MRSWeb.Data.csproj", "{CA0DE2CA-4880-4AB3-B6EC-ECC5B8E8BE03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRSWeb.Data.Models", "MRSWeb.Data.Models\MRSWeb.Data.Models.csproj", "{7277B46F-84D4-4343-B740-6F80C6DC4F4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRSWeb.Data.Models", "MRSWeb.Data.Models\MRSWeb.Data.Models.csproj", "{7277B46F-84D4-4343-B740-6F80C6DC4F4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRS.Tests", "MRS.Tests\MRS.Tests.csproj", "{5885A060-0E32-445E-8688-F857A1A8FAAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRS.Models", "MRS.Models\MRS.Models.csproj", "{3AE4987D-53EA-4D33-8935-C48C0C844352}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +85,14 @@ Global
 		{7277B46F-84D4-4343-B740-6F80C6DC4F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7277B46F-84D4-4343-B740-6F80C6DC4F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7277B46F-84D4-4343-B740-6F80C6DC4F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5885A060-0E32-445E-8688-F857A1A8FAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5885A060-0E32-445E-8688-F857A1A8FAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5885A060-0E32-445E-8688-F857A1A8FAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5885A060-0E32-445E-8688-F857A1A8FAAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE4987D-53EA-4D33-8935-C48C0C844352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE4987D-53EA-4D33-8935-C48C0C844352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE4987D-53EA-4D33-8935-C48C0C844352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE4987D-53EA-4D33-8935-C48C0C844352}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

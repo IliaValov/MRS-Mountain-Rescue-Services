@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MRSMobileServer.ViewModels.Account
+namespace MRS.Models.MRSMobileModels.BindingModels.Account
 {
     public class UserLoginBindingModel
     {

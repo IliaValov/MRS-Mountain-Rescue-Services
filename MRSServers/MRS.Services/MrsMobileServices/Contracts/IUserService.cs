@@ -1,4 +1,5 @@
-﻿using MRSMobile.Data.Models;
+﻿using MRS.Models.MRSMobileModels.ViewModels.Account;
+using MRSMobile.Data.Models;
 using System.Linq;
 
 namespace MRS.Services.MrsMobileServices.Contracts
@@ -10,6 +11,6 @@ namespace MRS.Services.MrsMobileServices.Contracts
 
         void ChangeUserCondition(string Id, bool isInDanger);
 
-        IQueryable<TModel> All<TModel>();
+        IQueryable<UserViewModel> All<TModel>();
     }
 }

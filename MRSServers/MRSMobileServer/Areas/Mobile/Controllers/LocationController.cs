@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MRS.Models.MRSMobileModels.BindingModels.Location;
 using MRS.Services.MrsMobileServices.Contracts;
 using MRSMobile.Data.Models;
-using MRSMobileServer.Areas.Mobile.Views.Location;
 using MRSMobileServer.Controllers;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -26,7 +26,7 @@ namespace MRSMobileServer.Areas.Mobile.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult> AddLocation([FromBody]CreateLocationBindingModel locationInfo)
+        public async Task<ActionResult> AddLocation([FromBody]LocationCreateBindingModel locationInfo)
         {
             if (locationInfo == null && !ModelState.IsValid)
             {
@@ -44,7 +44,7 @@ namespace MRSMobileServer.Areas.Mobile.Controllers
             return StatusCode(201);
         }
 
-        public async Task<ActionResult> AddLocationWithMessage([FromBody]CreateLocationBindingModel locationInfo)
+        public async Task<ActionResult> AddLocationWithMessage([FromBody]LocationCreateBindingModel locationInfo)
         {
             if (locationInfo == null && !ModelState.IsValid)
             {

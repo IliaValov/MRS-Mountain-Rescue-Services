@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MRSMobileServer.ViewModels.Account
+namespace MRS.Models.MRSMobileModels.BindingModels.Account
 {
     public class UserRegisterBindingModel
     {
-        
         [Phone]
         [Required]
         public string PhoneNumber { get; set; }

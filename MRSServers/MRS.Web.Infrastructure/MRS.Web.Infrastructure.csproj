@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MRS.Common\MRS.Common.csproj" />
+    <ProjectReference Include="..\MRS.Services\MRS.Services.csproj" />
+    <ProjectReference Include="..\MRSMobile.Data\MRSMobile.Data.csproj" />
   </ItemGroup>
 
 </Project>

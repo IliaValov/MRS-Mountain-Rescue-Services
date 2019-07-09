@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using MRS.Models.MRSMobileModels.BindingModels.Account;
 using MRS.Services.MrsMobileServices.Contracts;
 using MRS.Web.Infrastructure;
 using MRSMobile.Data.Models;
-using MRSMobileServer.ViewModels.Account;
 
 namespace MRSMobileServer.Controllers
 {
@@ -62,7 +62,7 @@ namespace MRSMobileServer.Controllers
 
             var deviceId = deviceService.AddDevice(model.Device);
 
-            var user = new MrsMobileUser { Email = model.PhoneNumber, UserName = model.PhoneNumber, DeviceId = deviceId };
+            var user = new MrsMobileUser { Email = model.PhoneNumber, UserName = model.PhoneNumber, PhoneNumber = model.PhoneNumber, DeviceId = deviceId };
             var result = await this.userManager.CreateAsync(user, model.PhoneNumber);
 
             if (result.Succeeded)
