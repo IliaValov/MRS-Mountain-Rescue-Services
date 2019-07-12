@@ -1,16 +1,16 @@
 ﻿using MRS.Models.MRSMobileModels.ViewModels.Account;
-using MRSMobile.Data.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MRS.Services.MrsMobileServices.Contracts
 {
     public interface IUserService
     {
 
-        MrsMobileUser GetUserById(string id);
+        Task<T> GetUserById<T>(string phonenumber);
 
-        void ChangeUserCondition(string Id, bool isInDanger);
+        Task ChangeUserCondition(string phonenumber, bool isInDanger);
 
-        IQueryable<UserViewModel> All<TModel>();
+        Task<IQueryable<TModel>> All<TModel>();
     }
 }

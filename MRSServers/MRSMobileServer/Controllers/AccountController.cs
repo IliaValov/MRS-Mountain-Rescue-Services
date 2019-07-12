@@ -60,7 +60,7 @@ namespace MRSMobileServer.Controllers
                 return this.BadRequest(this.ModelState.Values.FirstOrDefault());
             }
 
-            var deviceId = deviceService.AddDevice(model.Device);
+            var deviceId = await deviceService.AddDevice(model.Device);
 
             var user = new MrsMobileUser { Email = model.PhoneNumber, UserName = model.PhoneNumber, PhoneNumber = model.PhoneNumber, DeviceId = deviceId };
             var result = await this.userManager.CreateAsync(user, model.PhoneNumber);

@@ -1,6 +1,7 @@
 ﻿using MRS.Services.MrsMobileServices.Contracts;
 using MRSMobile.Data;
 using MRSMobile.Data.Models;
+using System.Threading.Tasks;
 
 namespace MRS.Services.MrsMobileServices
 {
@@ -13,15 +14,15 @@ namespace MRS.Services.MrsMobileServices
             this.dbContext = dbContext;
         }
 
-        public long AddDevice(string device)
+        public async Task<long> AddDevice(string device)
         {
             var newDevice = new MrsMobileDevice
             {
                 Device = device
             };
 
-            this.dbContext.MrsDevices.Add(newDevice);
-            this.dbContext.SaveChanges();
+            await this.dbContext.MrsDevices.AddAsync(newDevice);
+            await this.dbContext.SaveChangesAsync();
 
             return newDevice.Id;
         }

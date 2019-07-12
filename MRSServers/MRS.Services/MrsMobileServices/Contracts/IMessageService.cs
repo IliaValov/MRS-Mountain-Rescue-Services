@@ -1,18 +1,21 @@
-﻿using MRSMobile.Data.Models;
+﻿using MRS.Models.MRSMobileModels.BindingModels.Message;
+using MRS.Models.MRSMobileModels.ViewModels.Message;
+using MRSMobile.Data.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MRS.Services.MrsMobileServices.Contracts
 {
     public interface IMessageService
     {
-        void AddMessage(MrsMobileMessage message);
+        Task AddMessage<T>(T message);
 
-        MrsMobileMessage GetLastMessage();
+        Task<T> GetLastMessage<T>();
 
-        IQueryable<TModel> GetByDay<TModel>(DateTime date);
+        Task<IQueryable<TModel>> GetByDay<TModel>(DateTime date);
 
-        IQueryable<TModel> All<TModel>();
+        Task<IQueryable<TModel>> All<TModel>();
 
 
     }

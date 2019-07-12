@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using MRS.Models.MRSMobileModels.ViewModels.Location;
 using MRS.Services.MrsMobileServices.Contracts;
 using MRSMobile.Data;
 using MRSMobile.Data.Models;
@@ -17,9 +19,11 @@ namespace MRS.Services.MrsMobileServices
             this.context = context;
         }
 
-        public async Task AddLocation(MrsMobileLocation location)
+        public async Task AddLocation<T>(T location)
         {
-            await context.MrsLocations.AddAsync(location);
+            var newLocation = Mapper.Map<MrsMobileLocation>(location);
+
+            await context.MrsLocations.AddAsync(newLocation);
 
             await context.SaveChangesAsync();
 

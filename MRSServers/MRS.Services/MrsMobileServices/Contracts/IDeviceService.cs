@@ -1,7 +1,9 @@
-﻿namespace MRS.Services.MrsMobileServices.Contracts
+﻿using System.Threading.Tasks;
+
+namespace MRS.Services.MrsMobileServices.Contracts
 {
     public interface IDeviceService
     {
-        long AddDevice(string device);
+         Task<long> AddDevice(string device);
     }
 }

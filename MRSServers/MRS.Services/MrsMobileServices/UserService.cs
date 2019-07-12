@@ -1,6 +1,7 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using MRS.Models.MRSMobileModels.ViewModels.Account;
 using MRS.Services.MrsMobileServices.Contracts;
 using MRSMobile.Data;
 using MRSMobile.Data.Models;
@@ -17,18 +18,25 @@ namespace MRS.Services.MrsMobileServices
             this.context = context;
         }
 
-        public IQueryable<UserViewModel> All<TModel>() => context.Users.AsQueryable().ProjectTo<UserViewModel>();
+        public async Task<IQueryable<TModel>> All<TModel>() => await Task.Run(() =>
+            context
+        .Users
+        .AsQueryable()
+        .ProjectTo<TModel>());
 
-        public void ChangeUserCondition(string id, bool isInDanger)
+        public async Task ChangeUserCondition(string phonenumber, bool isInDanger)
         {
-            var user = context.Users.SingleOrDefault(x => x.Id == id);
+            var user = context.Users.SingleOrDefault(x => x.PhoneNumber == phonenumber);
 
             user.IsInDanger = isInDanger;
 
             context.Update(user);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public MrsMobileUser GetUserById(string id) => context.Users.SingleOrDefault(x => x.Id == id);
+        public async Task<T> GetUserById<T>(string phonenumber) => await Task.Run(() => 
+            Mapper.Map<T>(context.Users.SingleOrDefault(x => x.PhoneNumber == phonenumber)));
+
+
     }
 }

@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using MRS.Common.Mapping;
+using MRS.Models.MRSMobileModels.BindingModels.Location;
 using MRS.Services.MrsMobileServices;
 using MRS.Services.MrsMobileServices.Contracts;
 using MRSMobile.Data;
@@ -6,6 +8,7 @@ using MRSMobile.Data.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Tests
@@ -47,14 +50,26 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
+            AutoMapperConfig.RegisterMappings(typeof(LocationCreateBindingModel).GetTypeInfo().Assembly);
         }
 
         [Test]
         public async Task GetAllUsers_WithCorrectData_ShouldReturnAllUsers()
         {
+            //Arrange
             var dbContext = await this.GetDbContext();
 
-           
+            var userService = this.GetUserService(dbContext);
+
+            //Act
+            var actualResult = await userService.All<MrsMobileUser>();
+
+            var expectedResult = GetUsers();
+            //Assert
+
+            Assert.IsTrue(await actualResult.CountAsync() == expectedResult.Count);
+
+
         }
     }
 }

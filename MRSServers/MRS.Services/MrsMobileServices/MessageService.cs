@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using MRS.Models.MRSMobileModels.ViewModels.Message;
 using MRS.Services.MrsMobileServices.Contracts;
 using MRSMobile.Data;
 using MRSMobile.Data.Models;
@@ -16,20 +19,30 @@ namespace MRS.Services.MrsMobileServices
             this.context = context;
         }
 
-        public void AddMessage(MrsMobileMessage message)
+        public async Task AddMessage<T>(T message)
         {
-            context.MrsMessages.Add(message);
-            context.SaveChanges();
+            var newMessage = Mapper.Map<MrsMobileMessage>(message);
+            await context.MrsMessages.AddAsync(newMessage);
+            await context.SaveChangesAsync();
         }
 
-        public IQueryable<TModel> All<TModel>() => context.MrsMessages.AsQueryable().ProjectTo<TModel>();
+        public async Task<IQueryable<TModel>> All<TModel>() => await Task.Run(() => context
+        .MrsMessages
+        .AsQueryable()
+        .ProjectTo<TModel>());
 
-        public IQueryable<TModel> GetByDay<TModel>(DateTime date) => context.MrsMessages
+        public async Task<IQueryable<TModel>> GetByDay<TModel>(DateTime date) =>
+            await Task.Run(() => context
+            .MrsMessages
             .Where(d => d.CreatedOn.Day == date.Day)
             .AsQueryable()
-            .ProjectTo<TModel>();
+            .ProjectTo<TModel>());
 
 
-        public MrsMobileMessage GetLastMessage() => context.MrsMessages.LastOrDefault();
+        public async Task<T> GetLastMessage<T>() => await Task.Run(() =>
+            context
+        .MrsMessages
+        .ProjectTo<T>()
+        .LastOrDefault());
     }
 }
