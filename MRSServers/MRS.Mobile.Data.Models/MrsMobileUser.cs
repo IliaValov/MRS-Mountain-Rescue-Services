@@ -1,21 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MRS.Common.Mapping;
 using MRS.Data.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MRSMobile.Data.Models
+namespace MRS.Mobile.Data.Models
 {
     public class MrsMobileUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
         public MrsMobileUser()
         {
-            this.Id = Guid.NewGuid().ToString();
-            this.Messages = new List<MrsMobileMessage>();
-            this.Locations = new List<MrsMobileLocation>();
+            Id = Guid.NewGuid().ToString();
+            Messages = new List<MrsMobileMessage>();
+            Locations = new List<MrsMobileLocation>();
 
-            this.CreatedOn = DateTime.UtcNow;
+            CreatedOn = DateTime.UtcNow;
             //this.Roles = new HashSet<IdentityUserRole<string>>();
             //this.Claims = new HashSet<IdentityUserClaim<string>>();
             //this.Logins = new HashSet<IdentityUserLogin<string>>();

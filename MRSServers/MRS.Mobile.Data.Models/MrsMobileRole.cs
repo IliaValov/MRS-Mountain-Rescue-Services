@@ -2,7 +2,7 @@
 using MRS.Data.Common.Models;
 using System;
 
-namespace MRSMobile.Data.Models
+namespace MRS.Mobile.Data.Models
 {
     public class MrsMobileRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
@@ -16,7 +16,7 @@ namespace MRSMobile.Data.Models
         {
             this.Id = Guid.NewGuid().ToString();
 
-            this.CreatedOn = DateTime.UtcNow;
+            CreatedOn = DateTime.UtcNow;
         }
 
         //Audit info

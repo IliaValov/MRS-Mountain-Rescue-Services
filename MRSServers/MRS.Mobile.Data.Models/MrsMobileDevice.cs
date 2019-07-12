@@ -1,19 +1,18 @@
-﻿using MRS.Common.Mapping;
-using MRS.Data.Common.Models;
+﻿using MRS.Data.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MRSMobile.Data.Models
+namespace MRS.Mobile.Data.Models
 {
     public class MrsMobileDevice : BaseDeletableModel<long>
     {
         public MrsMobileDevice()
         {
 
-            this.CreatedOn = DateTime.UtcNow;
+            CreatedOn = DateTime.UtcNow;
 
-            this.Users = new List<MrsMobileUser>();
+            Users = new List<MrsMobileUser>();
         }
 
         [Required]

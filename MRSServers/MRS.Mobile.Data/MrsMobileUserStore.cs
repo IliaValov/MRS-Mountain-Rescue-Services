@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using MRSMobile.Data.Models;
+using MRS.Mobile.Data.Models;
 using System.Security.Claims;
 
-namespace MRSMobile.Data
+namespace MRS.Mobile.Data
 {
     public class MrsMobileUserStore : UserStore<
         MrsMobileUser,

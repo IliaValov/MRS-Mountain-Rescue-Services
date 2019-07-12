@@ -29,7 +29,7 @@ using MRS.Web.Infrastructure;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
 
 
-namespace MRSMobileServer
+namespace MRS.Mobile.Web
 {
     public class Startup
     {
@@ -45,7 +45,7 @@ namespace MRSMobileServer
         {
             services.AddDbContext<MrsMobileDbContext>
               (options => options.
-              UseSqlServer(this.
+              UseSqlServer(
               Configuration.
               GetConnectionString("DefaultConnection")));
 
@@ -54,12 +54,12 @@ namespace MRSMobileServer
 
             // ===== Add Identity ========
 
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JwtTokenValidation:Secret"]));
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtTokenValidation:Secret"]));
 
             services.Configure<TokenProviderOptions>(opts =>
             {
-                opts.Audience = this.Configuration["JwtTokenValidation:Audience"];
-                opts.Issuer = this.Configuration["JwtTokenValidation:Issuer"];
+                opts.Audience = Configuration["JwtTokenValidation:Audience"];
+                opts.Issuer = Configuration["JwtTokenValidation:Issuer"];
                 opts.Path = "/api/account/login";
                 opts.Expiration = TimeSpan.FromDays(15);
                 opts.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
@@ -74,9 +74,9 @@ namespace MRSMobileServer
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = signingKey,
                         ValidateIssuer = true,
-                        ValidIssuer = this.Configuration["JwtTokenValidation:Issuer"],
+                        ValidIssuer = Configuration["JwtTokenValidation:Issuer"],
                         ValidateAudience = true,
-                        ValidAudience = this.Configuration["JwtTokenValidation:Audience"],
+                        ValidAudience = Configuration["JwtTokenValidation:Audience"],
                         ValidateLifetime = true,
                     };
                 });
@@ -108,7 +108,7 @@ namespace MRSMobileServer
             services.AddTransient<IUserStore<MrsMobileUser>, MrsMobileUserStore>();
             services.AddTransient<IRoleStore<MrsMobileRole>, MrsMobileRoleStore>();
 
-            services.AddSingleton(this.Configuration);
+            services.AddSingleton(Configuration);
 
 
         }
@@ -119,7 +119,6 @@ namespace MRSMobileServer
             //Configure Automapper
             AutoMapperConfig.RegisterMappings(typeof(LocationCreateBindingModel).GetTypeInfo().Assembly);
 
-            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
 
             if (env.IsDevelopment())
@@ -151,20 +150,20 @@ namespace MRSMobileServer
             string smsVerificationCode = context.Request.Form["verificationcode"];
             string token = context.Request.Form["token"];
 
-            using (var dbContext = new MrsMobileDbContext())
-            {
+            //using (var context = serviceScope.ServiceProvider.GetRequiredService<MrsMobileDbContext>())
+            //{
 
-                var mobileAuth = dbContext.MobileSmsAuthantications
-                    .Include(x => x.User)
-                    .SingleOrDefault(x => x.Token == token &&
-                    x.User.UserName == phoneNumber &&
-                    x.AuthanticationCode == smsVerificationCode);
+            //    var mobileAuth = dbContext.MobileSmsAuthantications
+            //        .Include(x => x.User)
+            //        .SingleOrDefault(x => x.Token == token &&
+            //        x.User.UserName == phoneNumber &&
+            //        x.AuthanticationCode == smsVerificationCode);
 
-                if (mobileAuth == null)
-                {
-                    return null;
-                }
-            }
+            //    if (mobileAuth == null)
+            //    {
+            //        return null;
+            //    }
+            //}
 
             var userManager = context.RequestServices.GetRequiredService<UserManager<MrsMobileUser>>();
             var user = await userManager.FindByNameAsync(phoneNumber);

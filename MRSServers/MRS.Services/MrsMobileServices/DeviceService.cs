@@ -1,6 +1,6 @@
-﻿using MRS.Services.MrsMobileServices.Contracts;
-using MRSMobile.Data;
-using MRSMobile.Data.Models;
+﻿using MRS.Mobile.Data;
+using MRS.Mobile.Data.Models;
+using MRS.Services.MrsMobileServices.Contracts;
 using System.Threading.Tasks;
 
 namespace MRS.Services.MrsMobileServices

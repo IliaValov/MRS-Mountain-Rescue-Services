@@ -1,18 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MRSWebModels\BindingModels\" />
-    <Folder Include="MRSWebModels\ViewModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MRS.Common\MRS.Common.csproj" />
-    <ProjectReference Include="..\MRSMobile.Data.Models\MRSMobile.Data.Models.csproj" />
+    <ProjectReference Include="..\MRS.Mobile.Data.Models\MRS.Mobile.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>

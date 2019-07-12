@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MRSMobile.Data.Models;
+using MRS.Mobile.Data.Models;
 
-namespace MRSMobile.Data
+namespace MRS.Mobile.Data
 {
     public class MrsMobileDbContext : IdentityDbContext<MrsMobileUser, MrsMobileRole, string>
     {

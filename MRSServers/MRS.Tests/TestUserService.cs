@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using MRS.Common.Mapping;
+using MRS.Mobile.Data;
+using MRS.Mobile.Data.Models;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
 using MRS.Services.MrsMobileServices;
 using MRS.Services.MrsMobileServices.Contracts;
-using MRSMobile.Data;
-using MRSMobile.Data.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

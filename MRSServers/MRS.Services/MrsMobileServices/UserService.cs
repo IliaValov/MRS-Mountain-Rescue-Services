@@ -2,9 +2,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using MRS.Mobile.Data;
 using MRS.Services.MrsMobileServices.Contracts;
-using MRSMobile.Data;
-using MRSMobile.Data.Models;
 
 namespace MRS.Services.MrsMobileServices
 {
@@ -24,14 +23,14 @@ namespace MRS.Services.MrsMobileServices
         .AsQueryable()
         .ProjectTo<TModel>());
 
-        public async Task ChangeUserCondition(string phonenumber, bool isInDanger)
+        public async Task ChangeUserCondition(string userId, bool isInDanger)
         {
-            var user = context.Users.SingleOrDefault(x => x.PhoneNumber == phonenumber);
+            var user = context.Users.SingleOrDefault(x => x.Id == userId);
 
             user.IsInDanger = isInDanger;
 
-            context.Update(user);
-            await context.SaveChangesAsync();
+            this.context.Update(user);
+            await this.context.SaveChangesAsync();
         }
 
         public async Task<T> GetUserById<T>(string phonenumber) => await Task.Run(() => 

@@ -1,16 +1,15 @@
-﻿using MRS.Common.Mapping;
-using MRS.Data.Common.Models;
+﻿using MRS.Data.Common.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MRSMobile.Data.Models
+namespace MRS.Mobile.Data.Models
 {
     public class MrsMobileLocation : BaseDeletableModel<long>
     {
         public MrsMobileLocation()
         {
-            this.CreatedOn = DateTime.UtcNow;
+            CreatedOn = DateTime.UtcNow;
         }
 
 

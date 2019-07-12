@@ -1,7 +1,4 @@
-﻿using MRS.Models.MRSMobileModels.BindingModels.Message;
-using MRS.Models.MRSMobileModels.ViewModels.Message;
-using MRSMobile.Data.Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 

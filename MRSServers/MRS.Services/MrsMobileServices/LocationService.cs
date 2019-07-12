@@ -3,10 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using MRS.Models.MRSMobileModels.ViewModels.Location;
+using MRS.Mobile.Data;
+using MRS.Mobile.Data.Models;
 using MRS.Services.MrsMobileServices.Contracts;
-using MRSMobile.Data;
-using MRSMobile.Data.Models;
 
 namespace MRS.Services.MrsMobileServices
 {

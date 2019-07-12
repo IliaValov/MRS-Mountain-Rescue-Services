@@ -1,6 +1,6 @@
-﻿using MRS.Services.MrsMobileServices.Contracts;
-using MRSMobile.Data;
-using MRSMobile.Data.Models;
+﻿using MRS.Mobile.Data;
+using MRS.Mobile.Data.Models;
+using MRS.Services.MrsMobileServices.Contracts;
 using System;
 using System.Threading.Tasks;
 using Twilio;
@@ -30,15 +30,15 @@ namespace MRS.Services.MrsMobileServices
 
                 string phoneNumber = toPhoneNumber.Substring(1, toPhoneNumber.Length - 1);
 
-                TwilioClient.Init(accountSid, authToken);
+                //TwilioClient.Init(accountSid, authToken);
 
-                await MessageResource.CreateAsync(
-                     body: $"Enter this code to verify your phone number {authanticationCode}",
-                     from: new Twilio.Types.PhoneNumber(fromPhoneNumber),
-                     to: new Twilio.Types.PhoneNumber("+359" + phoneNumber)
-                 );
+                //await MessageResource.CreateAsync(
+                //     body: $"Enter this code to verify your phone number {authanticationCode}",
+                //     from: new Twilio.Types.PhoneNumber(fromPhoneNumber),
+                //     to: new Twilio.Types.PhoneNumber("+359" + phoneNumber)
+                // );
 
-                 token = await AddSmsAuthantication(authanticationCode, userId);
+                token = await AddSmsAuthantication(authanticationCode, userId) + ":" + authanticationCode.ToString();
             }
             catch (Exception ex)
             {
