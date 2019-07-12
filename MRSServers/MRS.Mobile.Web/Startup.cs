@@ -119,6 +119,7 @@ namespace MRS.Mobile.Web
             //Configure Automapper
             AutoMapperConfig.RegisterMappings(typeof(LocationCreateBindingModel).GetTypeInfo().Assembly);
 
+            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
 
             if (env.IsDevelopment())
@@ -150,34 +151,38 @@ namespace MRS.Mobile.Web
             string smsVerificationCode = context.Request.Form["verificationcode"];
             string token = context.Request.Form["token"];
 
-            //using (var context = serviceScope.ServiceProvider.GetRequiredService<MrsMobileDbContext>())
-            //{
-
-            //    var mobileAuth = dbContext.MobileSmsAuthantications
-            //        .Include(x => x.User)
-            //        .SingleOrDefault(x => x.Token == token &&
-            //        x.User.UserName == phoneNumber &&
-            //        x.AuthanticationCode == smsVerificationCode);
-
-            //    if (mobileAuth == null)
-            //    {
-            //        return null;
-            //    }
-            //}
-
-            var userManager = context.RequestServices.GetRequiredService<UserManager<MrsMobileUser>>();
-            var user = await userManager.FindByNameAsync(phoneNumber);
-            if (user == null || user.IsDeleted)
+            using (var dbContext = context.RequestServices.GetRequiredService<MrsMobileDbContext>())
             {
-                return null;
+
+                var mobileAuth = dbContext.MobileSmsAuthantications
+                    .Include(x => x.User)
+                    .SingleOrDefault(x => x.Token == token &&
+                    x.User.UserName == phoneNumber &&
+                    x.AuthanticationCode == smsVerificationCode);
+
+                if (mobileAuth == null || mobileAuth.ExpiredAt < DateTime.UtcNow || mobileAuth.IsUsed)
+                {
+                    return null;
+                }
+
+                mobileAuth.IsUsed = true;
+                dbContext.Update(mobileAuth);
+                dbContext.SaveChanges();
+
+                var userManager = context.RequestServices.GetRequiredService<UserManager<MrsMobileUser>>();
+                var user = await userManager.FindByNameAsync(phoneNumber);
+                if (user == null || user.IsDeleted)
+                {
+                    return null;
+                }
+
+                var roles = await userManager.GetRolesAsync(user);
+
+                var identity = new GenericIdentity(phoneNumber, "Token");
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+
+                return new GenericPrincipal(identity, roles.ToArray());
             }
-
-            var roles = await userManager.GetRolesAsync(user);
-
-            var identity = new GenericIdentity(phoneNumber, "Token");
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
-
-            return new GenericPrincipal(identity, roles.ToArray());
         }
     }
 }
