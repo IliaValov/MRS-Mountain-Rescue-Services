@@ -4,14 +4,14 @@ using System;
 
 namespace MRSWeb.Data.Models
 {
-    public class MrsWebRole : IdentityRole, IAuditInfo, IDeletableEntity
+    public class MrsSpaRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
-        public MrsWebRole()
+        public MrsSpaRole()
             : this(null)
         {
         }
 
-        public MrsWebRole(string name)
+        public MrsSpaRole(string name)
             : base(name)
         {
             this.Id = Guid.NewGuid().ToString();

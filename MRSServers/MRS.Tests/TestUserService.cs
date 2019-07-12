@@ -3,8 +3,9 @@ using MRS.Common.Mapping;
 using MRS.Mobile.Data;
 using MRS.Mobile.Data.Models;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
-using MRS.Services.MrsMobileServices;
-using MRS.Services.MrsMobileServices.Contracts;
+using MRS.Models.MRSMobileModels.ViewModels.Account;
+using MRS.Services.Mobile.Data;
+using MRS.Services.Mobile.Data.Contracts;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,8 @@ namespace Tests
             AutoMapperConfig.RegisterMappings(typeof(LocationCreateBindingModel).GetTypeInfo().Assembly);
         }
 
+       
+
         [Test]
         public async Task GetAllUsers_WithCorrectData_ShouldReturnAllUsers()
         {
@@ -62,7 +65,7 @@ namespace Tests
             var userService = this.GetUserService(dbContext);
 
             //Act
-            var actualResult = await userService.All<MrsMobileUser>();
+            var actualResult = await userService.All<UserViewModel>();
 
             var expectedResult = GetUsers();
             //Assert

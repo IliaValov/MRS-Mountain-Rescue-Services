@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MRS.Mobile.Data;
-using MRS.Services.MrsMobileServices.Contracts;
+using MRS.Services.Mobile.Data.Contracts;
 
-namespace MRS.Services.MrsMobileServices
+namespace MRS.Services.Mobile.Data
 {
     public class UserService : IUserService
     {
@@ -29,11 +29,11 @@ namespace MRS.Services.MrsMobileServices
 
             user.IsInDanger = isInDanger;
 
-            this.context.Update(user);
-            await this.context.SaveChangesAsync();
+            context.Update(user);
+            await context.SaveChangesAsync();
         }
 
-        public async Task<T> GetUserById<T>(string phonenumber) => await Task.Run(() => 
+        public async Task<T> GetUserById<T>(string phonenumber) => await Task.Run(() =>
             Mapper.Map<T>(context.Users.SingleOrDefault(x => x.PhoneNumber == phonenumber)));
 
 

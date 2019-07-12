@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MRS.Common\MRS.Common.csproj" />
+    <ProjectReference Include="..\MRS.Services.Mobile.Data\MRS.Services.Mobile.Data.csproj" />
     <ProjectReference Include="..\MRS.Services\MRS.Services.csproj" />
   </ItemGroup>
 

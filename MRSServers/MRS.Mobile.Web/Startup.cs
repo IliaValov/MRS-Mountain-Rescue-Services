@@ -23,11 +23,12 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MRS.Common.Mapping;
 using System.Reflection;
-using MRS.Services.MrsMobileServices;
-using MRS.Services.MrsMobileServices.Contracts;
 using MRS.Web.Infrastructure;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
-
+using MRS.Services.Contracts;
+using MRS.Services;
+using MRS.Services.Mobile.Data.Contracts;
+using MRS.Services.Mobile.Data;
 
 namespace MRS.Mobile.Web
 {
@@ -153,7 +154,6 @@ namespace MRS.Mobile.Web
 
             using (var dbContext = context.RequestServices.GetRequiredService<MrsMobileDbContext>())
             {
-
                 var mobileAuth = dbContext.MobileSmsAuthantications
                     .Include(x => x.User)
                     .SingleOrDefault(x => x.Token == token &&
@@ -167,7 +167,7 @@ namespace MRS.Mobile.Web
 
                 mobileAuth.IsUsed = true;
                 dbContext.Update(mobileAuth);
-                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
 
                 var userManager = context.RequestServices.GetRequiredService<UserManager<MrsMobileUser>>();
                 var user = await userManager.FindByNameAsync(phoneNumber);

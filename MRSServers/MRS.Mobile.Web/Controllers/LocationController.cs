@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MRS.Mobile.Data.Models;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
-using MRS.Services.MrsMobileServices.Contracts;
+using MRS.Services.Mobile.Data.Contracts;
 using MRSMobileServer.Controllers;
 using System.Security.Claims;
 using System.Threading.Tasks;

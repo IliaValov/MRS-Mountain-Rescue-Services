@@ -1,9 +1,9 @@
 ﻿using MRS.Mobile.Data;
 using MRS.Mobile.Data.Models;
-using MRS.Services.MrsMobileServices.Contracts;
+using MRS.Services.Mobile.Data.Contracts;
 using System.Threading.Tasks;
 
-namespace MRS.Services.MrsMobileServices
+namespace MRS.Services.Mobile.Data
 {
     public class DeviceService : IDeviceService
     {
@@ -21,8 +21,8 @@ namespace MRS.Services.MrsMobileServices
                 Device = device
             };
 
-            await this.dbContext.MrsDevices.AddAsync(newDevice);
-            await this.dbContext.SaveChangesAsync();
+            await dbContext.MrsDevices.AddAsync(newDevice);
+            await dbContext.SaveChangesAsync();
 
             return newDevice.Id;
         }

@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MRS.Mobile.Data.Models;
 using MRS.Models.MRSMobileModels.BindingModels.Account;
-using MRS.Services.MrsMobileServices.Contracts;
+using MRS.Services.Contracts;
+using MRS.Services.Mobile.Data.Contracts;
 using MRS.Web.Infrastructure;
 
 namespace MRSMobileServer.Controllers

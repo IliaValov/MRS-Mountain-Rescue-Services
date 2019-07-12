@@ -5,9 +5,9 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MRS.Mobile.Data;
 using MRS.Mobile.Data.Models;
-using MRS.Services.MrsMobileServices.Contracts;
+using MRS.Services.Mobile.Data.Contracts;
 
-namespace MRS.Services.MrsMobileServices
+namespace MRS.Services.Mobile.Data
 {
     public class MessageService : IMessageService
     {

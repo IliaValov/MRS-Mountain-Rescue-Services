@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 
-namespace MRS.Services.MrsMobileServices.Contracts
+namespace MRS.Services.Mobile.Data.Contracts
 {
     public interface IUserService
     {

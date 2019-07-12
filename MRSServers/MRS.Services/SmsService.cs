@@ -1,12 +1,12 @@
 ﻿using MRS.Mobile.Data;
 using MRS.Mobile.Data.Models;
-using MRS.Services.MrsMobileServices.Contracts;
+using MRS.Services.Contracts;
 using System;
 using System.Threading.Tasks;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
-namespace MRS.Services.MrsMobileServices
+namespace MRS.Services
 {
     public class SmsService : ISmsService
     {
@@ -57,8 +57,8 @@ namespace MRS.Services.MrsMobileServices
                 UserId = userId
             };
 
-            this.context.MobileSmsAuthantications.Add(smsAuthantication);
-            await this.context.SaveChangesAsync();
+            context.MobileSmsAuthantications.Add(smsAuthantication);
+            await context.SaveChangesAsync();
 
             return smsAuthantication.Token;
         }

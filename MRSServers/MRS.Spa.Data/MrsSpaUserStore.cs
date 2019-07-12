@@ -8,10 +8,10 @@ using System.Text;
 
 namespace MRSWeb.Data
 {
-    public class MrsWebUserStore : UserStore<
-        MrsWebUser,
-        MrsWebRole,
-        MrsWebDbContext,
+    public class MrsSpaUserStore : UserStore<
+        MrsSpaUser,
+        MrsSpaRole,
+        MrsSpaDbContext,
         string,
         IdentityUserClaim<string>,
         IdentityUserRole<string>,
@@ -19,24 +19,24 @@ namespace MRSWeb.Data
         IdentityUserToken<string>,
         IdentityRoleClaim<string>>
     {
-        public MrsWebUserStore(MrsWebDbContext context, IdentityErrorDescriber describer = null)
+        public MrsSpaUserStore(MrsSpaDbContext context, IdentityErrorDescriber describer = null)
             : base(context, describer)
         {
         }
 
-        protected override IdentityUserRole<string> CreateUserRole(MrsWebUser user, MrsWebRole role)
+        protected override IdentityUserRole<string> CreateUserRole(MrsSpaUser user, MrsSpaRole role)
         {
             return new IdentityUserRole<string> { RoleId = role.Id, UserId = user.Id };
         }
 
-        protected override IdentityUserClaim<string> CreateUserClaim(MrsWebUser user, Claim claim)
+        protected override IdentityUserClaim<string> CreateUserClaim(MrsSpaUser user, Claim claim)
         {
             var identityUserClaim = new IdentityUserClaim<string> { UserId = user.Id };
             identityUserClaim.InitializeFromClaim(claim);
             return identityUserClaim;
         }
 
-        protected override IdentityUserLogin<string> CreateUserLogin(MrsWebUser user, UserLoginInfo login) =>
+        protected override IdentityUserLogin<string> CreateUserLogin(MrsSpaUser user, UserLoginInfo login) =>
             new IdentityUserLogin<string>
             {
                 UserId = user.Id,
@@ -46,7 +46,7 @@ namespace MRSWeb.Data
             };
 
         protected override IdentityUserToken<string> CreateUserToken(
-            MrsWebUser user,
+            MrsSpaUser user,
             string loginProvider,
             string name,
             string value)

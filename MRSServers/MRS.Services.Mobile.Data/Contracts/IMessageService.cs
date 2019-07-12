@@ -2,14 +2,18 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MRS.Services.MrsMobileServices.Contracts
+namespace MRS.Services.Mobile.Data.Contracts
 {
-    public interface ILocationService
+    public interface IMessageService
     {
-        Task AddLocation<T>(T location);
+        Task AddMessage<T>(T message);
+
+        Task<T> GetLastMessage<T>();
 
         Task<IQueryable<TModel>> GetByDay<TModel>(DateTime date);
 
         Task<IQueryable<TModel>> All<TModel>();
+
+
     }
 }

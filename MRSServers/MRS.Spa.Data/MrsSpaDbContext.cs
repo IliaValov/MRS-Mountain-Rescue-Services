@@ -4,13 +4,13 @@ using MRSWeb.Data.Models;
 
 namespace MRSWeb.Data
 {
-    public class MrsWebDbContext : IdentityDbContext<MrsWebUser, MrsWebRole, string>
+    public class MrsSpaDbContext : IdentityDbContext<MrsSpaUser, MrsSpaRole, string>
     {
-        public MrsWebDbContext(DbContextOptions options) : base(options)
+        public MrsSpaDbContext(DbContextOptions options) : base(options)
         {
         }
 
-        protected MrsWebDbContext()
+        protected MrsSpaDbContext()
         {
         }
 

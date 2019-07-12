@@ -5,19 +5,19 @@ using System.Security.Claims;
 
 namespace MRSWeb.Data
 {
-    public class MrsWebRoleStore : RoleStore<
-        MrsWebRole,
-        MrsWebDbContext,
+    public class MrsSpaRoleStore : RoleStore<
+        MrsSpaRole,
+        MrsSpaDbContext,
         string,
         IdentityUserRole<string>,
         IdentityRoleClaim<string>>
     {
-        public MrsWebRoleStore(MrsWebDbContext context, IdentityErrorDescriber describer = null)
+        public MrsSpaRoleStore(MrsSpaDbContext context, IdentityErrorDescriber describer = null)
             : base(context, describer)
         {
         }
 
-        protected override IdentityRoleClaim<string> CreateRoleClaim(MrsWebRole role, Claim claim) =>
+        protected override IdentityRoleClaim<string> CreateRoleClaim(MrsSpaRole role, Claim claim) =>
             new IdentityRoleClaim<string>
             {
                 RoleId = role.Id,

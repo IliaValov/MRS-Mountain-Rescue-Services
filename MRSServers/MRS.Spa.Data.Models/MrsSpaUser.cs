@@ -4,9 +4,9 @@ using System;
 
 namespace MRSWeb.Data.Models
 {
-    public class MrsWebUser : IdentityUser, IAuditInfo, IDeletableEntity
+    public class MrsSpaUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
-        public MrsWebUser()
+        public MrsSpaUser()
         {
             this.Id = Guid.NewGuid().ToString();
 
