@@ -2,7 +2,7 @@
 using MRS.Data.Common.Models;
 using System;
 
-namespace MRSWeb.Data.Models
+namespace MRS.Spa.Data.Models
 {
     public class MrsSpaRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
@@ -14,9 +14,9 @@ namespace MRSWeb.Data.Models
         public MrsSpaRole(string name)
             : base(name)
         {
-            this.Id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid().ToString();
 
-            this.CreatedOn = DateTime.UtcNow;
+            CreatedOn = DateTime.UtcNow;
         }
 
         //Audit info

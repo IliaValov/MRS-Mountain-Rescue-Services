@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MRSWeb.Data.Models;
+using MRS.Spa.Data.Models;
 
-namespace MRSWeb.Data
+namespace MRS.Spa.Data
 {
     public class MrsSpaDbContext : IdentityDbContext<MrsSpaUser, MrsSpaRole, string>
     {
@@ -21,7 +21,7 @@ namespace MRSWeb.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-         
+
 
             //builder.Entity<MrsUser>()
             //    .HasMany(e => e.Claims)

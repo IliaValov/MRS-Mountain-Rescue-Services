@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using MRSWeb.Data.Models;
+using MRS.Spa.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
 
-namespace MRSWeb.Data
+namespace MRS.Spa.Data
 {
     public class MrsSpaUserStore : UserStore<
         MrsSpaUser,

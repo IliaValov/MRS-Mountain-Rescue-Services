@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using MRSWeb.Data.Models;
+using MRS.Spa.Data.Models;
 using System.Security.Claims;
 
-namespace MRSWeb.Data
+namespace MRS.Spa.Data
 {
     public class MrsSpaRoleStore : RoleStore<
         MrsSpaRole,

@@ -2,15 +2,15 @@
 using MRS.Data.Common.Models;
 using System;
 
-namespace MRSWeb.Data.Models
+namespace MRS.Spa.Data.Models
 {
     public class MrsSpaUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
         public MrsSpaUser()
         {
-            this.Id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid().ToString();
 
-            this.CreatedOn = DateTime.UtcNow;
+            CreatedOn = DateTime.UtcNow;
             //this.Roles = new HashSet<IdentityUserRole<string>>();
             //this.Claims = new HashSet<IdentityUserClaim<string>>();
             //this.Logins = new HashSet<IdentityUserLogin<string>>();
