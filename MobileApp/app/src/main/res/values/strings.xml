@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Moutain-Rescue-Services</string>
+    <string name="next">next</string>
+    <string name="phone_number">Phone number</string>
+    <string name="position">Position</string>
+    <string name="waiting_for_location_update">Waiting for location update...</string>
+    <string name="save_me">Save me</string>
+</resources>
