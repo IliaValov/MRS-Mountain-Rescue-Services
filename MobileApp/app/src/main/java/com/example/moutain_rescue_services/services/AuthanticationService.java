@@ -81,6 +81,9 @@ public class AuthanticationService {
     public boolean IsAuthanticated() {
         String[] userInfo = fileService.ReadUserInfo(fileName).split("\n");
 
+        if(userInfo.length < 2){
+            return false;
+        }
         String userPhoneNumber = userInfo[0];
         String userBearer = userInfo[1];
 
@@ -148,10 +151,9 @@ public class AuthanticationService {
 
     private Integer registerUser(String phoneNumber) throws IOException, JSONException {
         InputStream is = null;
-        int statusCode;
 
         try {
-            URL url = new URL("http://public-localization-services-authentication.azurewebsites.net/add/mobileregister");
+            URL url = new URL("http://192.168.134.219:80/api/account/register");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
@@ -160,6 +162,7 @@ public class AuthanticationService {
 
             JSONObject jsonParam = new JSONObject();
             jsonParam.put("PhoneNumber", phoneNumber);
+            jsonParam.put("Device", "Lenovo");
 
             Log.i("JSON", jsonParam.toString());
             DataOutputStream os = new DataOutputStream(conn.getOutputStream());
@@ -176,27 +179,9 @@ public class AuthanticationService {
 
             int responseCode = conn.getResponseCode();
 
-            StringBuilder response = new StringBuilder();
-
-            if (responseCode == HttpsURLConnection.HTTP_OK) {
-                String line;
-                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                while ((line = br.readLine()) != null) {
-                    response.append(line);
-                }
-
-            } else {
-                response = new StringBuilder("empty");
-            }
-
-            if (!response.toString().equals("empty")) {
-                fileService.SaveUserRegisterInfoFile(phoneNumber, response.toString());
-            }
-            statusCode = conn.getResponseCode();
-
             conn.disconnect();
 
-            return statusCode;
+            return responseCode;
 
         } finally {
             if (is != null) {
@@ -229,7 +214,7 @@ public class AuthanticationService {
         String authToken;
 
         try {
-            URL url = new URL("http://public-localization-services-authentication.azurewebsites.net/mobilelogin");
+            URL url = new URL("http://192.168.134.219:80/api/account/smsverification");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");

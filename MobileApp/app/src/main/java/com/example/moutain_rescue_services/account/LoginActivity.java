@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(!IsRegistered){
                     //Display an error
+                    return;
                 }
 
                 Intent intent = new Intent(context, VerificationActivity.class);
