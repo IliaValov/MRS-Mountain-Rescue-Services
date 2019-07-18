@@ -19,13 +19,15 @@ namespace MRSMobileServer.Controllers
         private readonly UserManager<MrsMobileUser> userManager;
         private readonly ISmsService smsService;
         private readonly IDeviceService deviceService;
+        private readonly ISmsAuthanticationService smsAuthanticationService;
 
-        public AccountController(UserManager<MrsMobileUser> userManager,IOptions<SmsOptions> options ,ISmsService smsService, IDeviceService deviceService)
+        public AccountController(UserManager<MrsMobileUser> userManager, IOptions<SmsOptions> options, ISmsService smsService, IDeviceService deviceService, ISmsAuthanticationService smsAuthanticationService)
         {
             this.userManager = userManager;
             this.options = options;
             this.smsService = smsService;
             this.deviceService = deviceService;
+            this.smsAuthanticationService = smsAuthanticationService;
         }
 
         [HttpPost]
@@ -42,36 +44,58 @@ namespace MRSMobileServer.Controllers
 
             var user = await this.userManager.FindByEmailAsync(model.PhoneNumber);
 
-            var token = await smsService.SendSms(accountSid, authToken, fromNumber, model.PhoneNumber, user.Id);
+            var verificationCode = await smsService.SendSms(accountSid, authToken, fromNumber, model.PhoneNumber);
 
             //TODO
-            if (!token.Equals(""))
+            if (!verificationCode.Equals(""))
             {
-                return token;
+                return verificationCode;
             }
 
             return BadRequest();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody]UserRegisterBindingModel model)
+        public async Task<ActionResult<string>> Register([FromBody]UserRegisterBindingModel model)
         {
             if (model == null || !this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState.Values.FirstOrDefault());
             }
 
-            var deviceId = await deviceService.AddDevice(model.Device);
+            var accountSid = this.options.Value.AccountSid;
+            var authToken = this.options.Value.AuthToken;
+            var fromNumber = this.options.Value.PhoneNumber;
 
-            var user = new MrsMobileUser { Email = model.PhoneNumber, UserName = model.PhoneNumber, PhoneNumber = model.PhoneNumber, DeviceId = deviceId };
-            var result = await this.userManager.CreateAsync(user, model.PhoneNumber);
+            var verificationCode = await smsService.SendSms(accountSid, authToken, fromNumber, model.PhoneNumber);
 
-            if (result.Succeeded)
+            if (string.IsNullOrEmpty(verificationCode))
             {
-                return this.Ok();
+                return this.BadRequest();
             }
 
-            return this.BadRequest(result.Errors.FirstOrDefault());
+            if (await userManager.FindByNameAsync(model.PhoneNumber) == null)
+            {
+                var deviceId = await deviceService.AddDevice(model.Device);
+
+                var user = new MrsMobileUser { Email = model.PhoneNumber, UserName = model.PhoneNumber, PhoneNumber = model.PhoneNumber, DeviceId = deviceId };
+                var result = await this.userManager.CreateAsync(user, model.PhoneNumber);
+
+
+                if (!result.Succeeded)
+                {
+                    return this.BadRequest(result.Errors.FirstOrDefault());
+                }
+            }
+
+            var token = await this.smsAuthanticationService.AddSmsTokenAsync(userManager.FindByNameAsync(model.PhoneNumber).Result.Id, verificationCode);
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                return token;
+            }
+
+            return this.BadRequest();
         }
     }
 }

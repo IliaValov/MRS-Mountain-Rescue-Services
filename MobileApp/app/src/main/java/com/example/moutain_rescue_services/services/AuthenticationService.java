@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.moutain_rescue_services.common.GlobalConstants;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,14 +21,12 @@ import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class AuthanticationService {
+public class AuthenticationService {
 
-    private Context context;
-    private String fileName = "UserInfo";
     private FileService fileService;
 
-    public AuthanticationService(Context context) {
-        this.context = context;
+    public AuthenticationService(Context context) {
+
         this.fileService = new FileService(context);
     }
 
@@ -51,7 +51,7 @@ public class AuthanticationService {
     }
 
     public boolean VerifyUser() {
-        String[] userInfo = fileService.ReadUserInfo(fileName).split("\n");
+        String[] userInfo = fileService.ReadUserInfo(GlobalConstants.UserFile).split("\n");
 
         if(userInfo.length < 2){
             return false;
@@ -79,7 +79,7 @@ public class AuthanticationService {
     }
 
     public boolean IsAuthanticated() {
-        String[] userInfo = fileService.ReadUserInfo(fileName).split("\n");
+        String[] userInfo = fileService.ReadUserInfo(GlobalConstants.UserFile).split("\n");
 
         if(userInfo.length < 2){
             return false;
@@ -114,7 +114,7 @@ public class AuthanticationService {
             int result = 0;
             String bearer = args[0];
             try {
-                URL reqURL = new URL("http://public-localization-services-authentication.azurewebsites.net/mobilelogin/"); //the URL we will send the request to
+                URL reqURL = new URL(GlobalConstants.URL +"/mobilelogin/"); //the URL we will send the request to
                 HttpURLConnection request = (HttpURLConnection) (reqURL.openConnection());
                 request.setRequestProperty("Authorization","Bearer " + bearer);
                 request.setRequestMethod("GET");
@@ -151,9 +151,10 @@ public class AuthanticationService {
 
     private Integer registerUser(String phoneNumber) throws IOException, JSONException {
         InputStream is = null;
+        String response = "";
 
         try {
-            URL url = new URL("http://192.168.134.219:80/api/account/register");
+            URL url = new URL(GlobalConstants.URL+"/api/account/register");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
@@ -178,6 +179,22 @@ public class AuthanticationService {
             is = conn.getInputStream();
 
             int responseCode = conn.getResponseCode();
+
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                String line;
+                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line=br.readLine()) != null) {
+                    response+=line;
+                }
+
+            }
+            else {
+                response="empty";
+            }
+
+            if (!response.equals("empty")){
+                fileService.SaveUserRegisterInfoFile(phoneNumber, response);
+            }
 
             conn.disconnect();
 
@@ -214,7 +231,7 @@ public class AuthanticationService {
         String authToken;
 
         try {
-            URL url = new URL("http://192.168.134.219:80/api/account/smsverification");
+            URL url = new URL(GlobalConstants.URL + "/api/account/smsverification");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");

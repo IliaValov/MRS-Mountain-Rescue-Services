@@ -21,13 +21,13 @@ public class GpsService {
 
     private String authToken;
 
-    private AuthanticationService authService;
+    private AuthenticationService authService;
 
     private FileService fileService;
 
     public GpsService(Context context){
         this.context = context;
-        this.authService = new AuthanticationService(context);
+        this.authService = new AuthenticationService(context);
         this.fileService = new FileService(context);
 
         authToken = this.fileService.ReadUserInfo("UserInfo").trim();

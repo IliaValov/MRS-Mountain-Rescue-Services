@@ -2,35 +2,14 @@ package com.example.moutain_rescue_services.account;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.moutain_rescue_services.services.AuthanticationService;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.ExecutionException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.net.ssl.HttpsURLConnection;
+import com.example.moutain_rescue_services.services.AuthenticationService;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -41,11 +20,11 @@ public class LoginActivity extends AppCompatActivity {
 
     Context context;
 
-    AuthanticationService authService;
+    AuthenticationService authService;
 
     public  LoginActivity(){
         context = this;
-        this.authService = new AuthanticationService(context);
+        this.authService = new AuthenticationService(context);
     }
 
     @Override

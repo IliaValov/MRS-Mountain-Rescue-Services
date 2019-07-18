@@ -18,15 +18,17 @@ namespace MRS.Services
         }
 
 
-        public async Task<string> SendSms(string accountSid, string authToken, string fromPhoneNumber, string toPhoneNumber, string userId)
+        public async Task<string> SendSms(string accountSid, string authToken, string fromPhoneNumber, string toPhoneNumber)
         {
-            var token = "";
+            string verificationCode = "";
 
             try
             {
                 var random = new Random();
 
-                string authanticationCode = random.Next(1111, 9999).ToString();
+                //string authanticationCode = random.Next(1111, 9999).ToString();
+                verificationCode = "4444";
+
 
                 string phoneNumber = toPhoneNumber.Substring(1, toPhoneNumber.Length - 1);
 
@@ -38,29 +40,14 @@ namespace MRS.Services
                 //     to: new Twilio.Types.PhoneNumber("+359" + phoneNumber)
                 // );
 
-                token = await AddSmsAuthantication(authanticationCode, userId) + ":" + authanticationCode.ToString();
+
             }
             catch (Exception ex)
             {
                 return "";
             }
 
-            return token;
-        }
-
-        private async Task<string> AddSmsAuthantication(string authanticationCode, string userId)
-        {
-            var smsAuthantication = new MrsMobileSmsAuthantication
-            {
-                AuthanticationCode = authanticationCode,
-                Token = Guid.NewGuid().ToString(),
-                UserId = userId
-            };
-
-            context.MobileSmsAuthantications.Add(smsAuthantication);
-            await context.SaveChangesAsync();
-
-            return smsAuthantication.Token;
+            return verificationCode;
         }
     }
 }
