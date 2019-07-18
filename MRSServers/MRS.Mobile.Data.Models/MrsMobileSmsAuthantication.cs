@@ -13,7 +13,7 @@ namespace MRS.Mobile.Data.Models
         }
 
         [Required]
-        public string Token { get; set; }
+        public string Token { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         public string AuthanticationCode { get; set; }
