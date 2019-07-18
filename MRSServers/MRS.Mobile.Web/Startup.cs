@@ -100,6 +100,7 @@ namespace MRS.Mobile.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //Add Services
+            services.AddTransient<ISmsAuthanticationService, SmsAuthanticationService>();
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IDeviceService, DeviceService>();
