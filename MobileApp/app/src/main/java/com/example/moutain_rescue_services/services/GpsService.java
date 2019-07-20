@@ -34,6 +34,14 @@ public class GpsService {
     }
 
     public boolean SendLocation(double latitude, double longitude, double altitude){
+
+        if(!internetIsConnected()){
+
+            Toast.makeText(context,
+                    "No internet check your internet provider", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         SendLocation sendLocation = new SendLocation();
 
         authToken = this.fileService.ReadUserInfo(GlobalConstants.UserFile).trim();
@@ -56,6 +64,13 @@ public class GpsService {
 
     public boolean SendLocationWithMessage(double latitude, double longitude, double altitude, String message, String condition){
 
+        if(!internetIsConnected()){
+
+            Toast.makeText(context,
+                    "No internet check your internet provider", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         SendLocationWithMessageAndCondition sendLocationWithMessageAndCondition = new SendLocationWithMessageAndCondition();
 
         authToken = this.fileService.ReadUserInfo(GlobalConstants.UserFile).trim();
@@ -76,6 +91,15 @@ public class GpsService {
 
 
         return  false;
+    }
+
+    private boolean internetIsConnected() {
+        try {
+            String command = "ping -c 1 google.com";
+            return (Runtime.getRuntime().exec(command).waitFor() == 0);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private class SendLocation extends AsyncTask<Double,Integer,Integer> {

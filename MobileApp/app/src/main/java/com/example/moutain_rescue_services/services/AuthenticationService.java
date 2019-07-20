@@ -3,6 +3,7 @@ package com.example.moutain_rescue_services.services;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.moutain_rescue_services.common.GlobalConstants;
 
@@ -29,13 +30,23 @@ import javax.net.ssl.HttpsURLConnection;
 public class AuthenticationService {
 
     private FileService fileService;
+    Context context;
 
     public AuthenticationService(Context context) {
+
+        this.context = context;
 
         this.fileService = new FileService(context);
     }
 
     public boolean RegisterUser(String phone) {
+
+        if(!internetIsConnected()){
+
+            Toast.makeText(context,
+                    "No internet check your internet provider", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         RegisterUser registerUser = new RegisterUser();
 
@@ -56,6 +67,13 @@ public class AuthenticationService {
     }
 
     public boolean VerifyUser(String verificationCode) {
+        if(!internetIsConnected()){
+
+            Toast.makeText(context,
+                    "No internet check your internet provider", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         String[] userInfo = fileService.ReadUserInfo(GlobalConstants.UserFile).split("\n");
 
         if (userInfo.length < 2) {
@@ -83,7 +101,24 @@ public class AuthenticationService {
         return false;
     }
 
+    private boolean internetIsConnected() {
+        try {
+            String command = "ping -c 1 google.com";
+            return (Runtime.getRuntime().exec(command).waitFor() == 0);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean IsAuthenticated() {
+
+        if(!internetIsConnected()){
+
+            Toast.makeText(context,
+                    "No internet check your internet provider", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         String[] userInfo = fileService.ReadUserInfo(GlobalConstants.UserFile).split("\n");
 
         if (userInfo.length < 1) {

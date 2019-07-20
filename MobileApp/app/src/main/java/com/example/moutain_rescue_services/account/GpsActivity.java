@@ -3,7 +3,6 @@ package com.example.moutain_rescue_services.account;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -12,6 +11,7 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -32,23 +32,26 @@ import com.example.moutain_rescue_services.services.GpsService;
 
 public class GpsActivity extends Activity implements SensorEventListener {
 
-    private Context context;
+    Context context;
+
+    ConnectivityManager connectivityManager;
 
     GpsService gpsService;
 
+    SensorEventListener sensorEventListener;
+
+    SensorManager senSensorManager;
+    Sensor senAccelerometer;
+
     LocationManager locationManager;
-
-    private SensorEventListener sensorEventListener;
-
-    private SensorManager senSensorManager;
-    private Sensor senAccelerometer;
+    LocationListener locationListener;
 
     RadioGroup radioGroup;
     RadioButton radioCondition;
 
     EditText conditionMessage;
 
-    private Button saveMeButton;
+    Button saveMeButton;
 
     private Double currentLatitude;
     private Double currentLongitude;
@@ -74,7 +77,7 @@ public class GpsActivity extends Activity implements SensorEventListener {
         locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
 
         // Define a listener that responds to location updates
-        LocationListener locationListener = new LocationListener() {
+         locationListener = new LocationListener() {
             public void onLocationChanged(Location loc) {
                 // Called when a new location is found by the network location provider.
                 String locStr = String.format("%s %f:%f (%f meters)", loc.getProvider(),
@@ -97,10 +100,14 @@ public class GpsActivity extends Activity implements SensorEventListener {
 
             public void onProviderEnabled(String provider) {
                 Log.v("Gibbons", "location onProviderEnabled() called");
+                Toast.makeText(context,
+                        provider, Toast.LENGTH_SHORT).show();
             }
 
             public void onProviderDisabled(String provider) {
                 Log.v("Gibbons", "location onProviderDisabled() called");
+                Toast.makeText(context,
+                        provider, Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -116,10 +123,10 @@ public class GpsActivity extends Activity implements SensorEventListener {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 20, locationListener);
         Log.v("Gibbons", "setting location updates from GPS provider");
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 20, locationListener);
-
 
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -182,29 +189,45 @@ public class GpsActivity extends Activity implements SensorEventListener {
 
             @Override
             public void onClick(View v) {
-
-
                 // get selected radio button from radioGroup
                 int selectedId = radioGroup.getCheckedRadioButtonId();
 
-                if (selectedId == -1) {
+                String additionalText = conditionMessage.getText().toString();
+
+
+                if (additionalText.equals("")) {
+                    additionalText = "Empty";
+                }
+
+                if (currentLongitude == null || currentLatitude == null || currentAltitude == null) {
                     Toast.makeText(context,
-                            "Select condition", Toast.LENGTH_SHORT).show();
+                            "You don't have coordinates to send check your gps", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                if (selectedId == -1) {
+                    Toast.makeText(context,
+                            "You need to select condition", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 // find the radiobutton by returned id
                 radioCondition = (RadioButton) popupView.findViewById(selectedId);
 
-
                 boolean isSend = gpsService
                         .SendLocationWithMessage(currentLatitude, currentLongitude, currentAltitude,
-                                conditionMessage.getText().toString(), radioCondition.getText().toString());
+                                additionalText, radioCondition.getText().toString());
+
+                if (!isSend) {
+                    Toast.makeText(context,
+                            "Your request didn't send check your internet connection", Toast.LENGTH_SHORT).show();
+                }
+
                 Toast.makeText(context,
                         "Your situation is send", Toast.LENGTH_SHORT).show();
 
                 popupWindow.dismiss();
-                return;
             }
 
         });
@@ -213,7 +236,6 @@ public class GpsActivity extends Activity implements SensorEventListener {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                return;
             }
         });
 
