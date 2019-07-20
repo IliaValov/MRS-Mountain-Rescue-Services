@@ -20,8 +20,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,15 +36,25 @@ public class GpsActivity extends Activity implements SensorEventListener {
 
     GpsService gpsService;
 
+    LocationManager locationManager;
+
     private SensorEventListener sensorEventListener;
 
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
 
+    RadioGroup radioGroup;
+    RadioButton radioCondition;
+
+    EditText conditionMessage;
 
     private Button saveMeButton;
 
-    public GpsActivity(){
+    private Double currentLatitude;
+    private Double currentLongitude;
+    private Double currentAltitude;
+
+    public GpsActivity() {
         this.context = this;
         gpsService = new GpsService(context);
     }
@@ -58,7 +71,7 @@ public class GpsActivity extends Activity implements SensorEventListener {
 
         saveMeButton = findViewById(R.id.saveMeButton);
 
-        LocationManager locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
+        locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
 
         // Define a listener that responds to location updates
         LocationListener locationListener = new LocationListener() {
@@ -69,7 +82,11 @@ public class GpsActivity extends Activity implements SensorEventListener {
                 TextView tvLoc = (TextView) findViewById(R.id.position1);
                 tvLoc.setText(locStr);
 
-                gpsService.SendLocation(loc.getLatitude(), loc.getLongitude(), loc.getAltitude());
+                currentLatitude = loc.getLatitude();
+                currentLongitude = loc.getLongitude();
+                currentAltitude = loc.getAltitude();
+
+                gpsService.SendLocation(currentLatitude, currentLongitude, currentAltitude);
 
                 Log.v("Gibbons", locStr);
             }
@@ -144,6 +161,10 @@ public class GpsActivity extends Activity implements SensorEventListener {
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         final View popupView = inflater.inflate(R.layout.activity_emergency, null);
 
+        radioGroup = popupView.findViewById(R.id.RadioConditionGroup);
+
+        conditionMessage = popupView.findViewById(R.id.message);
+
         Button proceed = popupView.findViewById(R.id.proceed);
         Button goBack = popupView.findViewById(R.id.goBack);
 
@@ -158,19 +179,41 @@ public class GpsActivity extends Activity implements SensorEventListener {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
         proceed.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
-                // SaveFile(phoneNum);
 
+                // get selected radio button from radioGroup
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                if (selectedId == -1) {
+                    Toast.makeText(context,
+                            "Select condition", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // find the radiobutton by returned id
+                radioCondition = (RadioButton) popupView.findViewById(selectedId);
+
+
+                boolean isSend = gpsService
+                        .SendLocationWithMessage(currentLatitude, currentLongitude, currentAltitude,
+                                conditionMessage.getText().toString(), radioCondition.getText().toString());
+                Toast.makeText(context,
+                        "Your situation is send", Toast.LENGTH_SHORT).show();
+
+                popupWindow.dismiss();
+                return;
             }
+
         });
 
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                popupWindow.dismiss();
+                return;
             }
         });
 
