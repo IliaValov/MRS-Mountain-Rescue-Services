@@ -3,6 +3,7 @@ package com.example.moutain_rescue_services.account;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -14,15 +15,19 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.moutain_rescue_services.services.GpsService;
 
 public class GpsActivity extends Activity implements SensorEventListener {
-
-    private static final String fileName = "UserInfo";
 
     private Context context;
 
@@ -46,9 +51,8 @@ public class GpsActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
 
         sensorEventListener = this;
-        setContentView(R.layout.activity_gps);
 
-        //TODO Check if user is authanticated
+        setContentView(R.layout.activity_gps);
 
         setContentView(R.layout.activity_gps);
 
@@ -109,6 +113,7 @@ public class GpsActivity extends Activity implements SensorEventListener {
             public void onClick(View v) {
 //                        Intent intent = new Intent(GpsActivity.this, PopEmergencyWindow.class);
 //                        startActivity(intent);
+                onButtonShowPopupWindowClick(v);
             }
         });
     }
@@ -121,7 +126,7 @@ public class GpsActivity extends Activity implements SensorEventListener {
             float x = sensorEvent.values[0];
             float y = sensorEvent.values[1];
             float z = sensorEvent.values[2];
-            TextView tvLoc = (TextView) findViewById(R.id.position2);
+            TextView tvLoc = findViewById(R.id.position2);
             String xyzStr = String.format("Position: %f:%f %f ", x, y, z);
             tvLoc.setText(xyzStr);
         }
@@ -130,5 +135,52 @@ public class GpsActivity extends Activity implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    public void onButtonShowPopupWindowClick(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = inflater.inflate(R.layout.activity_emergency, null);
+
+        Button proceed = popupView.findViewById(R.id.proceed);
+        Button goBack = popupView.findViewById(R.id.goBack);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // SaveFile(phoneNum);
+
+            }
+        });
+
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
     }
 }

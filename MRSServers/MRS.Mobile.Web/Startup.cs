@@ -121,7 +121,6 @@ namespace MRS.Mobile.Web
             //Configure Automapper
             AutoMapperConfig.RegisterMappings(typeof(LocationCreateBindingModel).GetTypeInfo().Assembly);
 
-            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
 
             if (env.IsDevelopment())
@@ -139,11 +138,9 @@ namespace MRS.Mobile.Web
               app.ApplicationServices.GetRequiredService<IOptions<TokenProviderOptions>>(),
               PrincipalResolver);
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseMvc();
-
-
         }
 
 

@@ -12,7 +12,7 @@ using MRS.Web.Infrastructure;
 
 namespace MRSMobileServer.Controllers
 {
-    [AllowAnonymous]
+    [ApiController]
     public class AccountController : BaseController
     {
         private readonly IOptions<SmsOptions> options;
@@ -30,7 +30,15 @@ namespace MRSMobileServer.Controllers
             this.smsAuthanticationService = smsAuthanticationService;
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> Authanticate()
+        {
+            return Ok();
+        }
+
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<string>> SmsVerification([FromBody]UserLoginBindingModel model)
         {
             if (model == null || !this.ModelState.IsValid)
@@ -56,9 +64,10 @@ namespace MRSMobileServer.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<string>> Register([FromBody]UserRegisterBindingModel model)
         {
-            if (model == null || !this.ModelState.IsValid)
+            if (model == null || !this.ModelState.IsValid || model.PhoneNumber.Length < 5)
             {
                 return this.BadRequest(this.ModelState.Values.FirstOrDefault());
             }

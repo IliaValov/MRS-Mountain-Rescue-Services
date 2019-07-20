@@ -2,6 +2,8 @@ package com.example.moutain_rescue_services.services;
 
 import android.content.Context;
 
+import com.example.moutain_rescue_services.common.GlobalConstants;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,8 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileService {
-
-    private String userData = "UserInfo";
 
     private Context context;
 
@@ -26,7 +26,7 @@ public class FileService {
 
         String saveUserInfo = phoneNumber + "\n" + secretKey;
         try {
-            FileOutputStream fos = context.openFileOutput(userData, Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput(GlobalConstants.UserFile, Context.MODE_PRIVATE);
             fos.write(saveUserInfo.getBytes());
             fos.close();
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class FileService {
         FileOutputStream outputStream;
 
         try {
-            outputStream = context.openFileOutput(userData, Context.MODE_PRIVATE);
+            outputStream = context.openFileOutput(GlobalConstants.UserFile, Context.MODE_PRIVATE);
             outputStream.write(fileContents.getBytes());
             outputStream.close();
         } catch (Exception e) {

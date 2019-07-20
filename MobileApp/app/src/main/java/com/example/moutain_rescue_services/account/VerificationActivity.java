@@ -15,11 +15,7 @@ import com.example.moutain_rescue_services.services.AuthenticationService;
 
 public class VerificationActivity  extends Activity {
 
-    private String phoneNumber = "";
-    private String secretKey = "";
-
     private EditText verificationCode;
-    private static final String fileName = "UserInfo";
 
     Context context;
     AuthenticationService authService;
@@ -36,22 +32,21 @@ public class VerificationActivity  extends Activity {
 
         setContentView(R.layout.activity_verify_phone_number);
 
-        verificationCode = (EditText) findViewById(R.id.verificationCode);
-        Button register = (Button) findViewById(R.id.checkVerification);
+        verificationCode = findViewById(R.id.verificationCode);
+        Button register = findViewById(R.id.checkVerification);
         TextView textView = findViewById(R.id.textView3);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Go to GpsActivity", Toast.LENGTH_SHORT).show();
-
 
                 String verifyCode = verificationCode.getText().toString();
 
-                boolean isUserVerify = authService.VerifyUser();
+                boolean isUserVerify = authService.VerifyUser(verifyCode);
 
                 if(!isUserVerify){
-                    //TODO Display an error
+                    Toast.makeText(context, "Invalid verification code", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 Intent intent = new Intent(context, GpsActivity.class);
@@ -60,5 +55,4 @@ public class VerificationActivity  extends Activity {
             }
         });
     }
-
 }

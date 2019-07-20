@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.moutain_rescue_services.common.GlobalConstants;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,15 +31,15 @@ public class GpsService {
         this.context = context;
         this.authService = new AuthenticationService(context);
         this.fileService = new FileService(context);
-
-        authToken = this.fileService.ReadUserInfo("UserInfo").trim();
     }
 
     public boolean SendLocation(double latitude, double longitude, double altitude){
         SendLocation sendLocation = new SendLocation();
 
+        authToken = this.fileService.ReadUserInfo(GlobalConstants.UserFile).trim();
+
         try {
-            int statusCode = sendLocation.execute().get();
+            int statusCode = sendLocation.execute(latitude, longitude, altitude).get();
 
             if(statusCode == 201){
                 return true;
@@ -67,16 +69,16 @@ public class GpsService {
         }
     }
 
-    private Integer sendLocation(double longitude, double latitude, double altitude) throws  IOException,JSONException{
+    private Integer sendLocation(double latitude, double longitude, double altitude) throws  IOException,JSONException{
         InputStream is = null;
 
         int statusCode = 0;
 
         try {
-            URL url = new URL("https://public-localization-services-mobile.azurewebsites.net/add/location");
+            URL url = new URL(GlobalConstants.URL + "/api/location/addlocation");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization","Bearer " + authToken);
+            conn.setRequestProperty("Authorization", "Bearer " + authToken);
             conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
             conn.setDoOutput(true);
             conn.setDoInput(true);

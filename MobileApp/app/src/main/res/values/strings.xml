@@ -5,4 +5,8 @@
     <string name="position">Position</string>
     <string name="waiting_for_location_update">Waiting for location update...</string>
     <string name="save_me">Save me</string>
+    <string name="ok">Ok</string>
+    <string name="back">Back</string>
+    <string name="lost">Lost</string>
+    <string name="broken_leg">Broken leg</string>
 </resources>

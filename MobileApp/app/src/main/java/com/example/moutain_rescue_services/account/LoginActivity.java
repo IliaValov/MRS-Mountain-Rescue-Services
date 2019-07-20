@@ -1,7 +1,10 @@
 package com.example.moutain_rescue_services.account;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,20 +35,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if(authService.IsAuthanticated()){
+        if(authService.IsAuthenticated()){
             Intent intent = new Intent(context, GpsActivity.class);
             startActivity(intent);
             finish();
         }
 
         phoneNumber = (EditText) findViewById(R.id.phonenumber);
+
         Button sendSms = (Button) findViewById(R.id.register);
 
         sendSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Going to register fragment",Toast.LENGTH_SHORT).show();
-
                 String phoneNum = phoneNumber.getText().toString().trim();
 
                 // SaveFile(phoneNum);
@@ -54,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(!IsRegistered){
                     //Display an error
+
+                    Toast.makeText(context, "Invalid phone number",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -61,5 +65,18 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+
     }
 }
