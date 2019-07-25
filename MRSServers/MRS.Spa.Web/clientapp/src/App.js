@@ -5,12 +5,12 @@ import Home from './components/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 import { MapContainer } from './components/components/map/MapContainer';
+import { Login } from './components/components/user/Login';
 
 export default () => (
   <Layout>
     <Route exact path='/' component={Home} />
-    <Route exact path='/map' component={MapContainer}/>
-    <Route path='/counter' component={Counter} />
-    <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
+    <Route exact path='/map' component={MapContainer} />
+    <Route exact path='/login' component={Login} />
   </Layout>
 );

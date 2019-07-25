@@ -1,34 +1,92 @@
 .nav-bar-vertical {
+    background-color: black;
     width: 20px;
-    height: 100px;
-    padding-top: 1%;
+    height: 97.7vh;
+    float: left;
+}
+
+.nav-bar-vertical ul {
+    list-style-type: none;
+    margin-top: 10px;
     padding-bottom: 1%;
     padding-right: 10px;
     padding-left: 5px;
     margin-left: 0px;
-    background: #0000CC;
-    float: left;
 }
 
-.nav-bar-vertical p {
+.nav-bar-vertical li {
+    width: max-content;
     transform: rotate(90deg);
     transform-origin: top left;
-    margin-top: 15px;
+    margin-bottom: 5em;
     margin-left: 17px;
-    color: black;
-    -webkit-user-select: none; /* Safari */        
--moz-user-select: none; /* Firefox */
--ms-user-select: none; /* IE10+/Edge */
-user-select: none; /* Standard */
-
+    color: white;
 }
 
 .nav-bar-vertical :hover {
     background-color: black;
-    color: white;
+    color: blue;
 }
 
 .map-container {
     margin-left: 20px;
+    height: 90vh;
 }
 
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.61);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    margin-left: 21px;
+    margin-top: 57px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+     -o-user-select: none;
+     user-select: none
+   }
