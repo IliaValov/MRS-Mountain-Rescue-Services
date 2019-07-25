@@ -25,7 +25,7 @@ namespace MRS.Spa.Web
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "clientapp/build";
+                configuration.RootPath = "ClientApp/build";
             });
         }
 
@@ -56,7 +56,7 @@ namespace MRS.Spa.Web
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "clientapp";
+                spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {

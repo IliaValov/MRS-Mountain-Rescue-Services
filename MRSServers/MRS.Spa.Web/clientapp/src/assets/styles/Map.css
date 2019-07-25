@@ -1,0 +1,34 @@
+.nav-bar-vertical {
+    width: 20px;
+    height: 100px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 10px;
+    padding-left: 5px;
+    margin-left: 0px;
+    background: #0000CC;
+    float: left;
+}
+
+.nav-bar-vertical p {
+    transform: rotate(90deg);
+    transform-origin: top left;
+    margin-top: 15px;
+    margin-left: 17px;
+    color: black;
+    -webkit-user-select: none; /* Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+/Edge */
+user-select: none; /* Standard */
+
+}
+
+.nav-bar-vertical :hover {
+    background-color: black;
+    color: white;
+}
+
+.map-container {
+    margin-left: 20px;
+}
+
