@@ -91,6 +91,13 @@ namespace MRS.Spa.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 
+            services.AddTransient<ISmsAuthanticationService, SmsAuthanticationService>();
+            services.AddTransient<ILocationService, LocationService>();
+            services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IDeviceService, DeviceService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ISmsService, SmsService>();
+
             services.AddTransient<IUserStore<MrsSpaUser>, MrsSpaUserStore>();
             services.AddTransient<IRoleStore<MrsSpaRole>, MrsSpaRoleStore>();
 
