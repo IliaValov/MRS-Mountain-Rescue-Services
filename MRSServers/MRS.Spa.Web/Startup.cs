@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MRS.Common.Mapping;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
+using MRS.Services.Mobile.Data;
 using MRS.Services.Mobile.Data.Contracts;
 using MRS.Spa.Data;
 using MRS.Spa.Data.Models;
@@ -97,7 +98,6 @@ namespace MRS.Spa.Web
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IDeviceService, DeviceService>();
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ISmsService, SmsService>();
 
             services.AddTransient<IUserStore<MrsSpaUser>, MrsSpaUserStore>();
             services.AddTransient<IRoleStore<MrsSpaRole>, MrsSpaRoleStore>();
