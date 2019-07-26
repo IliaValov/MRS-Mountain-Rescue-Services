@@ -3,6 +3,7 @@ import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLi
 import { Link } from 'react-router-dom';
 import Modal from 'react-awesome-modal';
 import Login from './components/user/Login'
+import AuthService from '../actions/AuthService';
 import './NavMenu.css';
 
 export default class NavMenu extends React.Component {
@@ -12,7 +13,8 @@ export default class NavMenu extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
-      isLoginVisiable: false
+      isLoginVisiable: false,
+      authService: new AuthService()
     };
   }
   toggle() {
@@ -25,6 +27,10 @@ export default class NavMenu extends React.Component {
     this.setState({
       isLoginVisiable: true
     });
+  }
+
+  handleLogoutClick = () => {
+    this.state.authService.logout();
   }
 
   closeModal = () => {
@@ -49,15 +55,24 @@ export default class NavMenu extends React.Component {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/map">Map</NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/" onClick={() => this.openModal()}>Login</NavLink>
-                </NavItem>
+                {!this.state.authService.isAuthenticated() ?
+                  <NavItem>
+                    <NavLink tag={Link} className="text-dark" to="/" onClick={() => this.openModal()}>Login</NavLink>
+                  </NavItem>
+                  : null}
+                {this.state.authService.isAuthenticated() ?
+                  <NavItem>
+                    <NavLink tag={Link} className="text-dark" to="/" onClick={() => this.handleLogoutClick()}>Logout</NavLink>
+                  </NavItem>
+                  : null}
               </ul>
             </Collapse>
           </Container>
         </Navbar>
         <Modal visible={this.state.isLoginVisiable} width="360px" height="250.4px" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-          <Login/>
+          <Login
+            isVisiable={this.state.isLoginVisiable}
+          />
         </Modal>
       </header>
     );

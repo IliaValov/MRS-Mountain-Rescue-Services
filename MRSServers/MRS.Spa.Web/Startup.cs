@@ -117,7 +117,7 @@ namespace MRS.Spa.Web
                     dbContext.Database.Migrate();
                 }
 
-                MrsSpaDbContextSeeder.Seed(dbContext, serviceScope.ServiceProvider, this.Configuration);
+                //MrsSpaDbContextSeeder.Seed(dbContext, serviceScope.ServiceProvider, this.Configuration);
             }
 
             if (env.IsDevelopment())
@@ -160,10 +160,10 @@ namespace MRS.Spa.Web
 
         private static async Task<GenericPrincipal> PrincipalResolver(HttpContext context)
         {
-            var email = context.Request.Form["username"];
+            var username = context.Request.Form["username"];
 
             var userManager = context.RequestServices.GetRequiredService<UserManager<MrsSpaUser>>();
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindByNameAsync(username);
             if (user == null || user.IsDeleted)
             {
                 return null;
@@ -179,7 +179,7 @@ namespace MRS.Spa.Web
 
             var roles = await userManager.GetRolesAsync(user);
 
-            var identity = new GenericIdentity(email, "Token");
+            var identity = new GenericIdentity(username, "Token");
             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
             return new GenericPrincipal(identity, roles.ToArray());
