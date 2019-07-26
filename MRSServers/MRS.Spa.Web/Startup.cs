@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MRS.Common.Mapping;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
+using MRS.Services.Mobile.Data.Contracts;
 using MRS.Spa.Data;
 using MRS.Spa.Data.Models;
 using MRS.Spa.Data.Seeding;
