@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MRS.Common\MRS.Common.csproj" />
     <ProjectReference Include="..\MRS.Mobile.Data.Models\MRS.Mobile.Data.Models.csproj" />
   </ItemGroup>
 

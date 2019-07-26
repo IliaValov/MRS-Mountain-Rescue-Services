@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MRS.Common;
 using MRS.Mobile.Data.Models;
 
 namespace MRS.Mobile.Data
@@ -17,7 +18,7 @@ namespace MRS.Mobile.Data
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    optionsBuilder.UseSqlServer(GetConnectionString());
+        //    optionsBuilder.UseSqlServer(GlobalConstants.MrsMobileDbConnectionString);
         //}
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -64,17 +65,6 @@ namespace MRS.Mobile.Data
         public DbSet<MrsMobileDevice> MrsDevices { get; set; }
 
         public DbSet<MrsMobileSmsAuthantication> MobileSmsAuthantications { get; set; }
-
-
-        private static string GetConnectionString()
-        {
-            const string databaseName = "MrsMobileDb";
-
-
-            return $@"Server=.\SQLEXPRESS;Database={databaseName};
-                    Trusted_Connection=True;
-                    Integrated Security=True;";
-        }
 
     }
 }

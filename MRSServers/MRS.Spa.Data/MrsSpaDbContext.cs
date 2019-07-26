@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MRS.Common;
 using MRS.Spa.Data.Models;
 
 namespace MRS.Spa.Data
@@ -14,10 +15,10 @@ namespace MRS.Spa.Data
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(GetConnectionString());
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(GlobalConstants.MrsSpaDbConnectionString);
+        //}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -45,18 +46,6 @@ namespace MRS.Spa.Data
             //    .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
-        }
-
-
-
-        private static string GetConnectionString()
-        {
-            const string databaseName = "MrsWebDb";
-
-
-            return $@"Server=.\SQLEXPRESS;Database={databaseName};
-                    Trusted_Connection=True;
-                    Integrated Security=True;";
         }
     }
 }

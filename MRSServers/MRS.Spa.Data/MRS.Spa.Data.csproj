@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MRS.Common\MRS.Common.csproj" />
     <ProjectReference Include="..\MRS.Spa.Data.Models\MRS.Spa.Data.Models.csproj" />
   </ItemGroup>
 
