@@ -29,6 +29,7 @@ using MRS.Services.Contracts;
 using MRS.Services;
 using MRS.Services.Mobile.Data.Contracts;
 using MRS.Services.Mobile.Data;
+using MRS.Mobile.Data.Seeding;
 
 namespace MRS.Mobile.Web
 {
@@ -116,12 +117,22 @@ namespace MRS.Mobile.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, MrsMobileDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             //Configure Automapper
             AutoMapperConfig.RegisterMappings(typeof(LocationCreateBindingModel).GetTypeInfo().Assembly);
 
-            dbContext.Database.EnsureCreated();
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<MrsMobileDbContext>();
+
+                if (env.IsDevelopment())
+                {
+                    dbContext.Database.Migrate();
+                }
+
+                MrsMobileDbContextSeeder.Seed(dbContext, serviceScope.ServiceProvider);
+            }
 
             if (env.IsDevelopment())
             {
