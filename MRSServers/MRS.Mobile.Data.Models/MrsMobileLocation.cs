@@ -22,6 +22,7 @@ namespace MRS.Mobile.Data.Models
         [Required]
         public double Altitude { get; set; }
 
+        [Required]
         public string UserId { get; set; }
         public MrsMobileUser User { get; set; }
 

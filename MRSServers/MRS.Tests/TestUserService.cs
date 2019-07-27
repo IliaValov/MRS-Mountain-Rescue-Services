@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Tests
 {
@@ -65,7 +66,7 @@ namespace Tests
             var userService = this.GetUserService(dbContext);
 
             //Act
-            var actualResult = await userService.All<UserViewModel>();
+            var actualResult = await userService.GetAllAsync<UserViewModel>();
 
             var expectedResult = GetUsers();
             //Assert

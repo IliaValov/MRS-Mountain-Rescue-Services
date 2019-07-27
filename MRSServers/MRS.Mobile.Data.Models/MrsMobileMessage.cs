@@ -18,6 +18,7 @@ namespace MRS.Mobile.Data.Models
         [Required]
         public string Condition { get; set; }
 
+        [Required]
         [ForeignKey("User")]
         public string UserId { get; set; }
         public MrsMobileUser User { get; set; }

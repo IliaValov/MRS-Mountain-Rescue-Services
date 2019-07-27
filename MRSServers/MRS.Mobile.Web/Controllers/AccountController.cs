@@ -1,11 +1,16 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using MRS.Mobile.Data;
 using MRS.Mobile.Data.Models;
 using MRS.Models.MRSMobileModels.BindingModels.Account;
+using MRS.Models.MRSMobileModels.ViewModels.Account;
+using MRS.Models.MRSMobileModels.ViewModels.Message;
 using MRS.Services.Contracts;
 using MRS.Services.Mobile.Data.Contracts;
 using MRS.Web.Infrastructure;
@@ -20,14 +25,20 @@ namespace MRSMobileServer.Controllers
         private readonly ISmsService smsService;
         private readonly IDeviceService deviceService;
         private readonly ISmsAuthanticationService smsAuthanticationService;
+        private readonly IUserService userService;
+        private readonly MrsMobileDbContext dbContext;
+        private readonly IMessageService messageService;
 
-        public AccountController(UserManager<MrsMobileUser> userManager, IOptions<SmsOptions> options, ISmsService smsService, IDeviceService deviceService, ISmsAuthanticationService smsAuthanticationService)
+        public AccountController(UserManager<MrsMobileUser> userManager, IOptions<SmsOptions> options, ISmsService smsService, IDeviceService deviceService, ISmsAuthanticationService smsAuthanticationService, IUserService userService, MrsMobileDbContext dbContext, IMessageService messageService)
         {
             this.userManager = userManager;
             this.options = options;
             this.smsService = smsService;
             this.deviceService = deviceService;
             this.smsAuthanticationService = smsAuthanticationService;
+            this.userService = userService;
+            this.dbContext = dbContext;
+            this.messageService = messageService;
         }
 
         [HttpGet]
@@ -36,6 +47,25 @@ namespace MRSMobileServer.Controllers
         {
             return Ok();
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<ICollection<ICollection<MrsMobileMessage>>>> ReturnUser()
+        {
+
+            return this.dbContext.Users.Include(x => x.Messages).Select(x => x.Messages).ToList();
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<MessageViewModel>>> ReturnMessage()
+        {
+            var result = await messageService.GetAllAsync<MessageViewModel>();
+
+            return result.ToList();
+        }
+
+
 
         [HttpPost]
         [AllowAnonymous]

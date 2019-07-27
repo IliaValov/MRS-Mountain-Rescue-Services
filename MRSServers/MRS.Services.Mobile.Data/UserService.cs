@@ -2,7 +2,10 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
+using MRS.Common.Mapping;
 using MRS.Mobile.Data;
+using MRS.Mobile.Data.Models;
 using MRS.Services.Mobile.Data.Contracts;
 
 namespace MRS.Services.Mobile.Data
@@ -17,24 +20,31 @@ namespace MRS.Services.Mobile.Data
             this.context = context;
         }
 
-        public async Task<IQueryable<TModel>> All<TModel>() => await Task.Run(() =>
-            context
+        public async Task<IQueryable<TModel>> GetAllAsync<TModel>() => await Task.Run(() =>
+            this.context
         .Users
         .AsQueryable()
-        .ProjectTo<TModel>());
+        .To<TModel>());
 
-        public async Task ChangeUserCondition(string userId, bool isInDanger)
+        public async Task<IQueryable<TModel>> GetAllWithLastLocationAsync<TModel>() => await Task.Run(() =>
+           this.context
+            .Users
+            .Include(x => x.Locations)
+            .AsQueryable()
+            .To<TModel>());
+
+        public async Task ChangeUserConditionAsync(string userId, bool isInDanger)
         {
             var user = context.Users.SingleOrDefault(x => x.Id == userId);
 
             user.IsInDanger = isInDanger;
 
-            context.Update(user);
-            await context.SaveChangesAsync();
+            this.context.Update(user);
+            await this.context.SaveChangesAsync();
         }
 
-        public async Task<T> GetUserById<T>(string phonenumber) => await Task.Run(() =>
-            Mapper.Map<T>(context.Users.SingleOrDefault(x => x.PhoneNumber == phonenumber)));
+        public async Task<T> GetUserByIdAsync<T>(string phonenumber) => await Task.Run(() =>
+            Mapper.Map<T>(this.context.Users.SingleOrDefault(x => x.PhoneNumber == phonenumber)));
 
 
     }

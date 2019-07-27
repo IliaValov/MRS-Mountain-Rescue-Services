@@ -6,10 +6,10 @@ namespace MRS.Services.Mobile.Data.Contracts
 {
     public interface ILocationService
     {
-        Task AddLocation<T>(T location);
+        Task AddLocationAsync<T>(T location);
 
-        Task<IQueryable<TModel>> GetByDay<TModel>(DateTime date);
+        Task<IQueryable<TModel>> GetByDayAsync<TModel>(DateTime date);
 
-        Task<IQueryable<TModel>> All<TModel>();
+        Task<IQueryable<TModel>> GetAllAsync<TModel>();
     }
 }

@@ -12,7 +12,7 @@ namespace MRS.Mobile.Data
         {
         }
 
-        public MrsMobileDbContext()
+        protected MrsMobileDbContext()
         {
         }
 
@@ -26,7 +26,8 @@ namespace MRS.Mobile.Data
             builder
                 .Entity<MrsMobileLocation>()
                 .HasOne(x => x.Message)
-                .WithOne(x => x.Location);
+                .WithOne(x => x.Location)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .Entity<MrsMobileMessage>()

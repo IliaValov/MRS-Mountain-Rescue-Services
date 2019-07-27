@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MRS.Mobile.Data\MRS.Mobile.Data.csproj" />
+    <ProjectReference Include="..\MRS.Models\MRS.Models.csproj" />
     <ProjectReference Include="..\MRS.Services.Mobile.Data\MRS.Services.Mobile.Data.csproj" />
     <ProjectReference Include="..\MRS.Web.Infrastructure\MRS.Web.Infrastructure.csproj" />
   </ItemGroup>

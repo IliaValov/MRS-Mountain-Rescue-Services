@@ -39,7 +39,7 @@ namespace MRSMobileServer.Areas.Mobile.Controllers
 
             location.UserId = userId;
 
-            await locationService.AddLocation(location);
+            await locationService.AddLocationAsync(location);
 
             return StatusCode(201);
         }
@@ -57,9 +57,10 @@ namespace MRSMobileServer.Areas.Mobile.Controllers
 
             location.UserId = userId;
             location.Message.LocationId = location.Id;
+            location.Message.UserId = userId;
 
-            await locationService.AddLocation(location);
-            await userService.ChangeUserCondition(userId, true);
+            await locationService.AddLocationAsync(location);
+            await userService.ChangeUserConditionAsync(userId, true);
 
             return StatusCode(201);
         }

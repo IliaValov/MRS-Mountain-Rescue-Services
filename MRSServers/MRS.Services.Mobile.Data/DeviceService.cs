@@ -21,8 +21,8 @@ namespace MRS.Services.Mobile.Data
                 Device = device
             };
 
-            await dbContext.MrsDevices.AddAsync(newDevice);
-            await dbContext.SaveChangesAsync();
+            await this.dbContext.MrsDevices.AddAsync(newDevice);
+            await this.dbContext.SaveChangesAsync();
 
             return newDevice.Id;
         }

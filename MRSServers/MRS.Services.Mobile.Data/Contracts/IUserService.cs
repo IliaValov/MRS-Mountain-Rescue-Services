@@ -5,10 +5,12 @@ namespace MRS.Services.Mobile.Data.Contracts
 {
     public interface IUserService
     {
-        Task<T> GetUserById<T>(string phonenumber);
+        Task<T> GetUserByIdAsync<T>(string phonenumber);
 
-        Task ChangeUserCondition(string userId, bool isInDanger);
+        Task ChangeUserConditionAsync(string userId, bool isInDanger);
 
-        Task<IQueryable<TModel>> All<TModel>();
+        Task<IQueryable<TModel>> GetAllWithLastLocationAsync<TModel>();
+
+        Task<IQueryable<TModel>> GetAllAsync<TModel>();
     }
 }

@@ -13,6 +13,6 @@ namespace MRS.Models.MRSMobileModels.ViewModels.Location
 
         public double Altitude { get; set; }
 
-        public ICollection<MessageViewModel> Messages { get; set; }
+        public MessageViewModel Message { get; set; }
     }
 }

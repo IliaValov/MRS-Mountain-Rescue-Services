@@ -9,4 +9,9 @@
     <ProjectReference Include="..\MRS.Mobile.Data.Models\MRS.Mobile.Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MRSSpaModels\BindingModels\" />
+    <Folder Include="MRSSpaModels\ViewModels\Account\" />
+  </ItemGroup>
+
 </Project>
