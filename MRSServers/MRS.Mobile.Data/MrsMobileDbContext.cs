@@ -12,7 +12,7 @@ namespace MRS.Mobile.Data
         {
         }
 
-        protected MrsMobileDbContext()
+        public MrsMobileDbContext()
         {
         }
 

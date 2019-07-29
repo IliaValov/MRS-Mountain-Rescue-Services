@@ -11,7 +11,7 @@ namespace MRS.Spa.Data
         {
         }
 
-        protected MrsSpaDbContext()
+        public MrsSpaDbContext()
         {
         }
 

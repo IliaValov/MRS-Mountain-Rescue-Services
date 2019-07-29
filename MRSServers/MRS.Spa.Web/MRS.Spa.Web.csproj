@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.76" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MRS.Models\MRS.Models.csproj" />
     <ProjectReference Include="..\MRS.Services.Mobile.Data\MRS.Services.Mobile.Data.csproj" />
+    <ProjectReference Include="..\MRS.Services.Spa.Data\MRS.Services.Spa.Data.csproj" />
     <ProjectReference Include="..\MRS.Spa.Data\MRS.Spa.Data.csproj" />
     <ProjectReference Include="..\MRS.Web.Infrastructure\MRS.Web.Infrastructure.csproj" />
   </ItemGroup>

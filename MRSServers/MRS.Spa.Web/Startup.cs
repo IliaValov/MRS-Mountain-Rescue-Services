@@ -11,12 +11,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MRS.Common.Mapping;
+using MRS.Mobile.Data;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
 using MRS.Services.Mobile.Data;
 using MRS.Services.Mobile.Data.Contracts;
 using MRS.Spa.Data;
 using MRS.Spa.Data.Models;
 using MRS.Spa.Data.Seeding;
+using MRS.Spa.Web.Hubs;
 using MRS.Web.Infrastructure.Middlewares.Auth;
 using System;
 using System.Linq;
@@ -45,6 +47,12 @@ namespace MRS.Spa.Web
              UseSqlServer(
              Configuration.
              GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<MrsMobileDbContext>
+              (options => options.
+              UseSqlServer(
+              Configuration.
+              GetConnectionString("MobileDbConnection")));
 
             // ===== Add Identity ========
 
@@ -97,7 +105,7 @@ namespace MRS.Spa.Web
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IDeviceService, DeviceService>();
-            services.AddTransient<IUserService, UserService>();
+            services.AddSingleton<IUserService, UserService>();
 
             services.AddTransient<IUserStore<MrsSpaUser>, MrsSpaUserStore>();
             services.AddTransient<IRoleStore<MrsSpaRole>, MrsSpaRoleStore>();
@@ -147,6 +155,13 @@ namespace MRS.Spa.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+
+            app.UseSignalR(
+             routes =>
+             {
+                 routes.MapHub<UserLocationsHub>("/userlocations");
+             });
 
             app.UseMvc(routes =>
             {
