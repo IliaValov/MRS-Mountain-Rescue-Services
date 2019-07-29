@@ -98,6 +98,10 @@ namespace MRS.Spa.Web
                 .AddRoleStore<MrsSpaRoleStore>()
                 .AddDefaultTokenProviders();
 
+            services.AddSignalR(o => {
+                o.EnableDetailedErrors = true;
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 
@@ -105,7 +109,7 @@ namespace MRS.Spa.Web
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IDeviceService, DeviceService>();
-            services.AddSingleton<IUserService, UserService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<IUserStore<MrsSpaUser>, MrsSpaUserStore>();
             services.AddTransient<IRoleStore<MrsSpaRole>, MrsSpaRoleStore>();

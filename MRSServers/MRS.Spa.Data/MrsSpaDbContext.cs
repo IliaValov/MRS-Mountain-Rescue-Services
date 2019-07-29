@@ -7,7 +7,7 @@ namespace MRS.Spa.Data
 {
     public class MrsSpaDbContext : IdentityDbContext<MrsSpaUser, MrsSpaRole, string>
     {
-        public MrsSpaDbContext(DbContextOptions options) : base(options)
+        public MrsSpaDbContext(DbContextOptions<MrsSpaDbContext> options) : base(options)
         {
         }
 
@@ -35,7 +35,7 @@ namespace MRS.Spa.Data
             //    .HasMany(e => e.Logins)
             //    .WithOne()
             //    .HasForeignKey(e => e.UserId)
-            //    .IsRequired()
+            //    .IsRequired()`    
             //    .OnDelete(DeleteBehavior.Restrict);
 
             //builder.Entity<MrsUser>()

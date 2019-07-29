@@ -8,7 +8,7 @@ namespace MRS.Mobile.Data
 {
     public class MrsMobileDbContext : IdentityDbContext<MrsMobileUser, MrsMobileRole, string>
     {
-        public MrsMobileDbContext(DbContextOptions options) : base(options)
+        public MrsMobileDbContext(DbContextOptions<MrsMobileDbContext> options) : base(options)
         {
         }
 

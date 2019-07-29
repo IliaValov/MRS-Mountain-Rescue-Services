@@ -21,7 +21,7 @@ namespace MRS.Spa.Web.Hubs
         {
             var users = await userService.GetAllWithLastLocationAsync<UserLastLocationViewModel>();
 
-            await this.Clients.Caller.SendAsync("ReceiveUsersWithLastLocation",
+            await this.Clients.Caller.SendAsync("SendUserLocations",
                 users.ToList()
                 );
         }
