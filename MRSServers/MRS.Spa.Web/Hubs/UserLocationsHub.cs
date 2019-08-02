@@ -19,7 +19,7 @@ namespace MRS.Spa.Web.Hubs
 
         public async Task SendUserLocations(string message)
         {
-            var users = await userService.GetAllWithLastLocationAsync<UserLastLocationViewModel>();
+            var users = await userService.GetAllAsync<UserViewModel>();
 
             await this.Clients.Caller.SendAsync("SendUserLocations",
                 users.ToList()

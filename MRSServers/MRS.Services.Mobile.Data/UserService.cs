@@ -23,6 +23,7 @@ namespace MRS.Services.Mobile.Data
         public async Task<IQueryable<TModel>> GetAllAsync<TModel>() => await Task.Run(() =>
             this.context
         .Users
+        .Include(x => x.Locations)
         .AsQueryable()
         .To<TModel>());
 

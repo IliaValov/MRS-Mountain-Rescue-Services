@@ -1,7 +1,6 @@
-export const User = {
-    name: '',
-    password: '',
-    authToken: '',
-    
-
+class User  {
+        phonenumber = ''
+        locations = []
 };
+
+export default User;
