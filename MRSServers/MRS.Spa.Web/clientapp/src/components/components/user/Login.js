@@ -34,8 +34,8 @@ export class Login extends Component {
 
     render() {
         return (
-            <div class="login-page">
-                <div class="form">
+            <div className="login-page">
+                <div className="form">
                         <input type="text" onChange={this.handleOnChangeUsername} placeholder="username" />
                         <input type="password" onChange={this.handleOnChangePassword} placeholder="password" />
                         <button onClick={() => this.handleLoginButton()}>login</button>

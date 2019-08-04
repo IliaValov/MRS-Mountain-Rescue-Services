@@ -12,14 +12,14 @@ export class MapContainer extends PureComponent {
         super(props);
 
         this.state = {
-            message: '',
+            currentUser: 'ALLUSERS',
             users: []
         };
 
         this.connection = null;
     }
 
-    componentDidMount = () => {
+    componentWillMount() {
 
         const protocol = new signalR.JsonHubProtocol();
 
@@ -35,7 +35,7 @@ export class MapContainer extends PureComponent {
         let a = new User();
 
         this.connection.on('SendUserLocations', (data) => {
-            data.map((ar) => this.InitializeUsers(ar));
+            data.map((ar) => this.initializeUsers(ar));
             console.log(data);
 
         });
@@ -49,7 +49,7 @@ export class MapContainer extends PureComponent {
         this.connection.stop();
     }
 
-    InitializeUsers = (user) => {
+    initializeUsers = (user) => {
         const { users } = this.state;
 
         let userArray = []
@@ -78,14 +78,20 @@ export class MapContainer extends PureComponent {
         this.forceUpdate();
     }
 
-    ShowAllUsers = () => {
+    handleChangeCurrentUser = (event) => {
+        let a = event.target.textContent;
+        
+        this.setState({ currentUser: a });
+    }
+
+    showAllUsers = () => {
         const { users } = this.state;
 
         console.log(users, "Users");
         console.log(this.state.users, "Users 1.1")
         if (this.state.users.length > 0) {
             console.log(users, "Users in  if")
-            return users.map(u => <div className='unselectable'>{u.phonenumber}</div>)
+            return users.map(u => <div className='unselectable' value={u.phoneNumber} onClick={(e) => this.handleChangeCurrentUser(e)} >{u.phonenumber}</div>)
         }
     }
 
@@ -98,17 +104,51 @@ export class MapContainer extends PureComponent {
     }
 
     getUsersLocations = () => {
+        const { users, currentUser } = this.state;
+
+        if (currentUser !== "ALLUSERS") {
+            let user = [];
+           
+            users.map((u) => {
+                console.log(u);
+                console.log(u.phonenumber);
+                if(u.phonenumber === currentUser){
+                    console.log("DONE");
+                    user.push(u);
+                }
+            })
+
+            return user;
+        }
+
+        return this.getUsersLastLocation();
+    }
+
+    getUsersLastLocation = () => {
         const { users } = this.state;
-        
-        return users;
+
+        let resultUsers = [];
+
+        users.map((u) => {
+            let user = new User();
+            user.phonenumber = u.phonenumber;
+
+            user.locations.push(u.locations[u.locations.length - 1]);
+
+            resultUsers.push(user);
+        });
+
+        return resultUsers
     }
 
     render() {
         return (
             <div>
+                <div>{this.state.currentUser}</div>
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onClick={() => this.closeNav()}>&times;</a>
-                    {this.ShowAllUsers()}
+                    <div className='unselectable' onClick={(e) => this.handleChangeCurrentUser(e)} >ALLUSERS</div>
+                    {this.showAllUsers()}
 
                     {/* <a href="#">0888014990</a>
                     <a href="#">Services</a>
@@ -132,7 +172,7 @@ export class MapContainer extends PureComponent {
 
                 <div className="map-container">
                     <GoogleMap
-                        users={this.state.users}
+                        users={this.getUsersLocations()}
                     />
                 </div>
             </div>
