@@ -1,11 +1,74 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import GoogleMap from './GoogleMap'
-import "../../../assets/styles/Map.css";
+import "../../assets/styles/Map.css";
 import { string } from 'prop-types';
 import * as signalR from '@aspnet/signalr';
-import User from '../../../models/UserModel';
-import Location from '../../../models/LocationModel';
+import { HubConnection } from '@aspnet/signalr';
+import User from '../../models/UserModel';
+import Location from '../../models/LocationModel';
+import { compose, withProps } from "recompose"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polygon } from "react-google-maps"
+
+const MyMapComponent = compose(
+    withProps({
+        googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
+        loadingElement: <div style={{ height: `100%` }} />,
+        containerElement: <div style={{ height: `90%` }} />,
+        mapElement: <div style={{ height: `100%` }} />,
+    }),
+    withScriptjs,
+    withGoogleMap
+)((props) =>
+    <GoogleMap
+        defaultZoom={8}
+        defaultCenter={{ lat: 44.666829, lng: 22.352099 }}
+    >
+        {showUserTrace(props.users)}
+        {showAllLocations(props.users)}
+    </GoogleMap>
+)
+
+function showUserTrace(users) {
+    if (users.length === 1) {
+        return users.map((u) => {
+            return u.locations.map((l, i) => {
+                if (i + 1 === u.locations.length) {
+                    return;
+                }
+
+                let locationFirst = u.locations[i];
+                let locationSecond = u.locations[i + 1];
+
+                const coords = [{ lat: locationFirst.latitude, lng: locationFirst.longitude }, { lat: locationSecond.latitude, lng: locationSecond.longitude }]
+
+                return (<Polygon
+                    path={coords}
+                    key={i}
+                />)
+            })
+        })
+    }
+}
+
+function showAllLocations(users) {
+
+    if (users) {
+
+        return users.map((u) => {
+            if (u.locations || u.locations.length > 0) {
+                return (u.locations.map((l, index) => {
+                    if (l) {
+                        return (<Marker key={index}
+                            position={{ lat: l.latitude, lng: l.longitude }}
+                            title={ 'Phone number: ' + u.phonenumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
+                        ></Marker>)
+                    }
+                }))
+            }
+        })
+    }
+}
+
 
 export class MapContainer extends PureComponent {
     constructor(props) {
@@ -13,13 +76,17 @@ export class MapContainer extends PureComponent {
 
         this.state = {
             currentUser: 'ALLUSERS',
-            users: []
+            users: [],
+            HubConnection: null
         };
 
         this.connection = null;
     }
 
     componentWillMount() {
+        const { HubConnection } = this.state;
+
+        var dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
         const protocol = new signalR.JsonHubProtocol();
 
@@ -27,22 +94,22 @@ export class MapContainer extends PureComponent {
             logMessageContent: true
         };
 
-        this.connection = new signalR.HubConnectionBuilder()
+        let hub = this.connection = new signalR.HubConnectionBuilder()
             .withUrl('/userlocations', options)
             .withHubProtocol(protocol)
             .build();
 
-        let a = new User();
-
-        this.connection.on('SendUserLocations', (data) => {
+        hub.on('SendUserLocations', (data) => {
             data.map((ar) => this.initializeUsers(ar));
             console.log(data);
 
         });
 
-        this.connection.start()
-            .then(() => this.connection.invoke("SendUserLocations", "a"))
+        hub.start()
+            .then(() => this.connection.invoke("SendUserLocations", new Date().toLocaleDateString([], dateOptions).toString()))
             .catch(err => console.error('SignalR Connection Error: ', err));
+
+        this.setState({ HubConnection: hub });
     }
 
     componentWillUnmount() {
@@ -80,7 +147,7 @@ export class MapContainer extends PureComponent {
 
     handleChangeCurrentUser = (event) => {
         let a = event.target.textContent;
-        
+
         this.setState({ currentUser: a });
     }
 
@@ -108,11 +175,11 @@ export class MapContainer extends PureComponent {
 
         if (currentUser !== "ALLUSERS") {
             let user = [];
-           
+
             users.map((u) => {
                 console.log(u);
                 console.log(u.phonenumber);
-                if(u.phonenumber === currentUser){
+                if (u.phonenumber === currentUser) {
                     console.log("DONE");
                     user.push(u);
                 }
@@ -171,7 +238,7 @@ export class MapContainer extends PureComponent {
                 </div>
 
                 <div className="map-container">
-                    <GoogleMap
+                    <MyMapComponent
                         users={this.getUsersLocations()}
                     />
                 </div>

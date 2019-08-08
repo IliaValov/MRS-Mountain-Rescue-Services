@@ -20,8 +20,10 @@ namespace MRS.Models.MRSMobileModels.ViewModels.Account
         {
             configuration.CreateMap<MrsMobileMessage, MessageViewModel>();
 
-            configuration.CreateMap<MrsMobileUser, UserLastLocationViewModel>()
-                .ForMember(x => x.Location, opt => opt.MapFrom(x => x.Locations))
+            configuration.CreateMap<MrsMobileLocation, LocationViewModel>();
+
+            configuration.CreateMap<MrsMobileUser, UserViewModel>()
+                .ForMember(x => x.Locations, opt => opt.MapFrom(x => x.Locations))
                 .ForMember(x => x.Messages, opt => opt.MapFrom(x => x.Messages));
 
 

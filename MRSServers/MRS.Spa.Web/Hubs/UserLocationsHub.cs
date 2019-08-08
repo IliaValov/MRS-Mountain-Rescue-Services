@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authorization;
@@ -17,9 +18,9 @@ namespace MRS.Spa.Web.Hubs
             this.userService = userService;
         }
 
-        public async Task SendUserLocations(string message)
+        public async Task SendUserLocations(string date)
         {
-            var users = await userService.GetAllAsync<UserViewModel>();
+            var users = (await userService.GetAllUsersWithLocationsWithDateAsync<UserViewModel>(DateTime.Parse(date))).ToList();
 
             await this.Clients.Caller.SendAsync("SendUserLocations",
                 users.ToList()

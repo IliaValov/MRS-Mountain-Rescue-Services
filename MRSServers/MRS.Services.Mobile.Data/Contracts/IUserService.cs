@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MRS.Services.Mobile.Data.Contracts
@@ -9,7 +10,7 @@ namespace MRS.Services.Mobile.Data.Contracts
 
         Task ChangeUserConditionAsync(string userId, bool isInDanger);
 
-        Task<IQueryable<TModel>> GetAllWithLastLocationAsync<TModel>();
+        Task<IQueryable<TModel>> GetAllUsersWithLocationsWithDateAsync<TModel>(DateTime date);
 
         Task<IQueryable<TModel>> GetAllAsync<TModel>();
     }

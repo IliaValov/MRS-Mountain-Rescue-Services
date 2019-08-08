@@ -4,8 +4,8 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
-import { MapContainer } from './components/components/map/MapContainer';
-import { Login } from './components/components/user/Login';
+import { MapContainer } from './components/map/MapContainer';
+import { Login } from './components/user/Login';
 
 export default () => (
   <Layout>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Modal from 'react-awesome-modal';
-import Login from './components/user/Login'
+import Login from './user/Login'
 import AuthService from '../actions/AuthService';
 import './NavMenu.css';
 

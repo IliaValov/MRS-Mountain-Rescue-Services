@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../../../assets/styles/Login.css'
+import '../../assets/styles/Login.css'
 import { withRouter } from 'react-router-dom'
 import { push } from 'react-router-redux'
-import AuthService from '../../../actions/AuthService';
+import AuthService from '../../actions/AuthService';
 
 export class Login extends Component {
     constructor(props) {

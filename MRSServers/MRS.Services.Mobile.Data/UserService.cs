@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -7,6 +8,7 @@ using MRS.Common.Mapping;
 using MRS.Mobile.Data;
 using MRS.Mobile.Data.Models;
 using MRS.Services.Mobile.Data.Contracts;
+using MRS.Spa.Data.Models;
 
 namespace MRS.Services.Mobile.Data
 {
@@ -27,10 +29,42 @@ namespace MRS.Services.Mobile.Data
         .AsQueryable()
         .To<TModel>());
 
-        public async Task<IQueryable<TModel>> GetAllWithLastLocationAsync<TModel>() => await Task.Run(() =>
+        public async Task<IQueryable<TModel>> GetAllUsersWithLocationsWithDateAsync<TModel>(DateTime date) => await Task.Run(() =>
            this.context
             .Users
             .Include(x => x.Locations)
+            .Select(x => new MrsMobileUser()
+            {
+                AccessFailedCount = x.AccessFailedCount,
+                ConcurrencyStamp = x.ConcurrencyStamp,
+                CreatedOn = x.CreatedOn,
+                DeletedOn = x.DeletedOn,
+                Device = x.Device,
+                DeviceId = x.DeviceId,
+                Email = x.Email,
+                EmailConfirmed = x.EmailConfirmed,
+                Id = x.Id,
+                IsDeleted = x.IsDeleted,
+                IsInDanger = x.IsInDanger,
+
+                Locations = x.Locations.Where(l =>
+                l.CreatedOn.Year == date.Year && 
+                l.CreatedOn.Month == date.Month &&
+                l.CreatedOn.Day == date.Day).ToList(),
+
+                LockoutEnabled = x.LockoutEnabled,
+                LockoutEnd = x.LockoutEnd,
+                Messages = x.Messages,
+                ModifiedOn = x.ModifiedOn,
+                NormalizedEmail = x.NormalizedEmail,
+                NormalizedUserName = x.NormalizedUserName,
+                PasswordHash = x.PasswordHash,
+                PhoneNumber = x.PhoneNumber,
+                PhoneNumberConfirmed = x.PhoneNumberConfirmed,
+                SecurityStamp = x.SecurityStamp,
+                TwoFactorEnabled = x.TwoFactorEnabled,
+                UserName = x.UserName
+            })
             .AsQueryable()
             .To<TModel>());
 
