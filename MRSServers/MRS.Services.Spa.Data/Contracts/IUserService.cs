@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MRS.Services.Spa.Data.Contracts
 {
-    class IUserService
+    public interface IUserService
     {
+        Task<bool> AddUser<TModel>(TModel model);
+
+        Task<bool> AddUsersWithLocations<TModel>(TModel model);
     }
 }

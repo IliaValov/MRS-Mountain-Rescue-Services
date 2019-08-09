@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Mrs.Spa.LocalData;
 using MRS.Common.Mapping;
 using MRS.Mobile.Data;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
@@ -47,6 +48,11 @@ namespace MRS.Spa.Web
              UseSqlServer(
              Configuration.
              GetConnectionString("DefaultConnection")));
+
+            services
+                .AddDbContext<MrsSpaLDContext>
+                (options => options.
+                UseInMemoryDatabase(databaseName: "UserStore"));
 
             services.AddDbContext<MrsMobileDbContext>
               (options => options.

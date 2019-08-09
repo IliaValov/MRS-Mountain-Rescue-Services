@@ -29,6 +29,7 @@
     <ProjectReference Include="..\MRS.Services.Mobile.Data\MRS.Services.Mobile.Data.csproj" />
     <ProjectReference Include="..\MRS.Services.Spa.Data\MRS.Services.Spa.Data.csproj" />
     <ProjectReference Include="..\MRS.Spa.Data\MRS.Spa.Data.csproj" />
+    <ProjectReference Include="..\Mrs.Spa.LocalData\Mrs.Spa.LocalData.csproj" />
     <ProjectReference Include="..\MRS.Web.Infrastructure\MRS.Web.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MRS.Models.MRSMobileModels.ViewModels.Account;
 using MRS.Models.MRSMobileModels.ViewModels.Location;
 
 namespace MRS.Spa.Web.Controllers
@@ -12,11 +13,13 @@ namespace MRS.Spa.Web.Controllers
     [ApiController]
     public class UsersController : BaseController
     {
+
+        //TODO Change the view model
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult> AddLocation([FromBody]LocationViewModel locationInfo)
+        public async Task<ActionResult> AddUser([FromBody]UserViewModel userInfo)
         {
-            if (locationInfo == null && !ModelState.IsValid)
+            if (userInfo == null && !ModelState.IsValid)
             {
                 return BadRequest("Location is invalid");
             }

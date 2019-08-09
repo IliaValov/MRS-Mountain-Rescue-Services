@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
@@ -14,12 +11,13 @@ namespace MRS.Spa.Web.Controllers
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult> AddLocation([FromBody]LocationCreateBindingModel locationInfo)
+        public async Task<ActionResult> AddLocation([FromBody]LocationUserAddBindingModel locationInfo)
         {
             if (locationInfo == null && !ModelState.IsValid)
             {
                 return BadRequest("Location is invalid");
             }
+
 
            
             return StatusCode(201);

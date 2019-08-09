@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MRS.Common.Mapping;
+using MRS.Models.MRSMobileModels.RecourceModels.Message;
+using System.ComponentModel.DataAnnotations;
 
 namespace MRS.Models.MRSMobileModels.BindingModels.Message
 {
-    class MessageAddBindingModel
+    public class MessageAddBindingModel : IMapTo<MessageResource>
     {
+        [Required]
+        public string Message { get; set; }
+
+        [Required]
+        public string Condition { get; set; }
     }
 }
