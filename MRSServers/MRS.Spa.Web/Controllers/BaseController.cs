@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MRS.Mobile.Web.Controllers
+namespace MRS.Spa.Web.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]

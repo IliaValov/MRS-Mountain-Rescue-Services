@@ -16,6 +16,10 @@ namespace MRS.Models.MRSMobileModels.BindingModels.Location
         [Required]
         public double Altitude { get; set; }
 
+        [Phone]
+        [Required]
+        public string UserPhoneNumber { get; set; }
+
         public MessageCreateBindingModel Message { get; set; }
     }
 }

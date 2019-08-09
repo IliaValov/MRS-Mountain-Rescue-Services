@@ -5,20 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 using MRS.Mobile.Data.Models;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
 using MRS.Services.Mobile.Data.Contracts;
-using MRSMobileServer.Controllers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace MRSMobileServer.Areas.Mobile.Controllers
+namespace MRS.Mobile.Web.Controllers
 {
     [ApiController]
     [Authorize]
-    public class LocationController : BaseController
+    public class LocationsController : BaseController
     {
         private readonly ILocationService locationService;
         private readonly IUserService userService;
 
-        public LocationController(ILocationService locationService, IUserService userService)
+        public LocationsController(ILocationService locationService, IUserService userService)
         {
             this.locationService = locationService;
             this.userService = userService;
