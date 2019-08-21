@@ -49,11 +49,6 @@ namespace MRS.Spa.Web
              Configuration.
              GetConnectionString("DefaultConnection")));
 
-            services
-                .AddDbContext<MrsSpaLDContext>
-                (options => options.
-                UseInMemoryDatabase(databaseName: "UserStore"));
-
             services.AddDbContext<MrsMobileDbContext>
               (options => options.
               UseSqlServer(
@@ -115,7 +110,7 @@ namespace MRS.Spa.Web
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IDeviceService, DeviceService>();
-            services.AddTransient<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddTransient<IUserStore<MrsSpaUser>, MrsSpaUserStore>();
             services.AddTransient<IRoleStore<MrsSpaRole>, MrsSpaRoleStore>();

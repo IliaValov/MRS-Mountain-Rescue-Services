@@ -60,7 +60,7 @@ function showAllLocations(users) {
                     if (l) {
                         return (<Marker key={index}
                             position={{ lat: l.latitude, lng: l.longitude }}
-                            title={ 'Phone number: ' + u.phonenumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
+                            title={'Phone number: ' + u.phonenumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
                         ></Marker>)
                     }
                 }))
@@ -76,6 +76,8 @@ export class MapContainer extends PureComponent {
 
         this.state = {
             currentUser: 'ALLUSERS',
+            currentDate: '',
+            findUsers: '',
             users: [],
             HubConnection: null
         };
@@ -100,16 +102,21 @@ export class MapContainer extends PureComponent {
             .build();
 
         hub.on('SendUserLocations', (data) => {
+            this.setState({users: []});
             data.map((ar) => this.initializeUsers(ar));
             console.log(data);
 
         });
 
+        let date = new Date();
+
+        let currentDate = date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+
         hub.start()
-            .then(() => this.connection.invoke("SendUserLocations", new Date().toLocaleDateString([], dateOptions).toString()))
+            .then(() => this.connection.invoke("SendUserLocations", currentDate))
             .catch(err => console.error('SignalR Connection Error: ', err));
 
-        this.setState({ HubConnection: hub });
+        this.setState({ HubConnection: hub, currentDate: currentDate });
     }
 
     componentWillUnmount() {
@@ -119,7 +126,7 @@ export class MapContainer extends PureComponent {
     initializeUsers = (user) => {
         const { users } = this.state;
 
-        let userArray = []
+        let userArray = [];
 
         let currentUser = new User();
 
