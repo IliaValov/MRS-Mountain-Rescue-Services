@@ -28,30 +28,22 @@ namespace MRS.Spa.Web.Hubs
 
         public async Task SendUserLocations(string date)
         {
-
             this.dateTime = DateTime.Parse(date);
 
-            while (true)
+            var users = (await this.userService.GetAllUsersWithLocationsWithDateAsync<UserViewModel>(dateTime)).ToList();
+
+            int currentUsersCount = users.Count;
+            int currentLocationsCount = users.Select(x => x.Locations.Count).Sum();
+
+            if (this.usersCount != currentUsersCount || this.locationsCount != currentLocationsCount)
             {
-                var users = (await this.userService.GetAllUsersWithLocationsWithDateAsync<UserViewModel>(dateTime)).ToList();
+                await this.Clients.Caller.SendAsync("SendUserLocations",
+                                                   users.ToList()
+                                                   );
 
-                int currentUsersCount = users.Count;
-                int currentLocationsCount = users.Select(x => x.Locations.Count).Sum();
-
-                if (this.usersCount != currentUsersCount || this.locationsCount != currentLocationsCount)
-                {
-                    await this.Clients.Caller.SendAsync("SendUserLocations",
-                                                       users.ToList()
-                                                       );
-
-                    this.usersCount = currentUsersCount;
-                    this.locationsCount = currentLocationsCount;
-                }
-
-
+                this.usersCount = currentUsersCount;
+                this.locationsCount = currentLocationsCount;
             }
-
-
 
         }
     }

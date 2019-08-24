@@ -6,14 +6,16 @@ import * as signalR from '@aspnet/signalr';
 import { HubConnection } from '@aspnet/signalr';
 import User from '../../models/UserModel';
 import Location from '../../models/LocationModel';
-import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polygon } from "react-google-maps"
+import { compose, withProps } from "recompose";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polygon } from "react-google-maps";
 
 const MyMapComponent = compose(
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
         loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `90%` }} />,
+        containerElement: <div style={{ height: `100%` }} />,
         mapElement: <div style={{ height: `100%` }} />,
     }),
     withScriptjs,
@@ -102,13 +104,15 @@ export class MapContainer extends PureComponent {
             .build();
 
         hub.on('SendUserLocations', (data) => {
-            this.setState({users: []});
+            this.setState({ users: [] });
             data.map((ar) => this.initializeUsers(ar));
             console.log(data);
 
         });
 
         let date = new Date();
+
+        console.log(date);
 
         let currentDate = date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
 
@@ -117,6 +121,14 @@ export class MapContainer extends PureComponent {
             .catch(err => console.error('SignalR Connection Error: ', err));
 
         this.setState({ HubConnection: hub, currentDate: currentDate });
+
+        setInterval(async () => this.CheckForUpdate(), 5000);
+    }
+
+    CheckForUpdate = async () => {
+        const { currentDate } = this.state;
+        console.log("done")
+        this.connection.invoke("SendUserLocations", currentDate)
     }
 
     componentWillUnmount() {
@@ -148,6 +160,8 @@ export class MapContainer extends PureComponent {
             return list;
         })
 
+        // this.CheckForUpdate();
+
         console.log(this.state.users)
         this.forceUpdate();
     }
@@ -159,15 +173,27 @@ export class MapContainer extends PureComponent {
     }
 
     showAllUsers = () => {
-        const { users } = this.state;
+        const { users, findUsers } = this.state;
 
         console.log(users, "Users");
         console.log(this.state.users, "Users 1.1")
         if (this.state.users.length > 0) {
             console.log(users, "Users in  if")
-            return users.map(u => <div className='unselectable' value={u.phoneNumber} onClick={(e) => this.handleChangeCurrentUser(e)} >{u.phonenumber}</div>)
+            return users.map((u, index) => {
+                if (findUsers === '') {
+                    return (<div key={index} className='unselectable' value={u.phoneNumber} onClick={(e) => this.handleChangeCurrentUser(e)} >
+                        {u.phonenumber}
+                    </div>)
+                }
+                if (u.phonenumber.includes(findUsers)) {
+                    return (<div key={index} className='unselectable' value={u.phoneNumber} onClick={(e) => this.handleChangeCurrentUser(e)} >
+                        {u.phonenumber}
+                    </div>)
+                }
+            })
         }
     }
+
 
     openNav = () => {
         document.getElementById("mySidenav").style.width = "250px";
@@ -215,12 +241,28 @@ export class MapContainer extends PureComponent {
         return resultUsers
     }
 
+    hnadleDatePickerChange = (startDate) => {
+        let newDate = startDate.getMonth() + 1 + '/' + startDate.getDate() + '/' + startDate.getFullYear();
+
+        this.setState({ currentDate: newDate })
+    }
+
+    handleUserInputChange = (event) => {
+        this.setState({ findUsers: event.target.value });
+    }
+
     render() {
+        const { currentDate, findUsers } = this.state;
+
         return (
             <div>
-                <div>{this.state.currentUser}</div>
-                <div id="mySidenav" class="sidenav">
-                    <a href="javascript:void(0)" class="closebtn" onClick={() => this.closeNav()}>&times;</a>
+                <DatePicker
+                    selected={currentDate != '' ? new Date(currentDate) : new Date()}
+                    onChange={this.hnadleDatePickerChange}
+                />
+                <div id="mySidenav" className="sidenav">
+                    <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeNav()}>&times;</a>
+                    <input type="text" value={findUsers} onChange={this.handleUserInputChange} />
                     <div className='unselectable' onClick={(e) => this.handleChangeCurrentUser(e)} >ALLUSERS</div>
                     {this.showAllUsers()}
 
