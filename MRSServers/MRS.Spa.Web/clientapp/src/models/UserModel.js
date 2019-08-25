@@ -1,5 +1,8 @@
 class User  {
-        phonenumber = ''
+        phoneNumber = ''
+        message = ''
+        condition = ''
+        type = ''
         locations = []
 };
 

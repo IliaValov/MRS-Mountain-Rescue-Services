@@ -62,7 +62,7 @@ function showAllLocations(users) {
                     if (l) {
                         return (<Marker key={index}
                             position={{ lat: l.latitude, lng: l.longitude }}
-                            title={'Phone number: ' + u.phonenumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
+                            title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
                         ></Marker>)
                     }
                 }))
@@ -77,7 +77,7 @@ export class MapContainer extends PureComponent {
         super(props);
 
         this.state = {
-            currentUser: 'ALLUSERS',
+            currentUser: new User(),
             currentDate: '',
             findUsers: '',
             users: [],
@@ -142,7 +142,7 @@ export class MapContainer extends PureComponent {
 
         let currentUser = new User();
 
-        currentUser.phonenumber = user.phoneNumber;
+        currentUser.phoneNumber = user.phoneNumber;
 
         user.locations.map(l => {
             let location = new Location();
@@ -167,9 +167,21 @@ export class MapContainer extends PureComponent {
     }
 
     handleChangeCurrentUser = (event) => {
-        let a = event.target.textContent;
+        const { users } = this.state;
+        let selectedOption = event.target.textContent;
 
-        this.setState({ currentUser: a });
+
+        if (selectedOption !== "ALLUSERS") {
+            let selectedUser = users.find(x => x.phoneNumber);
+
+            this.setState({ currentUser: selectedUser });
+
+            this.openUserInfo();
+        } else {
+            this.setState({ currentUser: new User() });
+        }
+
+
     }
 
     showAllUsers = () => {
@@ -182,12 +194,12 @@ export class MapContainer extends PureComponent {
             return users.map((u, index) => {
                 if (findUsers === '') {
                     return (<div key={index} className='unselectable' value={u.phoneNumber} onClick={(e) => this.handleChangeCurrentUser(e)} >
-                        {u.phonenumber}
+                        {u.phoneNumber}
                     </div>)
                 }
-                if (u.phonenumber.includes(findUsers)) {
+                if (u.phoneNumber.includes(findUsers)) {
                     return (<div key={index} className='unselectable' value={u.phoneNumber} onClick={(e) => this.handleChangeCurrentUser(e)} >
-                        {u.phonenumber}
+                        {u.phoneNumber}
                     </div>)
                 }
             })
@@ -196,23 +208,32 @@ export class MapContainer extends PureComponent {
 
 
     openNav = () => {
-        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("userMenu").style.width = "250px";
+
     }
 
     closeNav = () => {
-        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("userMenu").style.width = "0";
+    }
+
+    openUserInfo = () => {
+        document.getElementById("popup").style.width = "20%";
+    }
+
+    closeUserInfo = () => {
+        document.getElementById("popup").style.width = "0";
     }
 
     getUsersLocations = () => {
         const { users, currentUser } = this.state;
 
-        if (currentUser !== "ALLUSERS") {
+        if (currentUser.phoneNumber) {
             let user = [];
 
             users.map((u) => {
                 console.log(u);
-                console.log(u.phonenumber);
-                if (u.phonenumber === currentUser) {
+                console.log(u.phoneNumber);
+                if (u.phoneNumber === currentUser) {
                     console.log("DONE");
                     user.push(u);
                 }
@@ -231,7 +252,7 @@ export class MapContainer extends PureComponent {
 
         users.map((u) => {
             let user = new User();
-            user.phonenumber = u.phonenumber;
+            user.phoneNumber = u.phoneNumber;
 
             user.locations.push(u.locations[u.locations.length - 1]);
 
@@ -252,7 +273,7 @@ export class MapContainer extends PureComponent {
     }
 
     render() {
-        const { currentDate, findUsers } = this.state;
+        const { currentDate, findUsers, currentUser } = this.state;
 
         return (
             <div>
@@ -260,7 +281,7 @@ export class MapContainer extends PureComponent {
                     selected={currentDate != '' ? new Date(currentDate) : new Date()}
                     onChange={this.hnadleDatePickerChange}
                 />
-                <div id="mySidenav" className="sidenav">
+                <div id="userMenu" className="sidenav">
                     <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeNav()}>&times;</a>
                     <input type="text" value={findUsers} onChange={this.handleUserInputChange} />
                     <div className='unselectable' onClick={(e) => this.handleChangeCurrentUser(e)} >ALLUSERS</div>
@@ -270,6 +291,23 @@ export class MapContainer extends PureComponent {
                     <a href="#">Services</a>
                     <a href="#">Clients</a>
                     <a href="#">Contact</a> */}
+                </div>
+
+                <div id="popup" className="popup">
+                    <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeUserInfo()}>&times;</a>
+                    <div>
+                        Phone number: {currentUser.phoneNumber}
+                    </div>
+                    <div>
+                        Message: {currentUser.message}
+                    </div>
+                    <div>
+                        Condition: {currentUser.condition}
+                    </div>
+                    <div>
+                        Type: {currentUser.type}
+                    </div>
+
                 </div>
 
                 <div className="nav-bar-vertical">
