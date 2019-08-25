@@ -8,8 +8,4 @@
     <PackageReference Include="AutoMapper" Version="8.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MRS.Mobile.Data.Models\MRS.Mobile.Data.Models.csproj" />
-  </ItemGroup>
-
 </Project>

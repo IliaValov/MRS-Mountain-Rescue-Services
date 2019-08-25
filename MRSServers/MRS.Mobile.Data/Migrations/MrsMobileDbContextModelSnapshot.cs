@@ -221,6 +221,8 @@ namespace MRS.Mobile.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<int>("UserType");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DeviceId");

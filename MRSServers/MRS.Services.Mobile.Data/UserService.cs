@@ -17,7 +17,7 @@ namespace MRS.Services.Mobile.Data
 
         private readonly MrsMobileDbContext context;
 
-        public UserService(MrsMobileDbContext context)
+         public UserService(MrsMobileDbContext context)
         {
             this.context = context;
         }
@@ -63,7 +63,8 @@ namespace MRS.Services.Mobile.Data
                 PhoneNumberConfirmed = x.PhoneNumberConfirmed,
                 SecurityStamp = x.SecurityStamp,
                 TwoFactorEnabled = x.TwoFactorEnabled,
-                UserName = x.UserName
+                UserName = x.UserName,
+                UserType = x.UserType
             })
             .AsQueryable()
             .To<TModel>());

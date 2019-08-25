@@ -1,8 +1,8 @@
 class User  {
         phoneNumber = ''
         message = ''
-        condition = ''
-        type = ''
+        isInDanger = false
+        userType = ''
         locations = []
 };
 

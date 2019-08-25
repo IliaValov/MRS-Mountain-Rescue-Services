@@ -6,9 +6,9 @@ namespace MRS.Common
     {
         public const string AdministratorRoleName = "Administrator";
 
-        public const string UserRoleName = "User";
+        public const string NormalUserType = "normal";
 
-        public const string SaviorRoleName = "Savior";
+        public const string SaviorUserType = "savior";
 
         public const string JsonContentType = "application/json";
 

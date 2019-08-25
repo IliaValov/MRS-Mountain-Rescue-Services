@@ -84,6 +84,7 @@ namespace MRS.Mobile.Data.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     IsInDanger = table.Column<bool>(nullable: false),
+                    UserType = table.Column<int>(nullable: false),
                     DeviceId = table.Column<long>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MRS.Mobile.Data.Migrations
 {
     [DbContext(typeof(MrsMobileDbContext))]
-    [Migration("20190727171819_InitialCreate")]
+    [Migration("20190825181815_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -222,6 +222,8 @@ namespace MRS.Mobile.Data.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<int>("UserType");
 
                     b.HasKey("Id");
 

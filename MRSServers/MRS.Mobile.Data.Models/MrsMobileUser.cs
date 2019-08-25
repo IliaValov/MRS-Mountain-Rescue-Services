@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using MRS.Common;
 using MRS.Data.Common.Models;
+using MRS.Mobile.Data.Models.enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,7 +22,11 @@ namespace MRS.Mobile.Data.Models
             //this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
+        [Required]
         public bool IsInDanger { get; set; }
+
+        [Required]
+        public TypeUser UserType { get; set; } = Enum.Parse<TypeUser>(GlobalConstants.NormalUserType);
 
         [Required]
         public long DeviceId { get; set; }

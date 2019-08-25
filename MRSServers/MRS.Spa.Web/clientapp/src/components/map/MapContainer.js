@@ -105,6 +105,7 @@ export class MapContainer extends PureComponent {
 
         hub.on('SendUserLocations', (data) => {
             this.setState({ users: [] });
+            console.log(data)
             data.map((ar) => this.initializeUsers(ar));
             console.log(data);
 
@@ -142,17 +143,7 @@ export class MapContainer extends PureComponent {
 
         let currentUser = new User();
 
-        currentUser.phoneNumber = user.phoneNumber;
-
-        user.locations.map(l => {
-            let location = new Location();
-
-            location.latitude = l.latitude;
-            location.longitude = l.longitude;
-            location.altitude = l.altitude;
-
-            currentUser.locations.push(location);
-        })
+        currentUser = user;
 
         this.setState(state => {
             const list = state.users.push(currentUser);
@@ -233,7 +224,7 @@ export class MapContainer extends PureComponent {
             users.map((u) => {
                 console.log(u);
                 console.log(u.phoneNumber);
-                if (u.phoneNumber === currentUser) {
+                if (u.phoneNumber === currentUser.phoneNumber) {
                     console.log("DONE");
                     user.push(u);
                 }
@@ -302,10 +293,10 @@ export class MapContainer extends PureComponent {
                         Message: {currentUser.message}
                     </div>
                     <div>
-                        Condition: {currentUser.condition}
+                        Condition: {currentUser.isInDanger ? "Emergency" : "Normal"}
                     </div>
                     <div>
-                        Type: {currentUser.type}
+                        Type: {currentUser.userType}
                     </div>
 
                 </div>

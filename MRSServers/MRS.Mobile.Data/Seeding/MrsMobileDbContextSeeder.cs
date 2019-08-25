@@ -43,8 +43,8 @@ namespace MRS.Mobile.Data.Seeding
         private static void SeedRoles(RoleManager<MrsMobileRole> roleManager)
         {
             SeedRole(GlobalConstants.AdministratorRoleName, roleManager);
-            SeedRole(GlobalConstants.UserRoleName, roleManager);
-            SeedRole(GlobalConstants.SaviorRoleName, roleManager);
+            SeedRole(GlobalConstants.NormalUserType, roleManager);
+            SeedRole(GlobalConstants.SaviorUserType, roleManager);
         }
 
         private static void SeedRole(string roleName, RoleManager<MrsMobileRole> roleManager)

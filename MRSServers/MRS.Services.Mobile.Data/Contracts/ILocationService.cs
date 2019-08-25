@@ -10,6 +10,8 @@ namespace MRS.Services.Mobile.Data.Contracts
 
         Task<IQueryable<TModel>> GetByDayAsync<TModel>(DateTime date);
 
+        Task<IQueryable<TModel>> GetByDayAndUserIdAsync<TModel>(DateTime date);
+
         Task<IQueryable<TModel>> GetAllAsync<TModel>();
     }
 }

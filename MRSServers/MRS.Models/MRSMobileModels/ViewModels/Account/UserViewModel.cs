@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MRS.Common.Mapping;
 using MRS.Mobile.Data.Models;
+using MRS.Mobile.Data.Models.enums;
 using MRS.Models.MRSMobileModels.ViewModels.Location;
 using MRS.Models.MRSMobileModels.ViewModels.Message;
 using System.Collections.Generic;
@@ -10,6 +11,10 @@ namespace MRS.Models.MRSMobileModels.ViewModels.Account
     public class UserViewModel : IMapFrom<MrsMobileUser>, IHaveCustomMappings
     {
         public string PhoneNumber { get; set; }
+
+        public bool IsInDanger { get; set; }
+
+        public string UserType { get; set; }
 
         public ICollection<LocationViewModel> Locations { get; set; }
 
@@ -23,6 +28,7 @@ namespace MRS.Models.MRSMobileModels.ViewModels.Account
             configuration.CreateMap<MrsMobileLocation, LocationViewModel>();
 
             configuration.CreateMap<MrsMobileUser, UserViewModel>()
+                .ForMember(x => x.UserType, opt => opt.MapFrom(x => x.UserType.ToString()))
                 .ForMember(x => x.Locations, opt => opt.MapFrom(x => x.Locations))
                 .ForMember(x => x.Messages, opt => opt.MapFrom(x => x.Messages));
 
