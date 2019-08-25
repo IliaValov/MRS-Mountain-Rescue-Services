@@ -61,6 +61,7 @@ function showAllLocations(users) {
                 return (u.locations.map((l, index) => {
                     if (l) {
                         return (<Marker key={index}
+                            
                             position={{ lat: l.latitude, lng: l.longitude }}
                             title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
                         ></Marker>)
@@ -290,10 +291,13 @@ export class MapContainer extends PureComponent {
                         Phone number: {currentUser.phoneNumber}
                     </div>
                     <div>
-                        Message: {currentUser.message}
+                        Message: {currentUser.messages.length > 0 ? currentUser.messages[currentUser.messages.length - 1].message : ""}
                     </div>
                     <div>
-                        Condition: {currentUser.isInDanger ? "Emergency" : "Normal"}
+                        Condition: {currentUser.messages.length > 0 ? currentUser.messages[currentUser.messages.length - 1].condition : ""}
+                    </div>
+                    <div>
+                        Is in danger: {currentUser.isInDanger ? "Yes" : "No"}
                     </div>
                     <div>
                         Type: {currentUser.userType}

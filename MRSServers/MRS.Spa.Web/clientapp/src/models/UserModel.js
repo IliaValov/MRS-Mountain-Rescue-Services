@@ -1,9 +1,9 @@
 class User  {
-        phoneNumber = ''
-        message = ''
-        isInDanger = false
-        userType = ''
-        locations = []
+        phoneNumber = '';
+        isInDanger = false;
+        userType = '';
+        messages = [];
+        locations = [];
 };
 
 export default User;
