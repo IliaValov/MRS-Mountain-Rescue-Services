@@ -59,11 +59,11 @@ namespace MRS.Mobile.Data
             base.OnModelCreating(builder);
         }
 
-        public DbSet<MrsMobileLocation> MrsLocations { get; set; }
+        public DbSet<MrsMobileLocation> Locations { get; set; }
 
-        public DbSet<MrsMobileMessage> MrsMessages { get; set; }
+        public DbSet<MrsMobileMessage> Messages { get; set; }
 
-        public DbSet<MrsMobileDevice> MrsDevices { get; set; }
+        public DbSet<MrsMobileDevice> Devices { get; set; }
 
         public DbSet<MrsMobileSmsAuthantication> MobileSmsAuthantications { get; set; }
 

@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MRS.Models\MRS.Models.csproj" />
-    <ProjectReference Include="..\Mrs.Spa.LocalData\Mrs.Spa.LocalData.csproj" />
+    <ProjectReference Include="..\MRS.Spa.Data.Models\MRS.Spa.Data.Models.csproj" />
+    <ProjectReference Include="..\MRS.Spa.Data\MRS.Spa.Data.csproj" />
   </ItemGroup>
 
 </Project>

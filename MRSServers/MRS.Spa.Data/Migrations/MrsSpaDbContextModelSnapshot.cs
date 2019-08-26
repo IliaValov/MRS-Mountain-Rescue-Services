@@ -19,6 +19,99 @@ namespace MRS.Spa.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MRS.Spa.Data.Models.MrsSpaLocation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Altitude");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<double>("Latitude");
+
+                    b.Property<double>("Longitude");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<long>("PolygonId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PolygonId");
+
+                    b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("MRS.Spa.Data.Models.MrsSpaMissionLog", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsMissionSuccess");
+
+                    b.Property<string>("MissionName")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired();
+
+                    b.Property<string>("Text")
+                        .IsRequired();
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MissionLogs");
+                });
+
+            modelBuilder.Entity("MRS.Spa.Data.Models.MrsSpaPolygon", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int>("PolygonType");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Polygons");
+                });
+
             modelBuilder.Entity("MRS.Spa.Data.Models.MrsSpaRole", b =>
                 {
                     b.Property<string>("Id")
@@ -194,6 +287,30 @@ namespace MRS.Spa.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("MRS.Spa.Data.Models.MrsSpaLocation", b =>
+                {
+                    b.HasOne("MRS.Spa.Data.Models.MrsSpaPolygon", "Polygon")
+                        .WithMany("Locations")
+                        .HasForeignKey("PolygonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MRS.Spa.Data.Models.MrsSpaMissionLog", b =>
+                {
+                    b.HasOne("MRS.Spa.Data.Models.MrsSpaUser", "User")
+                        .WithMany("MissionLogs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MRS.Spa.Data.Models.MrsSpaPolygon", b =>
+                {
+                    b.HasOne("MRS.Spa.Data.Models.MrsSpaUser", "User")
+                        .WithMany("Polygons")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

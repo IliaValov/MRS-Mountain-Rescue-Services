@@ -13,7 +13,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polygon } from "react-g
 
 const MyMapComponent = compose(
     withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
+        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBWBwtK08PpLeiu2wVEyrr8P7x2LIqSrSk&v=3.exp&libraries=geometry,drawing,places",
         loadingElement: <div style={{ height: `100%` }} />,
         containerElement: <div style={{ height: `100%` }} />,
         mapElement: <div style={{ height: `100%` }} />,
@@ -22,6 +22,7 @@ const MyMapComponent = compose(
     withGoogleMap
 )((props) =>
     <GoogleMap
+        bootstrapURLKeys={{ key: "AIzaSyBWBwtK08PpLeiu2wVEyrr8P7x2LIqSrSk" }}
         defaultZoom={8}
         defaultCenter={{ lat: 44.666829, lng: 22.352099 }}
     >
@@ -209,11 +210,11 @@ export class MapContainer extends PureComponent {
     }
 
     openUserInfo = () => {
-        document.getElementById("popup").style.width = "20%";
+        document.getElementById("user-info").style.width = "20%";
     }
 
     closeUserInfo = () => {
-        document.getElementById("popup").style.width = "0";
+        document.getElementById("user-info").style.width = "0";
     }
 
     getUsersLocations = () => {
@@ -285,7 +286,7 @@ export class MapContainer extends PureComponent {
                     <a href="#">Contact</a> */}
                 </div>
 
-                <div id="popup" className="popup">
+                <div id="user-info" className="popup-user-info">
                     <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeUserInfo()}>&times;</a>
                     <div>
                         Phone number: {currentUser.phoneNumber}
@@ -308,6 +309,29 @@ export class MapContainer extends PureComponent {
                         </div> : null}
                 </div>
 
+                <div id="log-mission" className="popup-log-mission">
+                    <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeUserInfo()}>&times;</a>
+                    <div>
+                        Phone number: {currentUser.phoneNumber}
+                    </div>
+                    <div>
+                        Message: {currentUser.messages.length > 0 ? currentUser.messages[currentUser.messages.length - 1].message : ""}
+                    </div>
+                    <div>
+                        Condition: {currentUser.messages.length > 0 ? currentUser.messages[currentUser.messages.length - 1].condition : ""}
+                    </div>
+                    <div>
+                        Is in danger: {currentUser.isInDanger ? "Yes" : "No"}
+                    </div>
+                    <div>
+                        Type: {currentUser.userType}
+                    </div>
+                    {currentUser.isInDanger ?
+                        <div className='save-button'>
+                            Log mission
+                        </div> : null}
+                </div>
+
                 <div className="nav-bar-vertical">
                     <ul className="nav-bar-vertical">
                         <li className="unselectable" onClick={() => this.openNav()}>
@@ -319,6 +343,7 @@ export class MapContainer extends PureComponent {
                         <li className="unselectable">
                             Logs
                         </li>
+                        
                     </ul>
                 </div>
 

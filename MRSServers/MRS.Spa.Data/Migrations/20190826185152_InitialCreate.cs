@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MRS.Mobile.Data.Migrations
+namespace MRS.Spa.Data.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -27,20 +27,32 @@ namespace MRS.Mobile.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MrsDevices",
+                name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Device = table.Column<string>(nullable: false)
+                    DeletedOn = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MrsDevices", x => x.Id);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,44 +72,6 @@ namespace MRS.Mobile.Data.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    IsInDanger = table.Column<bool>(nullable: false),
-                    UserType = table.Column<int>(nullable: false),
-                    DeviceId = table.Column<long>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_MrsDevices_DeviceId",
-                        column: x => x.DeviceId,
-                        principalTable: "MrsDevices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -188,32 +162,7 @@ namespace MRS.Mobile.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MobileSmsAuthantications",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Token = table.Column<string>(nullable: false),
-                    AuthanticationCode = table.Column<string>(nullable: false),
-                    IsUsed = table.Column<bool>(nullable: false),
-                    ExpiredAt = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MobileSmsAuthantications", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MobileSmsAuthantications_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MrsMessages",
+                name: "MissionLogs",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -222,24 +171,50 @@ namespace MRS.Mobile.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Message = table.Column<string>(nullable: false),
-                    Condition = table.Column<string>(nullable: false),
-                    UserId = table.Column<string>(nullable: false),
-                    LocationId = table.Column<long>(nullable: false)
+                    MissionName = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: false),
+                    IsMissionSuccess = table.Column<bool>(nullable: false),
+                    Text = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MrsMessages", x => x.Id);
+                    table.PrimaryKey("PK_MissionLogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MrsMessages_AspNetUsers_UserId",
+                        name: "FK_MissionLogs_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MrsLocations",
+                name: "Polygons",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    PolygonType = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Polygons", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Polygons_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Locations",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -251,22 +226,15 @@ namespace MRS.Mobile.Data.Migrations
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
                     Altitude = table.Column<double>(nullable: false),
-                    UserId = table.Column<string>(nullable: false),
-                    MessageId = table.Column<long>(nullable: true)
+                    PolygonId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MrsLocations", x => x.Id);
+                    table.PrimaryKey("PK_Locations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MrsLocations_MrsMessages_MessageId",
-                        column: x => x.MessageId,
-                        principalTable: "MrsMessages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_MrsLocations_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Locations_Polygons_PolygonId",
+                        column: x => x.PolygonId,
+                        principalTable: "Polygons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -299,11 +267,6 @@ namespace MRS.Mobile.Data.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_DeviceId",
-                table: "AspNetUsers",
-                column: "DeviceId");
-
-            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -316,25 +279,18 @@ namespace MRS.Mobile.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MobileSmsAuthantications_UserId",
-                table: "MobileSmsAuthantications",
+                name: "IX_Locations_PolygonId",
+                table: "Locations",
+                column: "PolygonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MissionLogs_UserId",
+                table: "MissionLogs",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MrsLocations_MessageId",
-                table: "MrsLocations",
-                column: "MessageId",
-                unique: true,
-                filter: "[MessageId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MrsLocations_UserId",
-                table: "MrsLocations",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MrsMessages_UserId",
-                table: "MrsMessages",
+                name: "IX_Polygons_UserId",
+                table: "Polygons",
                 column: "UserId");
         }
 
@@ -356,22 +312,19 @@ namespace MRS.Mobile.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "MobileSmsAuthantications");
+                name: "Locations");
 
             migrationBuilder.DropTable(
-                name: "MrsLocations");
+                name: "MissionLogs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "MrsMessages");
+                name: "Polygons");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "MrsDevices");
         }
     }
 }

@@ -38,7 +38,7 @@ namespace MRS.Mobile.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MrsDevices");
+                    b.ToTable("Devices");
                 });
 
             modelBuilder.Entity("MRS.Mobile.Data.Models.MrsMobileLocation", b =>
@@ -74,7 +74,7 @@ namespace MRS.Mobile.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("MrsLocations");
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("MRS.Mobile.Data.Models.MrsMobileMessage", b =>
@@ -106,7 +106,7 @@ namespace MRS.Mobile.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("MrsMessages");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("MRS.Mobile.Data.Models.MrsMobileRole", b =>

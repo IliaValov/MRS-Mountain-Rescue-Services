@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MRS.Services.Spa.Data.Contracts
 {
-    public interface ILocationService
+    public interface IPolygonService
     {
-        Task AddLocation<TModel>(TModel model);
+        Task<long> AddPolygonAsync<TModel>(TModel model);
 
-        Task<IQueryable<TModel>> GetLocationsByPolygonId<TModel>(long polygonId);
+        Task<IQueryable<TModel>> GetPolygonsByUserIdAsync<TModel>(string userId);
     }
 }

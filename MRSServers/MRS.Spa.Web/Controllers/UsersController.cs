@@ -9,8 +9,7 @@ using MRS.Models.MRSMobileModels.ViewModels.Location;
 
 namespace MRS.Spa.Web.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+
     public class UsersController : BaseController
     {
 

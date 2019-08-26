@@ -10,12 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Mrs.Spa.LocalData;
 using MRS.Common.Mapping;
 using MRS.Mobile.Data;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
 using MRS.Services.Mobile.Data;
 using MRS.Services.Mobile.Data.Contracts;
+using MRS.Services.Spa.Data;
+using MRS.Services.Spa.Data.Contracts;
 using MRS.Spa.Data;
 using MRS.Spa.Data.Models;
 using MRS.Spa.Data.Seeding;
@@ -28,6 +29,8 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using ILocationService = MRS.Services.Mobile.Data.Contracts.ILocationService;
+using LocationService = MRS.Services.Mobile.Data.LocationService;
 
 namespace MRS.Spa.Web
 {
@@ -110,7 +113,11 @@ namespace MRS.Spa.Web
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IDeviceService, DeviceService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<Services.Mobile.Data.Contracts.IUserService, Services.Mobile.Data.UserService>();
+
+            services.AddTransient<Services.Spa.Data.Contracts.ILocationService, Services.Spa.Data.LocationService>();
+            services.AddTransient<IMissionLogService, MissionLogService>();
+            services.AddTransient<IPolygonService, PolygonService>();
 
             services.AddTransient<IUserStore<MrsSpaUser>, MrsSpaUserStore>();
             services.AddTransient<IRoleStore<MrsSpaRole>, MrsSpaRoleStore>();

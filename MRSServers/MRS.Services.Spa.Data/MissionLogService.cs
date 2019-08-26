@@ -11,30 +11,30 @@ using System.Threading.Tasks;
 
 namespace MRS.Services.Spa.Data
 {
-    public class LocationService : ILocationService
+    public class MissionLogService : IMissionLogService
     {
         private readonly MrsSpaDbContext context;
 
-        public LocationService(MrsSpaDbContext context)
+        public MissionLogService(MrsSpaDbContext context)
         {
             this.context = context;
         }
 
-        public async Task AddLocation<TModel>(TModel model)
+        public async Task AddMissionLog<TModel>(TModel model)
         {
-            var newLocation = Mapper.Map<MrsSpaLocation>(model);
+            var newMissionLog = Mapper.Map<MrsSpaMissionLog>(model);
 
-            await this.context.Locations.AddAsync(newLocation);
+            await this.context.MissionLogs.AddAsync(newMissionLog);
 
             await this.context.SaveChangesAsync();
         }
 
-        public async Task<IQueryable<TModel>> GetLocationsByPolygonId<TModel>(long polygonId)
+        public async Task<IQueryable<TModel>> GetAllMissionLogsByUserId<TModel>(string userId)
         {
             return await Task.Run(() =>
           this.context
-          .Locations
-          .Where(x => x.PolygonId == polygonId)
+          .MissionLogs
+          .Where(x => x.UserId == userId)
           .AsQueryable()
           .To<TModel>());
         }

@@ -20,6 +20,10 @@ namespace MRS.Spa.Data
         //    optionsBuilder.UseSqlServer(GlobalConstants.MrsSpaDbConnectionString);
         //}
 
+        public DbSet<MrsSpaLocation> Locations { get; set; }
+        public DbSet<MrsSpaMissionLog> MissionLogs { get; set; }
+        public DbSet<MrsSpaPolygon> Polygons { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
