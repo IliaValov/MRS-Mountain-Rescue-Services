@@ -70,6 +70,19 @@ body {
     margin-left: 50px;
 }
 
+.popup .log-button {
+    color: rgb(33, 107, 247);
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none
+}
+
+.popup .log-button:hover {
+    color: #797979;
+}
+
 .sidenav {
     height: 90%;
     width: 0;

@@ -34,7 +34,7 @@ namespace MRS.Mobile.Web.Controllers
 
             var location = Mapper.Map<MrsMobileLocation>(locationInfo);
 
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             location.UserId = userId;
 
@@ -52,7 +52,9 @@ namespace MRS.Mobile.Web.Controllers
 
             var location = Mapper.Map<MrsMobileLocation>(locationInfo);
 
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
+
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             location.UserId = userId;
             location.Message.LocationId = location.Id;

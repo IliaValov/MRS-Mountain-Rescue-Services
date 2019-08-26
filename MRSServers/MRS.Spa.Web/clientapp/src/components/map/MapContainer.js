@@ -61,7 +61,7 @@ function showAllLocations(users) {
                 return (u.locations.map((l, index) => {
                     if (l) {
                         return (<Marker key={index}
-                            
+
                             position={{ lat: l.latitude, lng: l.longitude }}
                             title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
                         ></Marker>)
@@ -302,7 +302,10 @@ export class MapContainer extends PureComponent {
                     <div>
                         Type: {currentUser.userType}
                     </div>
-
+                    {currentUser.isInDanger ?
+                        <div className='log-button'>
+                            Log mission
+                        </div> : null}
                 </div>
 
                 <div className="nav-bar-vertical">
