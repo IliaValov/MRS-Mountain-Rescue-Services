@@ -12,6 +12,7 @@ import { compose, withProps } from "recompose";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polygon } from "react-google-maps";
+import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 
 
 const MyMapComponent = compose(
@@ -57,20 +58,65 @@ function showUserTrace(users) {
 }
 
 function showAllLocations(users) {
-
+    let saviorIcon = new window.google.maps.MarkerImage(
+        "http://maps.google.com/mapfiles/ms/icons/blue.png",
+        null, /* size is determined at runtime */
+        null, /* origin is 0,0 */
+        null, /* anchor is bottom center of the scaled image */
+        new window.google.maps.Size(32, 32)
+    );
+    let normalUserIcon = new window.google.maps.MarkerImage(
+        "http://maps.google.com/mapfiles/ms/icons/green.png",
+        null, /* size is determined at runtime */
+        null, /* origin is 0,0 */
+        null, /* anchor is bottom center of the scaled image */
+        new window.google.maps.Size(32, 32)
+    );
+    let emergencyIcon = new window.google.maps.MarkerImage(
+        "http://maps.google.com/mapfiles/ms/icons/red.png",
+        null, /* size is determined at runtime */
+        null, /* origin is 0,0 */
+        null, /* anchor is bottom center of the scaled image */
+        new window.google.maps.Size(32, 32)
+    );
     if (users) {
 
         return users.map((u) => {
             if (u.locations || u.locations.length > 0) {
-                return (u.locations.map((l, index) => {
-                    if (l) {
-                        return (<Marker key={index}
-
-                            position={{ lat: l.latitude, lng: l.longitude }}
-                            title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
-                        ></Marker>)
-                    }
-                }))
+                if (u.isInDanger) {
+                    //Emergency user
+                    return (u.locations.map((l, index) => {
+                        if (l) {
+                            return (<Marker key={index}
+                                icon={emergencyIcon}
+                                position={{ lat: l.latitude, lng: l.longitude }}
+                                title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
+                            ></Marker>)
+                        }
+                    }))
+                } else if (u.userType.toLowerCase() === "savior") {
+                    //Savior user
+                    return (u.locations.map((l, index) => {
+                        if (l) {
+                            return (<Marker key={index}
+                                icon={saviorIcon}
+                                position={{ lat: l.latitude, lng: l.longitude }}
+                                title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
+                            ></Marker>)
+                        }
+                    }))
+                } else {
+                    //Normal user
+                    return (u.locations.map((l, index) => {
+                        if (l) {
+                            return (<Marker key={index}
+                                icon={normalUserIcon}
+                                position={{ lat: l.latitude, lng: l.longitude }}
+                                title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
+                            ></Marker>)
+                        }
+                    }))
+                }
             }
         })
     }
@@ -194,7 +240,7 @@ export class MapContainer extends PureComponent {
 
 
         if (selectedOption !== "ALLUSERS") {
-            let selectedUser = users.find(x => x.phoneNumber);
+            let selectedUser = users.find(x => x.phoneNumber === selectedOption);
 
             this.setState({ currentUser: selectedUser });
 
@@ -284,7 +330,8 @@ export class MapContainer extends PureComponent {
         users.map((u) => {
             let user = new User();
             user.phoneNumber = u.phoneNumber;
-
+            user.isInDanger = u.isInDanger;
+            user.userType = u.userType;
             user.locations.push(u.locations[u.locations.length - 1]);
 
             resultUsers.push(user);
