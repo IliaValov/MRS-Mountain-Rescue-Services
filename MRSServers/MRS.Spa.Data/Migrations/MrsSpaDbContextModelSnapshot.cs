@@ -58,6 +58,9 @@ namespace MRS.Spa.Data.Migrations
 
                     b.Property<DateTime?>("DeletedOn");
 
+                    b.Property<string>("Details")
+                        .IsRequired();
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<bool>("IsMissionSuccess");
@@ -68,9 +71,6 @@ namespace MRS.Spa.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired();
-
-                    b.Property<string>("Text")
                         .IsRequired();
 
                     b.Property<string>("UserId")

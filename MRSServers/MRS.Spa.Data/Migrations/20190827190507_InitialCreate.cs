@@ -174,7 +174,7 @@ namespace MRS.Spa.Data.Migrations
                     MissionName = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: false),
                     IsMissionSuccess = table.Column<bool>(nullable: false),
-                    Text = table.Column<string>(nullable: false),
+                    Details = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>

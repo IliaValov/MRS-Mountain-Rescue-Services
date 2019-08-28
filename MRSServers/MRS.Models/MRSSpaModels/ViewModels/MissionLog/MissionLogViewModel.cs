@@ -14,6 +14,6 @@ namespace MRS.Models.MRSSpaModels.ViewModels.MissionLog
 
         public bool IsMissionSuccess { get; set; }
 
-        public string Text { get; set; }
+        public string Details { get; set; }
     }
 }

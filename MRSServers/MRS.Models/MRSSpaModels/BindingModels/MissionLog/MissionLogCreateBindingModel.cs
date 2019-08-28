@@ -19,7 +19,7 @@ namespace MRS.Models.MRSSpaModels.BindingModels.MissionLog
         public bool IsMissionSuccess { get; set; }
 
         [Required]
-        public string Text { get; set; }
+        public string Details { get; set; }
 
         public string UserId { get; set; }
     }

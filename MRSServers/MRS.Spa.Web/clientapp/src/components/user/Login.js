@@ -29,7 +29,7 @@ export class Login extends Component {
     }
 
     handleSubmitForm = () => {
-        push('/'); // navigate to some route
+        this.props.push('/'); // navigate to some route
     }
 
     render() {

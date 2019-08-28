@@ -23,7 +23,7 @@ namespace MRS.Spa.Data.Models
         public bool IsMissionSuccess { get; set; }
 
         [Required]
-        public string Text { get; set; }
+        public string Details { get; set; }
 
         [Required]
         public string UserId { get; set; }

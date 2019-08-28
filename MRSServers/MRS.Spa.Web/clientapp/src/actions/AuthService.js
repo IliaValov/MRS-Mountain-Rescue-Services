@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 
 
-class AuthService {
+export class AuthService {
 
     loginUserSuccess(token) {
         localStorage.setItem('token', token);

@@ -1,15 +1,18 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import MissionLogService from "../../actions/MissionLogService";
 import "../../assets/styles/Map.css";
 import { string } from 'prop-types';
 import * as signalR from '@aspnet/signalr';
 import { HubConnection } from '@aspnet/signalr';
 import User from '../../models/UserModel';
+import MissionLogModel from '../../models/MissionLogModel';
 import Location from '../../models/LocationModel';
 import { compose, withProps } from "recompose";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polygon } from "react-google-maps";
+
 
 const MyMapComponent = compose(
     withProps({
@@ -83,13 +86,22 @@ export class MapContainer extends PureComponent {
             currentDate: '',
             findUsers: '',
             users: [],
+
+            missionLogs: [],
+            currentMissionLog: new MissionLogModel(),
+            findMissionLogByName: '',
+
+            missionLog: new MissionLogModel(),
+            missionLogService: new MissionLogService(),
+
+            intervalId: null,
             HubConnection: null
         };
 
         this.connection = null;
     }
 
-    componentWillMount() {
+    async componentWillMount() {
         const { HubConnection } = this.state;
 
         var dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -121,21 +133,38 @@ export class MapContainer extends PureComponent {
 
         hub.start()
             .then(() => this.connection.invoke("SendUserLocations", currentDate))
-            .catch(err => console.error('SignalR Connection Error: ', err));
+            .catch(err => console.error('SignalR Connection Error: ', err)), 5000;
 
-        this.setState({ HubConnection: hub, currentDate: currentDate });
+        let intervalId = setInterval(async () => this.CheckForUpdate(), 5000);
 
-        setInterval(async () => this.CheckForUpdate(), 5000);
-    }
+        await this.getAllMissionLogs();
 
-    CheckForUpdate = async () => {
-        const { currentDate } = this.state;
-        console.log("done")
-        this.connection.invoke("SendUserLocations", currentDate)
+        this.setState({ HubConnection: hub, currentDate: currentDate, intervalId: intervalId });
+
+
     }
 
     componentWillUnmount() {
-        this.connection.stop();
+        clearInterval(this.state.intervalId)
+    }
+
+    getAllMissionLogs = async () => {
+        const { missionLogService } = this.state;
+
+        let missionLogs = await missionLogService.getAllMissionLogs();
+
+        console.log("Mission logs");
+        console.log(missionLogs)
+
+        this.setState({ missionLogs: missionLogs });
+    }
+
+    CheckForUpdate = async () => {
+        const { currentDate, isConnectionStarted } = this.state;
+        console.log("done")
+
+        this.connection.invoke("SendUserLocations", currentDate)
+
     }
 
     initializeUsers = (user) => {
@@ -202,7 +231,7 @@ export class MapContainer extends PureComponent {
 
     openNav = () => {
         document.getElementById("userMenu").style.width = "250px";
-
+        this.closeMissionLogMenu();
     }
 
     closeNav = () => {
@@ -215,6 +244,15 @@ export class MapContainer extends PureComponent {
 
     closeUserInfo = () => {
         document.getElementById("user-info").style.width = "0";
+    }
+
+    openLogMission = () => {
+        document.getElementById("log-mission").style.width = "40%";
+    }
+
+    closeLogMission = () => {
+        document.getElementById("log-mission").style.width = "0";
+        this.setState({ missionLog: new MissionLogModel() })
     }
 
     getUsersLocations = () => {
@@ -265,8 +303,77 @@ export class MapContainer extends PureComponent {
         this.setState({ findUsers: event.target.value });
     }
 
+    handleMissionLogInputChange = (event) => {
+        this.setState({ findMissionLogByName: event.target.value });
+    }
+
+    handleCreateMissionLog = () => {
+        const { missionLog, missionLogService, currentUser } = this.state;
+
+        if (missionLog) {
+            if (!missionLog.missionName) {
+                alert("Add mission name!");
+                return;
+            } else if (!missionLog.details) {
+                alert("Add details!");
+                return;
+            }
+            else {
+                missionLog.phoneNumber = currentUser.phoneNumber;
+                missionLogService.addMissionLog(missionLog);
+                this.closeLogMission();
+            }
+        }
+
+        this.setState({ missionLog: new MissionLogModel() });
+    }
+
+    openMissionLogMenu = () => {
+        document.getElementById("missionLogMenu").style.width = "250px";
+        this.closeNav();
+    }
+
+    closeMissionLogMenu = () => {
+        document.getElementById("missionLogMenu").style.width = "0";
+    }
+
+    handleChangeCurrentMissionLog = (missionLog) => {
+        this.showCurrentLogMission();
+        this.setState({ currentMissionLog: missionLog });
+    }
+
+    showAllMissionLogs = () => {
+        const { missionLogs, findMissionLogByName } = this.state;
+
+        return missionLogs.map((currentMissionLog, index) => {
+            if (findMissionLogByName === "") {
+                return (
+                    <div key={index} className='unselectable' value={currentMissionLog.missionName} onClick={(e) => this.handleChangeCurrentMissionLog(currentMissionLog)} >
+                        {currentMissionLog.missionName}
+                    </div>)
+            } else {
+                if (currentMissionLog.missionName.toLowerCase().includes(findMissionLogByName.toLowerCase())) {
+                    return (
+                        <div key={index} className='unselectable' value={currentMissionLog.missionName} onClick={(e) => this.handleChangeCurrentMissionLog(currentMissionLog)} >
+                            {currentMissionLog.missionName}
+                        </div>)
+                }
+            }
+
+
+        })
+    }
+
+    showCurrentLogMission = () => {
+        document.getElementById("current-log-mission").style.width = "20%";
+    }
+
+    closeCurrentLogMission = () => {
+        document.getElementById("current-log-mission").style.width = "0";
+    }
+
     render() {
-        const { currentDate, findUsers, currentUser } = this.state;
+        const { currentDate, findUsers, currentUser, missionLog, currentMissionLog, findMissionLogByName } = this.state;
 
         return (
             <div>
@@ -279,6 +386,17 @@ export class MapContainer extends PureComponent {
                     <input type="text" value={findUsers} onChange={this.handleUserInputChange} />
                     <div className='unselectable' onClick={(e) => this.handleChangeCurrentUser(e)} >ALLUSERS</div>
                     {this.showAllUsers()}
+
+                    {/* <a href="#">0888014990</a>
+                    <a href="#">Services</a>
+                    <a href="#">Clients</a>
+                    <a href="#">Contact</a> */}
+                </div>
+
+                <div id="missionLogMenu" className="sidenav">
+                    <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeMissionLogMenu()}>&times;</a>
+                    <input type="text" value={findMissionLogByName} onChange={this.handleMissionLogInputChange} />
+                    {this.showAllMissionLogs()}
 
                     {/* <a href="#">0888014990</a>
                     <a href="#">Services</a>
@@ -304,32 +422,71 @@ export class MapContainer extends PureComponent {
                         Type: {currentUser.userType}
                     </div>
                     {currentUser.isInDanger ?
-                        <div className='log-button'>
+                        <div className='log-button' onClick={() => this.openLogMission()}>
                             Log mission
                         </div> : null}
                 </div>
 
                 <div id="log-mission" className="popup-log-mission">
-                    <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeUserInfo()}>&times;</a>
-                    <div>
-                        Phone number: {currentUser.phoneNumber}
+                    <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeLogMission()}>&times;</a>
+                    <div className="item">
+                        PhoneNumber: {currentUser.phoneNumber}
                     </div>
-                    <div>
-                        Message: {currentUser.messages.length > 0 ? currentUser.messages[currentUser.messages.length - 1].message : ""}
+                    <div className="item">
+                        Mission name: <input value={missionLog.missionName}
+                            onChange={(e) => {
+                                let tempMissionLog = missionLog;
+                                tempMissionLog.missionName = e.target.value;
+                                this.setState({ missionLog: tempMissionLog })
+                                this.forceUpdate()
+                            }}></input>
                     </div>
-                    <div>
-                        Condition: {currentUser.messages.length > 0 ? currentUser.messages[currentUser.messages.length - 1].condition : ""}
+                    <div className="item">
+                        Completed:
+                        <div class="dropdown">
+                            <button class="dropbtn">{missionLog.isMissionSuccess ? "YES" : "NO"}</button>
+                            <div class="dropdown-content">
+                                <div className="item" onClick={() => { missionLog.isMissionSuccess = true; this.setState({ missionLog }); this.forceUpdate() }}>Yes</div>
+                                <div className="item" onClick={() => { missionLog.isMissionSuccess = false; this.setState({ missionLog }); this.forceUpdate() }}>No</div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        Is in danger: {currentUser.isInDanger ? "Yes" : "No"}
+                    <div className="item">
+                        Details:
+                        <br />
+                        <textarea className="details"
+                            value={missionLog.details}
+                            onChange={(e) => {
+                                let tempMissionLog = missionLog;
+                                tempMissionLog.details = e.target.value;
+                                this.setState({ missionLog: tempMissionLog })
+                                this.forceUpdate()
+                            }}>
+
+                        </textarea>
                     </div>
-                    <div>
-                        Type: {currentUser.userType}
+                    <div className="submitbut" onClick={() => this.handleCreateMissionLog()}>Submit</div>
+                </div>
+
+
+                <div id="current-log-mission" className="popup-current-log-mission">
+                    <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeCurrentLogMission()}>&times;</a>
+                    <div className="item">
+                        PhoneNumber: {currentMissionLog.phoneNumber}
                     </div>
-                    {currentUser.isInDanger ?
-                        <div className='save-button'>
-                            Log mission
-                        </div> : null}
+                    <div className="item">
+                        Mission name:
+                            {currentMissionLog.missionName}
+                    </div>
+                    <div className="item">
+                        Completed:
+                            {currentMissionLog.isMissionSuccess ? "YES" : "NO"}
+                    </div>
+                    <div className="item">
+                        Details:
+                        <br />
+                        {currentMissionLog.details}
+                    </div>
                 </div>
 
                 <div className="nav-bar-vertical">
@@ -340,10 +497,10 @@ export class MapContainer extends PureComponent {
                         <li className="unselectable">
                             Polygons
                         </li>
-                        <li className="unselectable">
+                        <li className="unselectable" onClick={() => this.openMissionLogMenu()}>
                             Logs
                         </li>
-                        
+
                     </ul>
                 </div>
 
