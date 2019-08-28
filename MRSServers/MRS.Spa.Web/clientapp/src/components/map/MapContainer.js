@@ -383,7 +383,7 @@ export class MapContainer extends PureComponent {
                 />
                 <div id="userMenu" className="sidenav">
                     <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeNav()}>&times;</a>
-                    <input type="text" value={findUsers} onChange={this.handleUserInputChange} />
+                    <input type="text" placeholder={"*Enter phone number"} value={findUsers} onChange={this.handleUserInputChange} />
                     <div className='unselectable' onClick={(e) => this.handleChangeCurrentUser(e)} >ALLUSERS</div>
                     {this.showAllUsers()}
 
@@ -395,7 +395,7 @@ export class MapContainer extends PureComponent {
 
                 <div id="missionLogMenu" className="sidenav">
                     <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeMissionLogMenu()}>&times;</a>
-                    <input type="text" value={findMissionLogByName} onChange={this.handleMissionLogInputChange} />
+                    <input type="text" placeholder={"*Enter mission name"} value={findMissionLogByName} onChange={this.handleMissionLogInputChange} />
                     {this.showAllMissionLogs()}
 
                     {/* <a href="#">0888014990</a>
