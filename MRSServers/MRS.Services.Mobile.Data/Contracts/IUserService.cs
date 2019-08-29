@@ -6,8 +6,6 @@ namespace MRS.Services.Mobile.Data.Contracts
 {
     public interface IUserService
     {
-        Task<T> GetUserByIdAsync<T>(string phonenumber);
-
         Task ChangeUserConditionAsync(string userId, bool isInDanger);
 
         Task<IQueryable<TModel>> GetAllUsersWithLocationsWithDateAsync<TModel>(DateTime date);

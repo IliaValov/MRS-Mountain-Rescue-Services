@@ -21,4 +21,8 @@
     <ProjectReference Include="..\MRS.Services\MRS.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MRS.Spa.Tests\" />
+  </ItemGroup>
+
 </Project>

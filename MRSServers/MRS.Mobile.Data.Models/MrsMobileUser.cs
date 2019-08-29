@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MRS.Common;
+using MRS.Common.Mapping;
 using MRS.Data.Common.Models;
 using MRS.Mobile.Data.Models.enums;
 using System;

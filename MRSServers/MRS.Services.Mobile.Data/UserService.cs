@@ -25,8 +25,8 @@ namespace MRS.Services.Mobile.Data
         public async Task<IQueryable<TModel>> GetAllAsync<TModel>() => await Task.Run(() =>
             this.context
         .Users
-        .Include(x => x.Locations)
         .AsQueryable()
+        .OrderBy(x => x.CreatedOn)
         .To<TModel>());
 
         public async Task<IQueryable<TModel>> GetAllUsersWithLocationsWithDateAsync<TModel>(DateTime date) => await Task.Run(() =>
@@ -78,10 +78,6 @@ namespace MRS.Services.Mobile.Data
             this.context.Update(user);
             await this.context.SaveChangesAsync();
         }
-
-        public async Task<T> GetUserByIdAsync<T>(string phonenumber) => await Task.Run(() =>
-            Mapper.Map<T>(this.context.Users.SingleOrDefault(x => x.PhoneNumber == phonenumber)));
-
 
     }
 }

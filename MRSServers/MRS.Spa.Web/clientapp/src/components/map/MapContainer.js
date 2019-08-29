@@ -368,6 +368,7 @@ export class MapContainer extends PureComponent {
             else {
                 missionLog.phoneNumber = currentUser.phoneNumber;
                 missionLogService.addMissionLog(missionLog);
+                this.getAllMissionLogs();
                 this.closeLogMission();
             }
         }
