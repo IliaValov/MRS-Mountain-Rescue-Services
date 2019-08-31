@@ -20,7 +20,7 @@ namespace MRS.Services.Spa.Data
             this.context = context;
         }
 
-        public async Task AddMissionLog<TModel>(TModel model)
+        public async Task AddMissionLogAsync<TModel>(TModel model)
         {
             var newMissionLog = Mapper.Map<MrsSpaMissionLog>(model);
 
@@ -29,7 +29,7 @@ namespace MRS.Services.Spa.Data
             await this.context.SaveChangesAsync();
         }
 
-        public async Task<IQueryable<TModel>> GetAllMissionLogsByUserId<TModel>(string userId)
+        public async Task<IQueryable<TModel>> GetAllMissionLogsByUserIdAsync<TModel>(string userId)
         {
             return await Task.Run(() =>
           this.context

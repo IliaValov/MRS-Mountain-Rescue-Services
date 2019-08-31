@@ -8,8 +8,8 @@ namespace MRS.Services.Spa.Data.Contracts
 {
     public interface IMissionLogService
     {
-        Task AddMissionLog<TModel>(TModel model);
+        Task AddMissionLogAsync<TModel>(TModel model);
 
-        Task<IQueryable<TModel>> GetAllMissionLogsByUserId<TModel>(string userId);
+        Task<IQueryable<TModel>> GetAllMissionLogsByUserIdAsync<TModel>(string userId);
     }
 }

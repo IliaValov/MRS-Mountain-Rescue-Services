@@ -32,12 +32,8 @@ namespace MRS.Services.Mobile.Data
         public Task<IQueryable<TModel>> GetAllAsync<TModel>() =>
             Task.Run(() => this.context.Locations.AsQueryable().ProjectTo<TModel>());
 
-        public Task<IQueryable<TModel>> GetByDayAndUserIdAsync<TModel>(DateTime date)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<IQueryable<TModel>> GetByDayAsync<TModel>(DateTime date) =>
+        public Task<IQueryable<TModel>> GetByDateAsync<TModel>(DateTime date) =>
             Task.Run(() =>
             this.context
             .Locations

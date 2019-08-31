@@ -6,11 +6,11 @@ namespace MRS.Services.Mobile.Data.Contracts
 {
     public interface IMessageService
     {
-        Task AddMessage<T>(T message);
+        Task AddMessageAsync<T>(T message);
 
-        Task<T> GetLastMessage<T>();
+        Task<T> GetLastMessageAsync<T>();
 
-        Task<IQueryable<TModel>> GetByDay<TModel>(DateTime date);
+        Task<IQueryable<TModel>> GetAllMessagesByDateAsync<TModel>(DateTime date);
 
         Task<IQueryable<TModel>> GetAllAsync<TModel>();
 

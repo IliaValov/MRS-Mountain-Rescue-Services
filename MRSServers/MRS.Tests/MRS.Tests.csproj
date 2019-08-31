@@ -18,11 +18,8 @@
     <ProjectReference Include="..\MRS.Common\MRS.Common.csproj" />
     <ProjectReference Include="..\MRS.Models\MRS.Models.csproj" />
     <ProjectReference Include="..\MRS.Services.Mobile.Data\MRS.Services.Mobile.Data.csproj" />
+    <ProjectReference Include="..\MRS.Services.Spa.Data\MRS.Services.Spa.Data.csproj" />
     <ProjectReference Include="..\MRS.Services\MRS.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MRS.Spa.Tests\" />
   </ItemGroup>
 
 </Project>

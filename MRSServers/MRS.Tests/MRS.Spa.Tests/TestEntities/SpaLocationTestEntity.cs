@@ -1,12 +1,12 @@
 ﻿using MRS.Common.Mapping;
-using MRS.Mobile.Data.Models;
+using MRS.Spa.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MRS.Tests.MRS.Mobile.Tests.TestEntities
+namespace MRS.Tests.MRS.Spa.Tests.TestEntities
 {
-    public class LocationTestEntity : IMapFrom<MrsMobileLocation>
+    public class SpaLocationTestEntity : IMapFrom<MrsSpaLocation>, IMapTo<MrsSpaLocation>
     {
         public double Latitude { get; set; }
 
@@ -15,6 +15,5 @@ namespace MRS.Tests.MRS.Mobile.Tests.TestEntities
         public double Altitude { get; set; }
 
         public DateTime CreatedOn { get; set; }
-
     }
 }

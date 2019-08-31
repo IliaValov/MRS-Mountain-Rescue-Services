@@ -12,12 +12,12 @@ namespace MRS.Mobile.Web.Controllers
 {
     [ApiController]
     [Authorize]
-    public class LocationsController : BaseController
+    public class LocationsMessagesController : BaseController
     {
         private readonly ILocationService locationService;
         private readonly IUserService userService;
 
-        public LocationsController(ILocationService locationService, IUserService userService)
+        public LocationsMessagesController(ILocationService locationService, IUserService userService)
         {
             this.locationService = locationService;
             this.userService = userService;

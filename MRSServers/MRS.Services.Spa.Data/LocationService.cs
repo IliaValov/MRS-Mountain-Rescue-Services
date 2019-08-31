@@ -20,7 +20,7 @@ namespace MRS.Services.Spa.Data
             this.context = context;
         }
 
-        public async Task AddLocation<TModel>(TModel model)
+        public async Task AddLocationAsync<TModel>(TModel model)
         {
             var newLocation = Mapper.Map<MrsSpaLocation>(model);
 
@@ -29,7 +29,7 @@ namespace MRS.Services.Spa.Data
             await this.context.SaveChangesAsync();
         }
 
-        public async Task<IQueryable<TModel>> GetLocationsByPolygonId<TModel>(long polygonId)
+        public async Task<IQueryable<TModel>> GetLocationsByPolygonIdAsync<TModel>(long polygonId)
         {
             return await Task.Run(() =>
           this.context

@@ -1,30 +1,20 @@
-using Microsoft.EntityFrameworkCore;
-using MRS.Common.Mapping;
 using MRS.Mobile.Data;
 using MRS.Mobile.Data.Models;
-using MRS.Models.MRSMobileModels.BindingModels.Location;
-using MRS.Models.MRSMobileModels.ViewModels.Account;
 using MRS.Services.Mobile.Data;
 using MRS.Services.Mobile.Data.Contracts;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Linq;
 using MRS.Tests.MRS.Mobile.Tests.TestEntities;
 using MRS.Tests.Common;
 using AutoMapper;
 
-namespace Tests
+namespace MRS.Tests.MRS.Mobile.Tests
 {
     public class TestUserService
     {
-        public TestUserService()
-        {
-            MapperInitializer.InitializeMapper();
-        }
-
         private IUserService GetUserService(MrsMobileDbContext dbContext)
         {
 
@@ -37,7 +27,7 @@ namespace Tests
             {
                 new MrsMobileUser {
                     UserName = "0888014990",
-                  
+
 
                 },
                 new MrsMobileUser { UserName = "0887512119"
@@ -153,10 +143,10 @@ namespace Tests
             string errorMessagePrefix = "UserService GetAllAsync() method does not work properly.";
 
             //Arrange
-            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeContext();
+            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeMobileContext();
             await SeedData(dbContext, false);
 
-            var userService = this.GetUserService(dbContext);
+            var userService = GetUserService(dbContext);
 
             //Act
             var actualResults = (await userService.GetAllAsync<UserTestEntity>()).ToList();
@@ -183,9 +173,9 @@ namespace Tests
             string errorMessagePrefix = "UserService GetAllAsync() method does not work properly.";
 
             //Arrange
-            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeContext();
+            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeMobileContext();
 
-            var userService = this.GetUserService(dbContext);
+            var userService = GetUserService(dbContext);
             //Act
             var actualResults = (await userService.GetAllAsync<UserTestEntity>()).ToList();
 
@@ -200,14 +190,14 @@ namespace Tests
             string errorMessagePrefix = "UserService GetAllUsersWithLocationsWithDateAsync method does not work properly.";
 
             //Arrange
-            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeContext();
+            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeMobileContext();
             await SeedData(dbContext, true);
 
-            var userService = this.GetUserService(dbContext);
+            var userService = GetUserService(dbContext);
             //Act
             var actualResults = (await userService.GetAllUsersWithLocationsWithDateAsync<UserTestEntity>(DateTime.UtcNow)).OrderBy(x => x.CreatedOn).ToList();
 
-            var expectedResults = Mapper.Map<List<UserTestEntity>>(GetDummyUsers()).OrderBy(x => x.CreatedOn).ToList();
+            var expectedResults = Mapper.Map<List<UserTestEntity>>(GetDummyLocations()).OrderBy(x => x.CreatedOn).ToList();
 
             Assert.IsTrue(actualResults.Count() == expectedResults.Count);
 
@@ -216,6 +206,7 @@ namespace Tests
                 var expectedEntry = expectedResults[i];
                 var actualEntry = actualResults[i];
 
+                Assert.True(expectedEntry.UserName == actualEntry.UserName, errorMessagePrefix + " " + "users are not returned properly.");
                 Assert.True(expectedEntry.Locations.Count == actualEntry.Locations.Count, errorMessagePrefix + " " + "locations are not returned properly.");
 
                 for (int j = 0; j < expectedEntry.Locations.Count; j++)
@@ -234,10 +225,10 @@ namespace Tests
             string errorMessagePrefix = "UserService GetAllUsersWithLocationsWithDateAsync method does not work properly.";
 
             //Arrange
-            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeContext();
+            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeMobileContext();
             await SeedData(dbContext, false);
 
-            var userService = this.GetUserService(dbContext);
+            var userService = GetUserService(dbContext);
 
 
             //Act
@@ -265,10 +256,10 @@ namespace Tests
 
 
             //Arrange
-            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeContext();
+            var dbContext = MRSMobileDbContextInMemoryFactory.InitializeMobileContext();
             await SeedData(dbContext, false);
 
-            var userService = this.GetUserService(dbContext);
+            var userService = GetUserService(dbContext);
 
 
             //Act

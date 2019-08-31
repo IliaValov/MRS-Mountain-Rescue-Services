@@ -8,8 +8,8 @@ namespace MRS.Services.Spa.Data.Contracts
 {
     public interface ILocationService
     {
-        Task AddLocation<TModel>(TModel model);
+        Task AddLocationAsync<TModel>(TModel model);
 
-        Task<IQueryable<TModel>> GetLocationsByPolygonId<TModel>(long polygonId);
+        Task<IQueryable<TModel>> GetLocationsByPolygonIdAsync<TModel>(long polygonId);
     }
 }

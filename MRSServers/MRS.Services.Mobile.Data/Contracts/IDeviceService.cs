@@ -4,6 +4,6 @@ namespace MRS.Services.Mobile.Data.Contracts
 {
     public interface IDeviceService
     {
-        Task<long> AddDevice(string device);
+        Task<long> AddDeviceAsync(string device);
     }
 }

@@ -90,7 +90,7 @@ namespace MRS.Mobile.Web.Controllers
 
             if (await userManager.FindByNameAsync(model.PhoneNumber) == null)
             {
-                var deviceId = await deviceService.AddDevice(model.Device);
+                var deviceId = await deviceService.AddDeviceAsync(model.Device);
 
                 var user = new MrsMobileUser { Email = model.PhoneNumber, UserName = model.PhoneNumber, PhoneNumber = model.PhoneNumber, DeviceId = deviceId };
                 var result = await userManager.CreateAsync(user, model.PhoneNumber);

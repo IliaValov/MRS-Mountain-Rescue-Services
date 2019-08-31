@@ -19,7 +19,7 @@ namespace MRS.Services.Mobile.Data
             this.context = context;
         }
 
-        public async Task AddMessage<T>(T message)
+        public async Task AddMessageAsync<T>(T message)
         {
             var newMessage = Mapper.Map<MrsMobileMessage>(message);
             await this.context.Messages.AddAsync(newMessage);
@@ -32,17 +32,18 @@ namespace MRS.Services.Mobile.Data
         .To<TModel>());
 
 
-        public async Task<IQueryable<TModel>> GetByDay<TModel>(DateTime date) =>
+        public async Task<IQueryable<TModel>> GetAllMessagesByDateAsync<TModel>(DateTime date) =>
             await Task.Run(() => this.context
             .Messages
             .Where(d => d.CreatedOn.Day == date.Day)
             .To<TModel>());
 
 
-        public async Task<T> GetLastMessage<T>() => await Task.Run(() =>
+        public async Task<T> GetLastMessageAsync<T>() => await Task.Run(() =>
             context
         .Messages
+        .OrderByDescending(x => x.Id)
         .To<T>()
-        .LastOrDefault());
+        .FirstOrDefault());
     }
 }

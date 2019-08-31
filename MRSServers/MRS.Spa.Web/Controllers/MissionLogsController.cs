@@ -36,7 +36,7 @@ namespace MRS.Spa.Web.Controllers
 
             missionLogCreateBindingModel.UserId = userId;
 
-            await this.missionLogService.AddMissionLog(missionLogCreateBindingModel);
+            await this.missionLogService.AddMissionLogAsync(missionLogCreateBindingModel);
 
             return StatusCode(201);
         }
@@ -45,7 +45,7 @@ namespace MRS.Spa.Web.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var missionLogs = (await this.missionLogService.GetAllMissionLogsByUserId<MissionLogViewModel>(userId)).ToList();
+            var missionLogs = (await this.missionLogService.GetAllMissionLogsByUserIdAsync<MissionLogViewModel>(userId)).ToList();
 
             if(missionLogs == null)
             {

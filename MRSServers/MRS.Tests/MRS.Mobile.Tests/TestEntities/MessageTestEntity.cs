@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MRS.Tests.MRS.Mobile.Tests.TestEntities
 {
-    public class MessageTestEntity : IMapFrom<MrsMobileMessage>
+    public class MessageTestEntity : IMapFrom<MrsMobileMessage>, IMapTo<MrsMobileMessage>
     {
 
         public string Message { get; set; }
@@ -15,10 +15,7 @@ namespace MRS.Tests.MRS.Mobile.Tests.TestEntities
 
         public DateTime CreatedOn { get; set; }
 
-        public string UserId { get; set; }
-        public UserTestEntity User { get; set; }
 
-        public long LocationId { get; set; }
-        public LocationTestEntity Location { get; set; }
+
     }
 }

@@ -14,7 +14,7 @@ namespace MRS.Services.Mobile.Data
             this.dbContext = dbContext;
         }
 
-        public async Task<long> AddDevice(string device)
+        public async Task<long> AddDeviceAsync(string device)
         {
             var newDevice = new MrsMobileDevice
             {
