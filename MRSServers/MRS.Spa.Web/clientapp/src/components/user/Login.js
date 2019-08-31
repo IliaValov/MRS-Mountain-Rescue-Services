@@ -11,13 +11,22 @@ export class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            isSuccess: true,
             authService: new AuthService()
         }
     }
 
-    handleLoginButton = () => {
+    handleLoginButton = async () => {
         const { username, password, authService } = this.state;
-        console.log(this.state.authService.loginUser('MRSAdministrator', 'MrsAdministrator123'));
+        let isLogged = await this.state.authService.loginUser(username, password);
+
+        if (isLogged) {
+            this.props.history.push('/');
+        } else {
+            this.setState({ isSuccess: false })
+        }
+
+
     }
 
     handleOnChangeUsername = (event) => {
@@ -29,16 +38,18 @@ export class Login extends Component {
     }
 
     handleSubmitForm = () => {
-        this.props.push('/'); // navigate to some route
+        this.props.history.push('/'); // navigate to some route
     }
 
     render() {
         return (
-            <div className="login-page">
+            <div id="login-page" className="login-page">
+                {this.state.isSuccess ? null : <div>Wrong username or password</div>}
+
                 <div className="form">
-                        <input type="text" onChange={this.handleOnChangeUsername} placeholder="username" />
-                        <input type="password" onChange={this.handleOnChangePassword} placeholder="password" />
-                        <button onClick={() => this.handleLoginButton()}>login</button>
+                    <input type="text" onChange={this.handleOnChangeUsername} placeholder="username" />
+                    <input type="password" onChange={this.handleOnChangePassword} placeholder="password" />
+                    <button onClick={() => this.handleLoginButton()}>login</button>
                 </div>
             </div>
         )

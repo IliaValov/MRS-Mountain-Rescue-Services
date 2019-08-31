@@ -46,13 +46,16 @@ export class AuthService {
                     console.log(JSON.stringify(response.access_token));
                     if (response.access_token) {
                         this.setToken(response);
+                        return true;
                     }
                 } catch (e) {
                     console.log(e);
+                    return false;
                 }
             })
             .catch(error => {
                 Promise.reject(error);
+                return false;
             })
     }
 

@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polygon } from "react-google-maps";
 import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
-
+import AuthService from '../../actions/AuthService';
 
 const MyMapComponent = compose(
     withProps({
@@ -139,6 +139,7 @@ export class MapContainer extends PureComponent {
 
             missionLog: new MissionLogModel(),
             missionLogService: new MissionLogService(),
+            authservice: new AuthService(),
 
             intervalId: null,
             HubConnection: null
@@ -148,14 +149,21 @@ export class MapContainer extends PureComponent {
     }
 
     async componentWillMount() {
-        const { HubConnection } = this.state;
+        const { HubConnection, authservice } = this.state;
 
         var dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
+
+        if(!authservice.isAuthenticated()){
+            this.props.history.push('/login');
+        
+            return;
+        }
 
         const protocol = new signalR.JsonHubProtocol();
 
         const options = {
-            logMessageContent: true
+            logMessageContent: true,
+            accessTokenFactory:() => authservice.getToken()
         };
 
         let hub = this.connection = new signalR.HubConnectionBuilder()

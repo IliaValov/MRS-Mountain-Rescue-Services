@@ -57,7 +57,7 @@ export default class NavMenu extends React.Component {
                 </NavItem>
                 {!this.state.authService.isAuthenticated() ?
                   <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/" onClick={() => this.openModal()}>Login</NavLink>
+                    <NavLink tag={Link} className="text-dark" to="/login" >Login</NavLink>
                   </NavItem>
                   : null}
                 {this.state.authService.isAuthenticated() ?
@@ -69,11 +69,7 @@ export default class NavMenu extends React.Component {
             </Collapse>
           </Container>
         </Navbar>
-        <Modal visible={this.state.isLoginVisiable} width="360px" height="250.4px" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-          <Login
-            isVisiable={this.state.isLoginVisiable}
-          />
-        </Modal>
+      
       </header>
     );
   }
