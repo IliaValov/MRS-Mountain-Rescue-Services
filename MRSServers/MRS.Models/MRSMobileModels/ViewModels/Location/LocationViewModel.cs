@@ -1,6 +1,7 @@
 ﻿using MRS.Common.Mapping;
 using MRS.Mobile.Data.Models;
 using MRS.Models.MRSMobileModels.ViewModels.Message;
+using System;
 using System.Collections.Generic;
 
 namespace MRS.Models.MRSMobileModels.ViewModels.Location
@@ -12,6 +13,8 @@ namespace MRS.Models.MRSMobileModels.ViewModels.Location
         public double Longitude { get; set; }
 
         public double Altitude { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public MessageViewModel Message { get; set; }
     }

@@ -90,7 +90,7 @@ function showAllLocations(users) {
                             return (<Marker key={index}
                                 icon={emergencyIcon}
                                 position={{ lat: l.latitude, lng: l.longitude }}
-                                title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
+                                title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude+ ", createdOn: " + l.createdOn}
                             ></Marker>)
                         }
                     }))
@@ -101,7 +101,7 @@ function showAllLocations(users) {
                             return (<Marker key={index}
                                 icon={saviorIcon}
                                 position={{ lat: l.latitude, lng: l.longitude }}
-                                title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
+                                title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude + ", createdOn: " + l.createdOn}
                             ></Marker>)
                         }
                     }))
@@ -112,7 +112,7 @@ function showAllLocations(users) {
                             return (<Marker key={index}
                                 icon={normalUserIcon}
                                 position={{ lat: l.latitude, lng: l.longitude }}
-                                title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude}
+                                title={'Phone number: ' + u.phoneNumber + '\r\n' + 'lat: ' + l.latitude + ', lng: ' + l.longitude+ ", createdOn: " + l.createdOn}
                             ></Marker>)
                         }
                     }))
@@ -148,14 +148,13 @@ export class MapContainer extends PureComponent {
         this.connection = null;
     }
 
-    async componentWillMount() {
+ componentWillMount() {
         const { HubConnection, authservice } = this.state;
 
         var dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
         if(!authservice.isAuthenticated()){
             this.props.history.push('/login');
-        
             return;
         }
 
@@ -191,11 +190,9 @@ export class MapContainer extends PureComponent {
 
         let intervalId = setInterval(async () => this.CheckForUpdate(), 5000);
 
-        await this.getAllMissionLogs();
+        setTimeout(async () => await this.getAllMissionLogs(), 50);
 
         this.setState({ HubConnection: hub, currentDate: currentDate, intervalId: intervalId });
-
-
     }
 
     componentWillUnmount() {
