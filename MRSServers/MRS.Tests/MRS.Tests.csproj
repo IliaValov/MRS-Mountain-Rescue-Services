@@ -15,11 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MRS.Common\MRS.Common.csproj" />
+    <ProjectReference Include="..\Data\MRS.Mobile.Data\MRS.Mobile.Data.csproj" />
+    <ProjectReference Include="..\Data\MRS.Spa.Data\MRS.Spa.Data.csproj" />
     <ProjectReference Include="..\MRS.Models\MRS.Models.csproj" />
-    <ProjectReference Include="..\MRS.Services.Mobile.Data\MRS.Services.Mobile.Data.csproj" />
-    <ProjectReference Include="..\MRS.Services.Spa.Data\MRS.Services.Spa.Data.csproj" />
-    <ProjectReference Include="..\MRS.Services\MRS.Services.csproj" />
+    <ProjectReference Include="..\Services\MRS.Services.Mobile.Data\MRS.Services.Mobile.Data.csproj" />
+    <ProjectReference Include="..\Services\MRS.Services.Spa.Data\MRS.Services.Spa.Data.csproj" />
   </ItemGroup>
 
 </Project>

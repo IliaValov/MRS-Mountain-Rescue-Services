@@ -8,7 +8,6 @@ using MRS.Common.Mapping;
 using MRS.Mobile.Data;
 using MRS.Mobile.Data.Models;
 using MRS.Services.Mobile.Data.Contracts;
-using MRS.Spa.Data.Models;
 
 namespace MRS.Services.Mobile.Data
 {

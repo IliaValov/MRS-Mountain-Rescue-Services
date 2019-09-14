@@ -6,11 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="Twilio" Version="5.31.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MRS.Mobile.Data\MRS.Mobile.Data.csproj" />
-    <ProjectReference Include="..\MRS.Spa.Data.Models\MRS.Spa.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\MRS.Mobile.Data\MRS.Mobile.Data.csproj" />
   </ItemGroup>
 
 </Project>
