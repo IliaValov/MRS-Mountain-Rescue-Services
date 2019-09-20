@@ -14,8 +14,6 @@
     <ProjectReference Include="..\Data\MRS.Mobile.Data.Models\MRS.Mobile.Data.Models.csproj" />
     <ProjectReference Include="..\Data\MRS.Spa.Data.Models\MRS.Spa.Data.Models.csproj" />
     <ProjectReference Include="..\MRS.Common\MRS.Common.csproj" />
-    <ProjectReference Include="..\MRS.Mobile.Data.Models\MRS.Mobile.Data.Models.csproj" />
-    <ProjectReference Include="..\MRS.Spa.Data.Models\MRS.Spa.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>
