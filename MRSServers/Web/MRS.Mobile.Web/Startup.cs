@@ -128,7 +128,7 @@ namespace MRS.Mobile.Web
 
                 if (env.IsDevelopment())
                 {
-                    dbContext.Database.Migrate();
+                    //dbContext.Database.Migrate();
                 }
 
                 //MrsMobileDbContextSeeder.Seed(dbContext, serviceScope.ServiceProvider);

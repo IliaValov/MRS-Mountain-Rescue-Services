@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MRS.Common;
 using MRS.Models.MRSSpaModels.BindingModels.MissionLog;
 using MRS.Models.MRSSpaModels.ViewModels.MissionLog;
-using MRS.Services.Spa.Data;
 using MRS.Services.Spa.Data.Contracts;
 
 namespace MRS.Spa.Web.Controllers
@@ -29,7 +28,7 @@ namespace MRS.Spa.Web.Controllers
         {
             if (missionLogCreateBindingModel == null && !ModelState.IsValid)
             {
-                return BadRequest("Mission log is invalid");
+                return BadRequest(GlobalConstants.ErrorMissionLogIsInValid);
             }
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;

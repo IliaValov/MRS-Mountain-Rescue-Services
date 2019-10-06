@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.DependencyInjection;
+using MRS.Common;
 using MRS.Models.MRSMobileModels.ViewModels.Account;
-using MRS.Services.Mobile.Data;
 using MRS.Services.Mobile.Data.Contracts;
 
 namespace MRS.Spa.Web.Hubs
@@ -39,7 +36,7 @@ namespace MRS.Spa.Web.Hubs
 
             if (this.usersCount != currentUsersCount || this.locationsCount != currentLocationsCount)
             {
-                await this.Clients.Caller.SendAsync("SendUserLocations",
+                await this.Clients.Caller.SendAsync(GlobalConstants.UserLocationsHubSendLocation,
                                                    users.ToList()
                                                    );
 

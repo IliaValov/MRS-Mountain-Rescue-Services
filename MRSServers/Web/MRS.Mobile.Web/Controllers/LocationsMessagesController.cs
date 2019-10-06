@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MRS.Common;
 using MRS.Mobile.Data.Models;
 using MRS.Models.MRSMobileModels.BindingModels.Location;
 using MRS.Services.Mobile.Data.Contracts;
@@ -29,7 +30,7 @@ namespace MRS.Mobile.Web.Controllers
         {
             if (locationInfo == null && !ModelState.IsValid)
             {
-                return BadRequest("Location is invalid");
+                return BadRequest(GlobalConstants.ErrorLocationIsInValid);
             }
 
             var location = Mapper.Map<MrsMobileLocation>(locationInfo);
@@ -47,7 +48,7 @@ namespace MRS.Mobile.Web.Controllers
         {
             if (locationInfo == null && !ModelState.IsValid)
             {
-                return BadRequest("Location is invalid");
+                return BadRequest(GlobalConstants.ErrorLocationIsInValid);
             }
 
             var location = Mapper.Map<MrsMobileLocation>(locationInfo);

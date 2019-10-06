@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using MRS.Common;
 using MRS.Mobile.Data.Models;
 using MRS.Models.MRSMobileModels.BindingModels.Account;
 using MRS.Services.Contracts;
@@ -60,7 +61,7 @@ namespace MRS.Mobile.Web.Controllers
             var verificationCode = await smsService.SendSms(accountSid, authToken, fromNumber, model.PhoneNumber);
 
             //TODO
-            if (!verificationCode.Equals(""))
+            if (!verificationCode.Equals(GlobalConstants.EmptyString))
             {
                 return verificationCode;
             }
@@ -101,7 +102,7 @@ namespace MRS.Mobile.Web.Controllers
                     return BadRequest(result.Errors.FirstOrDefault());
                 }
 
-                var addRole = await userManager.AddToRoleAsync(user, "User");
+                var addRole = await userManager.AddToRoleAsync(user, GlobalConstants.RoleUser);
 
                 if (!addRole.Succeeded)
                 {
