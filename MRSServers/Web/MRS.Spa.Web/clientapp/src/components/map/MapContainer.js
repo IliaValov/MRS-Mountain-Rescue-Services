@@ -6,6 +6,9 @@ import "../../assets/styles/Map.css";
 import { connect } from 'react-redux';
 
 import * as signalR from '@aspnet/signalr';
+
+import * as GlobalConstants from '../../assets/GlobalConstants';
+
 import DatePicker from "react-datepicker";
 
 import { GoogleMapComponent } from './GoogleMap';
@@ -63,7 +66,7 @@ export class MapContainer extends PureComponent {
             .withHubProtocol(protocol)
             .build();
 
-        hub.on('SendUserLocations', (data) => {
+        hub.on(GlobalConstants.HubLocationName, (data) => {
             this.setState({ users: [] });
             console.log(data)
             data.map((ar) => this.initializeUsers(ar));
@@ -78,7 +81,7 @@ export class MapContainer extends PureComponent {
         let currentDate = date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
 
         hub.start()
-            .then(() => this.connection.invoke("SendUserLocations", currentDate))
+            .then(() => this.connection.invoke(GlobalConstants.HubLocationName, currentDate))
             .catch(err => console.error('SignalR Connection Error: ', err)), 5000;
 
         let intervalId = setInterval(async () => this.CheckForUpdate(), 5000);
@@ -107,7 +110,7 @@ export class MapContainer extends PureComponent {
         const { currentDate, isConnectionStarted } = this.state;
         console.log("done")
 
-        this.connection.invoke("SendUserLocations", currentDate)
+        this.connection.invoke(GlobalConstants.HubLocationName, currentDate)
 
     }
 
@@ -137,7 +140,7 @@ export class MapContainer extends PureComponent {
         let selectedOption = event.target.textContent;
 
 
-        if (selectedOption !== "ALLUSERS") {
+        if (selectedOption !== GlobalConstants.ALLUSERS) {
             let selectedUser = users.find(x => x.phoneNumber === selectedOption);
 
             this.setState({ currentUser: selectedUser });
