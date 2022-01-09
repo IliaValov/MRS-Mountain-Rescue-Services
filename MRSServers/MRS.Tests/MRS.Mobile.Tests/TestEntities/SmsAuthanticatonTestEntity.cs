@@ -2,11 +2,13 @@
 using MRS.Mobile.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace MRS.Tests.MRS.Mobile.Tests.TestEntities
 {
-   public class SmsAuthanticatonTestEntity : IMapFrom<MrsMobileSmsAuthantication>
+    [ExcludeFromCodeCoverage]
+    public class SmsAuthanticatonTestEntity : IMapFrom<MrsMobileSmsAuthantication>
     {
         public string Token { get; set; }
 

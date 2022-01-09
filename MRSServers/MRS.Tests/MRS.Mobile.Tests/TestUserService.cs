@@ -10,9 +10,12 @@ using System.Linq;
 using MRS.Tests.MRS.Mobile.Tests.TestEntities;
 using MRS.Tests.Common;
 using AutoMapper;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MRS.Tests.MRS.Mobile.Tests
 {
+    [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class TestUserService
     {
         private IUserService GetUserService(MrsMobileDbContext dbContext)

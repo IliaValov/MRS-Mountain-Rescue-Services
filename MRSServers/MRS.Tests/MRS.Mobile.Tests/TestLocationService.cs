@@ -9,12 +9,15 @@ using MRS.Tests.MRS.Mobile.Tests.TestEntities;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MRS.Tests.MRS.Mobile.Tests
 {
+    [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class TestLocationService
     {
         private ILocationService GetLocationService(MrsMobileDbContext dbContext)

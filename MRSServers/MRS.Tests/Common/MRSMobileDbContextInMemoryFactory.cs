@@ -3,10 +3,12 @@ using MRS.Mobile.Data;
 using MRS.Spa.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace MRS.Tests.Common
 {
+    [ExcludeFromCodeCoverage]
     public class MRSMobileDbContextInMemoryFactory
     {
         public static MrsMobileDbContext InitializeMobileContext()
